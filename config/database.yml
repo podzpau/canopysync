@@ -14,3 +14,7 @@ test:
 production:
   <<: *default
   database: storage/production.sqlite3
+
+cable:
+  adapter: sqlite3
+  database: storage/cable.sqlite3
