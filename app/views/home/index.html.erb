@@ -1,0 +1,14 @@
+<% if @shop.blocks.any? %>
+  <% @shop.blocks.each do |block| %>
+    <%= render "blocks/#{block['type']}", config: block['config'] %>
+  <% end %>
+<% else %>
+  <div class="min-h-screen flex items-center justify-center bg-gray-50">
+    <div class="text-center">
+      <h1 class="text-4xl font-bold mb-4">Welcome to <%= @shop.name %></h1>
+      <p class="text-gray-600 mb-8">Your storefront is ready to be customized</p>
+      <%= link_to 'Start Building →', edit_admin_settings_path, 
+          class: 'inline-block px-6 py-3 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700' %>
+    </div>
+  </div>
+<% end %>

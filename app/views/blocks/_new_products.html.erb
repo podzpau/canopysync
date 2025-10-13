@@ -1,0 +1,17 @@
+<div class="py-16 px-4 bg-white">
+  <h2 class="text-4xl font-bold mb-12 text-center text-primary">
+    <%= config['heading'] || 'New Products' %>
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-6xl mx-auto">
+    <% (config['limit']&.to_i || 4).times do %>
+      <div class="border rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
+        <div class="aspect-square bg-primary-light"></div>
+        <div class="p-4">
+          <h3 class="font-semibold mb-2">New Product</h3>
+          <p class="text-sm text-gray-600 mb-3">Just arrived</p>
+          <button class="w-full py-2 btn-primary rounded-lg font-semibold">View</button>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

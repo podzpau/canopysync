@@ -1,0 +1,55 @@
+<div class="bg-white rounded-lg max-w-2xl w-full max-h-[80vh] overflow-y-auto">
+  <div class="sticky top-0 bg-white border-b px-6 py-4 flex justify-between items-center">
+    <h2 class="text-xl font-bold">
+      Edit <%= BlockTypes::AVAILABLE_BLOCKS[@block['type']][:name] %>
+    </h2>
+    <button onclick="closeBlockModal()" class="text-2xl text-gray-400 hover:text-gray-600">×</button>
+  </div>
+  
+  <%= form_with url: admin_block_path(@block['id']), method: :patch,
+      data: { remote: true }, class: 'p-6' do |f| %>
+    
+    <% BlockTypes::AVAILABLE_BLOCKS[@block['type']][:fields].each do |field| %>
+      <div class="mb-5">
+        <%= f.label field.humanize, class: 'block font-semibold mb-2' %>
+        
+        <% if field == 'content' %>
+          <%= f.text_area "config[#{field}]", 
+              value: @block['config'][field],
+              rows: 6,
+              class: 'w-full border-2 rounded-lg px-4 py-3' %>
+              
+        <% elsif field == 'alignment' %>
+          <div class="flex gap-2">
+            <% %w[left center right].each do |align| %>
+              <%= f.radio_button "config[#{field}]", align, 
+                  checked: @block['config'][field] == align,
+                  class: 'peer sr-only', id: "align_#{align}" %>
+              <%= label_tag "align_#{align}", align.capitalize, 
+                  class: 'flex-1 px-4 py-2 border-2 rounded-lg cursor-pointer text-center peer-checked:border-green-600 peer-checked:bg-green-50' %>
+            <% end %>
+          </div>
+          
+        <% else %>
+          <%= f.text_field "config[#{field}]", 
+              value: @block['config'][field], 
+              placeholder: field.humanize,
+              class: 'w-full border-2 rounded-lg px-4 py-3' %>
+        <% end %>
+      </div>
+    <% end %>
+    
+    <div class="flex gap-3 pt-4 border-t">
+      <%= f.submit 'Save Block', 
+          class: 'flex-1 py-3 bg-green-600 text-white rounded-lg font-bold hover:bg-green-700' %>
+      <button type="button" onclick="closeBlockModal()"
+              class="px-6 py-3 border-2 rounded-lg hover:bg-gray-50">Cancel</button>
+    </div>
+  <% end %>
+</div>
+
+<script>
+  function closeBlockModal() {
+    document.getElementById('block-editor-modal').classList.add('hidden');
+  }
+</script>

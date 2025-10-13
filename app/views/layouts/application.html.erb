@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CanopySync</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+    
+    <!-- Custom Font -->
+    <% if @shop&.font_url %>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="<%= @shop.font_url %>" rel="stylesheet">
+    <% end %>
+    
+    <!-- Dynamic Theme CSS -->
+    <% if @shop %>
+      <style>
+        :root {
+          /* Colors */
+          --color-primary: <%= @shop.theme_colors[:primary] %>;
+          --color-primary-dark: <%= @shop.theme_colors[:primary_dark] %>;
+          --color-primary-light: <%= @shop.theme_colors[:primary_light] %>;
+          --color-secondary: <%= @shop.theme_colors[:secondary] %>;
+          --color-secondary-dark: <%= @shop.theme_colors[:secondary_dark] %>;
+          --color-secondary-light: <%= @shop.theme_colors[:secondary_light] %>;
+          --text-on-primary: <%= @shop.theme_colors[:text_on_primary] %>;
+          --text-on-secondary: <%= @shop.theme_colors[:text_on_secondary] %>;
+          
+          /* Typography */
+          --font-primary: '<%= @shop.font_family %>', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        
+        body {
+          font-family: var(--font-primary);
+        }
+        
+        /* Auto-apply theme to utility classes */
+        .bg-primary { background-color: var(--color-primary) !important; }
+        .bg-primary-dark { background-color: var(--color-primary-dark) !important; }
+        .bg-primary-light { background-color: var(--color-primary-light) !important; }
+        .bg-secondary { background-color: var(--color-secondary) !important; }
+        .bg-secondary-dark { background-color: var(--color-secondary-dark) !important; }
+        .bg-secondary-light { background-color: var(--color-secondary-light) !important; }
+        
+        .text-primary { color: var(--color-primary) !important; }
+        .text-secondary { color: var(--color-secondary) !important; }
+        .text-on-primary { color: var(--text-on-primary) !important; }
+        .text-on-secondary { color: var(--text-on-secondary) !important; }
+        
+        .border-primary { border-color: var(--color-primary) !important; }
+        .border-secondary { border-color: var(--color-secondary) !important; }
+        
+        /* Smart button styles */
+        .btn-primary {
+          background-color: var(--color-primary);
+          color: var(--text-on-primary);
+        }
+        .btn-primary:hover {
+          background-color: var(--color-primary-dark);
+        }
+        
+        .btn-secondary {
+          background-color: var(--color-secondary);
+          color: var(--text-on-secondary);
+        }
+        .btn-secondary:hover {
+          background-color: var(--color-secondary-dark);
+        }
+      </style>
+    <% end %>
+  </head>
+
+  <body>
+    <main class="container mx-auto mt-28 px-5 flex">
+      <%= yield %>
+    </main>
+  </body>
+</html>

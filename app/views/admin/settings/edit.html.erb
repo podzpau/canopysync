@@ -1,0 +1,250 @@
+<div class="flex h-screen bg-gray-50 overflow-hidden" data-controller="block-selector">
+  
+  <!-- Left Sidebar - 320px (w-80) -->
+  <aside class="w-80 bg-neutral-900 flex flex-col overflow-y-auto">
+    
+    <!-- Logo -->
+   <div class="p-6">
+  <h1 class="text-xl font-bold text-white">canopy<span class="text-sky-400">sync</span></h1>
+</div>
+    
+    <!-- Style Section -->
+    <div class="border-b border-zinc-700">
+      <details class="group">
+        <summary class="flex items-center justify-between px-6 py-3 cursor-pointer hover:bg-neutral-800 transition-colors">
+          <span class="text-white text-sm font-semibold">⚙️ Style</span>
+          <span class="text-white text-xs group-open:rotate-90 inline-block transition-transform">▶</span>
+        </summary>
+        
+        <div class="px-6 py-4 bg-neutral-800">
+          <%= form_with model: @shop, url: admin_settings_path, method: :patch, data: { turbo: false } do |f| %>
+            <div class="space-y-3">
+              <label class="text-xs text-zinc-400 block mb-2">Corner Style</label>
+              <div class="flex gap-2">
+                <label class="flex-1 cursor-pointer">
+                  <%= f.radio_button :corner_style, 'rounded', class: 'peer sr-only' %>
+                  <div class="px-3 py-2 bg-neutral-700 peer-checked:bg-sky-700 rounded text-xs text-white text-center transition-colors">
+                    Soft
+                  </div>
+                </label>
+                <label class="flex-1 cursor-pointer">
+                  <%= f.radio_button :corner_style, 'sharp', class: 'peer sr-only' %>
+                  <div class="px-3 py-2 bg-neutral-700 peer-checked:bg-sky-700 text-xs text-white text-center transition-colors">
+                    Sharp
+                  </div>
+                </label>
+              </div>
+              <%= f.submit 'Save', class: 'w-full mt-3 px-4 py-2 bg-sky-700 hover:bg-sky-600 text-white text-xs rounded transition-colors' %>
+            </div>
+          <% end %>
+        </div>
+      </details>
+    </div>
+    
+    <!-- Blocks Section -->
+    <div class="border-b border-zinc-700">
+      <details open class="group">
+        <summary class="flex items-center justify-between px-6 py-3 cursor-pointer hover:bg-neutral-800 transition-colors">
+          <span class="text-white text-sm font-semibold">📦 Blocks</span>
+          <span class="text-white text-xs group-open:rotate-90 inline-block transition-transform">▶</span>
+        </summary>
+        
+        <div class="p-4 bg-neutral-800">
+          <%= form_with url: admin_blocks_path, method: :post, id: 'add-block-form' do |f| %>
+            <div class="grid grid-cols-2 gap-3">
+              <% BlockTypes::AVAILABLE_BLOCKS.each do |key, block| %>
+                <%= button_tag type: 'submit', name: 'block_type', value: key,
+                    class: 'flex flex-col items-center gap-2 p-3 bg-neutral-700 hover:bg-neutral-600 rounded-lg transition-colors group' do %>
+                  <div class="w-10 h-10 bg-neutral-600 group-hover:bg-neutral-500 rounded flex items-center justify-center text-2xl">
+                    📄
+                  </div>
+                  <span class="text-[10px] text-white text-center leading-tight"><%= block[:name] %></span>
+                <% end %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </details>
+    </div>
+    
+    <!-- Brand Section -->
+    <div class="border-b border-zinc-700">
+      <details class="group">
+        <summary class="flex items-center justify-between px-6 py-3 cursor-pointer hover:bg-neutral-800 transition-colors">
+          <span class="text-zinc-400 text-sm font-semibold">🎨 Brand</span>
+          <span class="text-zinc-400 text-xs group-open:rotate-90 inline-block transition-transform">▶</span>
+        </summary>
+        
+        <div class="px-6 py-4 bg-neutral-800 space-y-4">
+          <%= form_with model: @shop, url: admin_settings_path, method: :patch, data: { turbo: false } do |f| %>
+            
+            <!-- Text (Font) -->
+            <div>
+              <label class="text-xs text-zinc-400 block mb-2">Font</label>
+              <%= f.select :font_family, 
+                  options_for_select(Shop::FONT_LIBRARY.map { |k,v| [v[:name], k] }, @shop.font_family),
+                  {},
+                  class: 'w-full px-3 py-2 bg-neutral-700 text-white text-xs rounded border border-neutral-600 focus:border-sky-700 focus:outline-none' %>
+            </div>
+            
+            <!-- Primary Color -->
+            <div>
+              <label class="text-xs text-zinc-400 block mb-2">Primary Color</label>
+              <div class="flex gap-2">
+                <%= f.color_field :primary_color, 
+                    class: 'w-12 h-10 rounded cursor-pointer bg-neutral-700 border border-neutral-600' %>
+                <%= f.text_field :primary_color, 
+                    class: 'flex-1 px-3 py-2 bg-neutral-700 text-white text-xs rounded border border-neutral-600 focus:border-sky-700 focus:outline-none font-mono' %>
+              </div>
+            </div>
+            
+            <!-- Secondary Color -->
+            <div>
+              <label class="text-xs text-zinc-400 block mb-2">Secondary Color</label>
+              <div class="flex gap-2">
+                <%= f.color_field :secondary_color, 
+                    class: 'w-12 h-10 rounded cursor-pointer bg-neutral-700 border border-neutral-600' %>
+                <%= f.text_field :secondary_color, 
+                    class: 'flex-1 px-3 py-2 bg-neutral-700 text-white text-xs rounded border border-neutral-600 focus:border-sky-700 focus:outline-none font-mono' %>
+              </div>
+            </div>
+            
+            <!-- Logo Upload -->
+            <div>
+              <label class="text-xs text-zinc-400 block mb-2">Logo</label>
+              <%= f.text_field :logo_url, 
+                  placeholder: 'Enter logo URL...',
+                  class: 'w-full px-3 py-2 bg-neutral-700 text-white text-xs rounded border border-neutral-600 focus:border-sky-700 focus:outline-none' %>
+              <p class="text-[10px] text-zinc-500 mt-1">Paste image URL or upload file</p>
+            </div>
+            
+            <%= f.submit 'Save Brand', class: 'w-full mt-3 px-4 py-2 bg-sky-700 hover:bg-sky-600 text-white text-xs rounded transition-colors' %>
+          <% end %>
+        </div>
+      </details>
+    </div>
+    
+    <!-- SEO & Content Checklist -->
+    <div class="border-b border-zinc-700">
+      <details class="group">
+        <summary class="flex items-center justify-between px-6 py-3 cursor-pointer hover:bg-neutral-800 transition-colors">
+          <span class="text-zinc-400 text-sm font-semibold">🔍 SEO & Content</span>
+          <span class="text-zinc-400 text-xs group-open:rotate-90 inline-block transition-transform">▶</span>
+        </summary>
+        
+        <div class="px-6 py-4 bg-neutral-800 space-y-4">
+          <%= form_with model: @shop, url: admin_settings_path, method: :patch, data: { turbo: false } do |f| %>
+            
+            <!-- Meta Title -->
+            <div>
+              <label class="text-xs text-zinc-400 block mb-2">Page Title</label>
+              <%= f.text_field :meta_title, 
+                  placeholder: 'Best Cannabis in Town | Shop Name',
+                  class: 'w-full px-3 py-2 bg-neutral-700 text-white text-xs rounded border border-neutral-600 focus:border-sky-700 focus:outline-none' %>
+              <p class="text-[10px] text-zinc-500 mt-1">60 characters max</p>
+            </div>
+            
+            <!-- Meta Description -->
+            <div>
+              <label class="text-xs text-zinc-400 block mb-2">Meta Description</label>
+              <%= f.text_area :meta_description, 
+                  rows: 3,
+                  placeholder: 'Premium cannabis products delivered to your door...',
+                  class: 'w-full px-3 py-2 bg-neutral-700 text-white text-xs rounded border border-neutral-600 focus:border-sky-700 focus:outline-none resize-none' %>
+              <p class="text-[10px] text-zinc-500 mt-1">160 characters max</p>
+            </div>
+            
+            <!-- Google Preview -->
+            <div class="p-3 bg-neutral-900 rounded border border-neutral-700">
+              <p class="text-[10px] text-zinc-500 mb-2">Google Preview:</p>
+              <div class="text-blue-400 text-xs mb-1 truncate"><%= @shop.meta_title || 'Your Page Title' %></div>
+              <div class="text-emerald-500 text-[10px] mb-1">yourstore.com › page</div>
+              <div class="text-zinc-400 text-[10px] line-clamp-2"><%= @shop.meta_description || 'Your meta description appears here...' %></div>
+            </div>
+            
+            <%= f.submit 'Save SEO', class: 'w-full mt-3 px-4 py-2 bg-sky-700 hover:bg-sky-600 text-white text-xs rounded transition-colors' %>
+          <% end %>
+        </div>
+      </details>
+    </div>
+    
+    <!-- Spacer -->
+    <div class="flex-1"></div>
+    
+    <!-- Back to Dashboard -->
+    <div class="border-t border-zinc-700 p-6">
+      <%= link_to root_path, class: 'flex items-center gap-3 text-zinc-400 hover:text-white transition-colors group' do %>
+        <span class="text-lg">←</span>
+        <span class="text-sm underline">Back to Dashboard</span>
+      <% end %>
+    </div>
+    
+  </aside>
+  
+  <!-- Main Content Area -->
+  <div class="flex-1 flex flex-col overflow-hidden">
+    
+    <!-- Top Toolbar -->
+    <div class="bg-white border-b px-8 py-3 flex items-center justify-between">
+      
+      <!-- Device Toggles (Center) -->
+      <div class="flex-1 flex justify-center">
+        <div class="inline-flex bg-gray-100 rounded-lg p-1 gap-1">
+          <button data-action="click->block-selector#setDevice" data-device="desktop" class="device-toggle px-4 py-2 bg-white rounded shadow-sm text-sm">🖥️</button>
+          <button data-action="click->block-selector#setDevice" data-device="tablet" class="device-toggle px-4 py-2 hover:bg-white/50 rounded transition-colors text-sm">📱</button>
+          <button data-action="click->block-selector#setDevice" data-device="mobile" class="device-toggle px-4 py-2 hover:bg-white/50 rounded transition-colors text-sm">📲</button>
+        </div>
+      </div>
+      
+      <!-- Actions (Right) -->
+      <div class="flex gap-3">
+        <%= link_to 'Preview', root_path, target: '_blank',
+            class: 'px-5 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 text-sm font-medium transition-colors' %>
+        <button class="px-6 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 text-sm font-semibold transition-colors">
+          Set Live
+        </button>
+      </div>
+    </div>
+    
+    <!-- Canvas -->
+    <div class="flex-1 overflow-y-auto bg-gray-50 p-8">
+      <div data-block-selector-target="canvas" class="max-w-6xl mx-auto transition-all duration-300">
+        <div class="bg-white shadow-2xl rounded-xl overflow-hidden min-h-screen">
+          
+          <% if @shop.blocks.any? %>
+            <% @shop.blocks.each do |block| %>
+              <div class="block-item relative group border-2 border-transparent transition-all cursor-pointer"
+                   data-block-id="<%= block['id'] %>"
+                   data-action="click->block-selector#selectBlock">
+                <%= render "blocks/#{block['type']}", config: block['config'] %>
+                
+                <!-- Hover Controls -->
+                <div class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 flex gap-2 transition-opacity z-10">
+                  <button class="px-3 py-1 bg-sky-600 hover:bg-sky-700 text-white text-xs rounded shadow-lg font-medium">
+                    ✏️ Edit
+                  </button>
+                  <%= button_to admin_block_path(block['id']), method: :delete, data: { turbo: false, confirm: 'Delete this block?' },
+                      class: 'px-3 py-1 bg-red-600 hover:bg-red-700 text-white text-xs rounded shadow-lg font-medium' do %>
+                    🗑️ Delete
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+          <% else %>
+            <!-- Empty State -->
+            <div class="h-screen flex items-center justify-center">
+              <div class="text-center">
+                <div class="text-8xl mb-4">➕</div>
+                <h3 class="text-2xl font-bold text-gray-700 mb-2">Start Building Your Page</h3>
+                <p class="text-gray-500">Click a block from the sidebar to add it to your page</p>
+              </div>
+            </div>
+          <% end %>
+          
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  
+</div>

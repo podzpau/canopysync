@@ -1,0 +1,39 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  domain: MyString
+  logo_url: MyString
+  primary_color: MyString
+  secondary_color: MyString
+  hero_title: MyString
+  hero_subtitle: MyText
+  hero_image_url: MyString
+  about_text: MyText
+  phone: MyString
+  email: MyString
+  delivery_areas: MyText
+  hours: MyText
+  meadow_api_key: MyString
+  meadow_location_id: MyString
+  template: 1
+  blocks_config: MyText
+
+two:
+  name: MyString
+  domain: MyString
+  logo_url: MyString
+  primary_color: MyString
+  secondary_color: MyString
+  hero_title: MyString
+  hero_subtitle: MyText
+  hero_image_url: MyString
+  about_text: MyText
+  phone: MyString
+  email: MyString
+  delivery_areas: MyText
+  hours: MyText
+  meadow_api_key: MyString
+  meadow_location_id: MyString
+  template: 1
+  blocks_config: MyText

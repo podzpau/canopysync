@@ -1,0 +1,5 @@
+<div class="text-block py-12 px-4 <%= config['alignment'] == 'center' ? 'text-center' : 'text-left' %>">
+  <div class="max-w-3xl <%= config['alignment'] == 'center' ? 'mx-auto' : '' %> prose prose-lg">
+    <%= simple_format(config['content']) %>
+  </div>
+</div>

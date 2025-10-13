@@ -1,0 +1,12 @@
+<div class="py-16 px-4 bg-gray-100">
+  <h2 class="text-3xl font-bold mb-12 text-center">
+    <%= config['heading'] || 'Featured Brands' %>
+  </h2>
+  <div class="grid grid-cols-2 md:grid-cols-6 gap-8 max-w-6xl mx-auto">
+    <% 6.times do %>
+      <div class="aspect-square bg-white rounded-lg flex items-center justify-center p-4 hover:shadow-lg transition-shadow">
+        <div class="text-gray-400 font-bold text-xl">BRAND</div>
+      </div>
+    <% end %>
+  </div>
+</div>

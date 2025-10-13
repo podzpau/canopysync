@@ -1,0 +1,21 @@
+<div class="product-grid py-16 px-4">
+  <h2 class="text-4xl font-bold mb-12 text-center text-primary">
+    <%= config['heading'] %>
+  </h2>
+  
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+    <%# Mock products - you'll replace this %>
+    <% 3.times do |i| %>
+      <div class="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
+        <div class="aspect-square bg-primary-light"></div>
+        <div class="p-4">
+          <h3 class="font-semibold mb-2">Product Name</h3>
+          <p class="text-sm text-gray-600 mb-3">Category • Brand</p>
+          <button class="w-full py-2 btn-primary rounded-lg font-semibold">
+            View Details
+          </button>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

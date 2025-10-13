@@ -1,0 +1,21 @@
+<% if @shop.blocks.any? %>
+  <% @shop.blocks.each do |block| %>
+    <div class="relative group">
+      <%= render "blocks/#{block['type']}", config: block['config'] %>
+      
+      <!-- Hover indicator -->
+      <div class="absolute inset-0 bg-blue-500/0 group-hover:bg-blue-500/10 transition-all pointer-events-none border-2 border-transparent group-hover:border-blue-500">
+        <div class="absolute top-2 right-2 bg-blue-600 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 font-semibold">
+          <%= BlockTypes::AVAILABLE_BLOCKS[block['type']][:name] %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% else %>
+  <div class="flex items-center justify-center h-full text-gray-400 p-8 text-center">
+    <div>
+      <div class="text-4xl mb-2">👋</div>
+      <div class="text-sm">Add blocks to see preview</div>
+    </div>
+  </div>
+<% end %>
