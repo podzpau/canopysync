@@ -213,7 +213,7 @@
           
           <% if @shop.blocks.any? %>
             <% @shop.blocks.each do |block| %>
-              <div class="block-item relative group border-2 border-transparent transition-all cursor-pointer"
+              <div class="block-item relative group transition-all cursor-pointer"
                    data-block-id="<%= block['id'] %>"
                    data-action="click->block-selector#selectBlock">
                 <%= render "blocks/#{block['type']}", config: block['config'] %>
