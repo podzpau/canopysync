@@ -1,16 +1,16 @@
 class Admin::BlocksController < AdminController
   before_action :load_shop
   
- def create
-  Rails.logger.info "=== CREATE BLOCK CALLED ==="
-  Rails.logger.info "Block type: #{params[:block_type]}"
-  
-  block_type = params[:block_type]
-  default_config = BlockTypes::AVAILABLE_BLOCKS[block_type][:fields].index_with { '' }
-  @shop.add_block(block_type, default_config)
-  
-  redirect_to edit_admin_settings_path, notice: 'Block added'
-end
+  def create
+    Rails.logger.info "=== CREATE BLOCK CALLED ==="
+    Rails.logger.info "Block type: #{params[:block_type]}"
+    
+    block_type = params[:block_type]
+    default_config = BlockTypes::AVAILABLE_BLOCKS[block_type][:fields].index_with { '' }
+    @shop.add_block(block_type, default_config)
+    
+    redirect_to edit_admin_settings_path, notice: 'Block added'
+  end
   
   def edit
     @block_index = @shop.blocks.index { |b| b['id'] == params[:id] }
@@ -46,7 +46,7 @@ end
   private
   
   def load_shop
-    @shop = Shop.find_by(domain: 'alpaca.club')
+    @shop = Shop.first
   end
   
   def block_params
