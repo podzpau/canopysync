@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'home#index'
+  root 'root 'admin/settings#edit'
   
   namespace :admin do
     resource :settings, only: [:edit, :update]  # singular 'resource' = no ID needed
