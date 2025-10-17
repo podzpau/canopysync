@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  root 'root 'admin/settings#edit'
+  root 'admin/settings#edit'
   
   namespace :admin do
-    resource :settings, only: [:edit, :update]  # singular 'resource' = no ID needed
+    resource :settings, only: [:edit, :update]
     resources :blocks, only: [:create, :edit, :update, :destroy] do
       collection do
         patch :reorder
