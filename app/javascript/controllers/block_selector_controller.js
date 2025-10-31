@@ -11,14 +11,12 @@ export default class extends Controller {
   selectBlock(event) {
     // Remove selection from all blocks
     document.querySelectorAll('.block-item').forEach(block => {
-      block.classList.remove('border-sky-500', 'ring-2', 'ring-sky-400')
-      block.classList.add('border-transparent')
+      block.classList.remove('ring-4', 'ring-sky-500')
     })
     
     // Add selection to clicked block
     const clickedBlock = event.currentTarget
-    clickedBlock.classList.remove('border-transparent')
-    clickedBlock.classList.add('border-sky-500', 'ring-2', 'ring-sky-400')
+    clickedBlock.classList.add('ring-4', 'ring-sky-500')
     
     console.log('Selected block:', clickedBlock.dataset.blockId)
   }

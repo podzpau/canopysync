@@ -1,40 +1,43 @@
 <div class="flex h-screen bg-gray-50 overflow-hidden" data-controller="block-selector">
   
   <!-- Left Sidebar - 320px (w-80) -->
-  <aside class="w-80 bg-neutral-900 flex flex-col overflow-y-auto">
+  <aside class="w-80 bg-white border-r border-gray-200 flex flex-col overflow-y-auto">
     
     <!-- Logo -->
-   <div class="p-6">
-  <h1 class="text-xl font-bold text-white">canopy<span class="text-sky-400">sync</span></h1>
-</div>
+    <div class="px-6 py-6 border-b border-gray-200 flex items-center gap-3">
+      <svg width="40" height="40" viewBox="0 0 544 271" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M41.922 247.38C37.0153 247.38 32.6607 246.46 28.858 244.62C25.0553 242.78 22.0807 240.112 19.934 236.616C17.8487 233.059 16.806 228.857 16.806 224.012C16.806 219.167 17.8487 214.996 19.934 211.5C22.0807 207.943 25.0553 205.213 28.858 203.312C32.722 201.411 37.138 200.46 42.106 200.46C48.8527 200.46 54.25 201.779 58.298 204.416V212.052C54.3114 209.292 49.2207 207.912 43.026 207.912C37.9967 207.912 33.918 209.292 30.79 212.052C27.7233 214.751 26.19 218.737 26.19 224.012C26.19 229.287 27.7233 233.273 30.79 235.972C33.8567 238.671 37.874 240.02 42.842 240.02C49.0367 240.02 54.3727 238.548 58.85 235.604V243.148C56.7034 244.62 54.25 245.693 51.49 246.368C48.7914 247.043 45.602 247.38 41.922 247.38ZM84.3333 247.38C78.9973 247.38 74.704 246.031 71.4533 243.332C68.264 240.572 66.6693 236.861 66.6693 232.2C66.6693 227.293 68.2026 223.521 71.2693 220.884C74.3973 218.185 78.8133 216.836 84.5173 216.836C90.5893 216.836 95.7413 218.063 99.9733 220.516V218.216C99.9733 214.72 98.9 212.144 96.7533 210.488C94.668 208.771 91.356 207.912 86.8173 207.912C84.1186 207.912 81.4813 208.188 78.9053 208.74C76.3906 209.231 74.1213 209.936 72.0973 210.856V203.312C73.9373 202.453 76.3293 201.779 79.2733 201.288C82.2173 200.736 85.0693 200.46 87.8293 200.46C95.128 200.46 100.525 202.085 104.021 205.336C107.579 208.525 109.357 212.972 109.357 218.676V246H100.617V241.032C98.716 243.117 96.4466 244.712 93.8093 245.816C91.2333 246.859 88.0746 247.38 84.3333 247.38ZM86.6333 240.296C89.5773 240.296 92.2453 239.713 94.6373 238.548C97.0293 237.383 98.808 235.757 99.9733 233.672V227.692C95.9866 225.116 91.54 223.828 86.6333 223.828C83.076 223.828 80.408 224.533 78.6293 225.944C76.912 227.293 76.0533 229.379 76.0533 232.2C76.0533 237.597 79.58 240.296 86.6333 240.296ZM120.888 201.84H129.904V208.188C131.99 205.551 134.535 203.619 137.54 202.392C140.607 201.104 143.796 200.46 147.108 200.46C152.996 200.46 157.382 202.024 160.264 205.152C163.147 208.28 164.588 212.481 164.588 217.756V246H155.296V218.676C155.296 211.5 151.862 207.912 144.992 207.912C142.048 207.912 139.288 208.617 136.712 210.028C134.198 211.377 132.02 213.463 130.18 216.284V246H120.888V201.84ZM197.981 247.38C193.013 247.38 188.627 246.46 184.825 244.62C181.083 242.719 178.139 240.02 175.993 236.524C173.907 232.967 172.865 228.796 172.865 224.012C172.865 219.289 173.907 215.149 175.993 211.592C178.078 208.035 181.022 205.305 184.825 203.404C188.627 201.441 193.013 200.46 197.981 200.46C202.949 200.46 207.334 201.441 211.137 203.404C214.939 205.305 217.883 208.035 219.969 211.592C222.115 215.149 223.189 219.289 223.189 224.012C223.189 228.796 222.115 232.967 219.969 236.524C217.883 240.02 214.939 242.719 211.137 244.62C207.334 246.46 202.949 247.38 197.981 247.38ZM197.981 240.02C202.765 240.02 206.567 238.548 209.389 235.604C212.21 232.66 213.621 228.796 213.621 224.012C213.621 219.044 212.21 215.119 209.389 212.236C206.567 209.353 202.765 207.912 197.981 207.912C193.197 207.912 189.394 209.353 186.573 212.236C183.751 215.119 182.341 219.044 182.341 224.012C182.341 228.796 183.751 232.66 186.573 235.604C189.394 238.548 193.197 240.02 197.981 240.02ZM233.283 201.84H242.299V208.372C246.837 203.097 252.971 200.46 260.699 200.46C265.115 200.46 269.071 201.441 272.567 203.404C276.124 205.367 278.884 208.127 280.847 211.684C282.871 215.18 283.883 219.259 283.883 223.92C283.883 228.52 282.871 232.599 280.847 236.156C278.884 239.713 276.155 242.473 272.659 244.436C269.163 246.399 265.176 247.38 260.699 247.38C257.019 247.38 253.584 246.767 250.395 245.54C247.205 244.313 244.599 242.504 242.575 240.112V266.148H233.283V201.84ZM258.583 240.02C261.588 240.02 264.287 239.376 266.679 238.088C269.132 236.739 271.033 234.837 272.383 232.384C273.793 229.931 274.499 227.109 274.499 223.92C274.499 220.731 273.793 217.94 272.383 215.548C271.033 213.095 269.132 211.224 266.679 209.936C264.287 208.587 261.588 207.912 258.583 207.912C254.841 207.912 251.529 208.893 248.647 210.856C245.825 212.819 243.801 215.517 242.575 218.952V228.888C243.617 232.261 245.611 234.96 248.555 236.984C251.499 239.008 254.841 240.02 258.583 240.02ZM297.382 264.216C294.07 264.216 291.31 263.879 289.102 263.204V255.936C290.696 256.549 292.659 256.856 294.99 256.856C297.136 256.856 298.823 256.304 300.05 255.2C301.276 254.157 302.38 252.44 303.362 250.048L305.478 244.896L286.158 201.84H295.726L310.446 235.788L324.154 201.84H333.722L313.85 250.968C312.01 255.568 309.802 258.911 307.226 260.996C304.711 263.143 301.43 264.216 297.382 264.216ZM354.145 247.38C351.078 247.38 347.828 246.981 344.393 246.184C340.958 245.448 338.26 244.436 336.297 243.148V235.236C338.689 236.647 341.449 237.812 344.577 238.732C347.705 239.591 350.741 240.02 353.685 240.02C356.997 240.02 359.42 239.621 360.953 238.824C362.486 238.027 363.253 236.739 363.253 234.96C363.253 233.611 362.885 232.537 362.149 231.74C361.474 230.881 360.278 230.115 358.561 229.44C356.905 228.765 354.39 227.968 351.017 227.048C347.398 226.005 344.516 224.963 342.369 223.92C340.284 222.816 338.689 221.436 337.585 219.78C336.542 218.124 336.021 215.977 336.021 213.34C336.021 209.108 337.677 205.919 340.989 203.772C344.362 201.564 348.87 200.46 354.513 200.46C357.457 200.46 360.34 200.736 363.161 201.288C365.982 201.84 368.252 202.607 369.969 203.588V211.316C368.19 210.273 365.982 209.445 363.345 208.832C360.769 208.219 358.132 207.912 355.433 207.912C352.182 207.912 349.698 208.311 347.981 209.108C346.264 209.905 345.405 211.316 345.405 213.34C345.405 214.628 345.773 215.671 346.509 216.468C347.245 217.265 348.41 217.971 350.005 218.584C351.661 219.136 354.268 219.872 357.825 220.792C363.406 222.325 367.27 224.135 369.417 226.22C371.625 228.305 372.729 231.188 372.729 234.868C372.729 238.671 371.165 241.707 368.037 243.976C364.909 246.245 360.278 247.38 354.145 247.38ZM387.225 264.216C383.913 264.216 381.153 263.879 378.945 263.204V255.936C380.54 256.549 382.503 256.856 384.833 256.856C386.98 256.856 388.667 256.304 389.893 255.2C391.12 254.157 392.224 252.44 393.205 250.048L395.321 244.896L376.001 201.84H385.569L400.289 235.788L413.997 201.84H423.565L403.693 250.968C401.853 255.568 399.645 258.911 397.069 260.996C394.555 263.143 391.273 264.216 387.225 264.216ZM431.837 201.84H440.853V208.188C442.939 205.551 445.484 203.619 448.489 202.392C451.556 201.104 454.745 200.46 458.057 200.46C463.945 200.46 468.331 202.024 471.213 205.152C474.096 208.28 475.537 212.481 475.537 217.756V246H466.245V218.676C466.245 211.5 462.811 207.912 455.941 207.912C452.997 207.912 450.237 208.617 447.661 210.028C445.147 211.377 442.969 213.463 441.129 216.284V246H431.837V201.84ZM510.277 247.38C505.371 247.38 501.016 246.46 497.213 244.62C493.411 242.78 490.436 240.112 488.289 236.616C486.204 233.059 485.161 228.857 485.161 224.012C485.161 219.167 486.204 214.996 488.289 211.5C490.436 207.943 493.411 205.213 497.213 203.312C501.077 201.411 505.493 200.46 510.461 200.46C517.208 200.46 522.605 201.779 526.653 204.416V212.052C522.667 209.292 517.576 207.912 511.381 207.912C506.352 207.912 502.273 209.292 499.145 212.052C496.079 214.751 494.545 218.737 494.545 224.012C494.545 229.287 496.079 233.273 499.145 235.972C502.212 238.671 506.229 240.02 511.197 240.02C517.392 240.02 522.728 238.548 527.205 235.604V243.148C525.059 244.62 522.605 245.693 519.845 246.368C517.147 247.043 513.957 247.38 510.277 247.38Z" fill="#28365C"/>
+      </svg>
+      <span class="text-lg font-bold text-gray-900">CanopySync</span>
+    </div>
     
     <!-- Style Section -->
-    <div class="border-b border-zinc-700">
+    <div class="border-b border-gray-200">
       <details class="group">
-        <summary class="flex items-center justify-between px-6 py-3 cursor-pointer hover:bg-neutral-800 transition-colors">
-          <span class="text-white text-sm font-semibold">⚙️ Style</span>
-          <span class="text-white text-xs group-open:rotate-90 inline-block transition-transform">▶</span>
+        <summary class="flex items-center justify-between px-6 py-3 cursor-pointer hover:bg-gray-50 transition-colors">
+          <span class="text-gray-900 text-sm font-semibold">⚙️ Style</span>
+          <span class="text-gray-600 text-xs group-open:rotate-90 inline-block transition-transform">▶</span>
         </summary>
         
-        <div class="px-6 py-4 bg-neutral-800">
+        <div class="px-6 py-4 bg-gray-50 border-t border-gray-200">
           <%= form_with model: @shop, url: admin_settings_path, method: :patch, data: { turbo: false } do |f| %>
             <div class="space-y-3">
-              <label class="text-xs text-zinc-400 block mb-2">Corner Style</label>
+              <label class="text-xs text-gray-600 block mb-2">Corner Style</label>
               <div class="flex gap-2">
                 <label class="flex-1 cursor-pointer">
                   <%= f.radio_button :corner_style, 'rounded', class: 'peer sr-only' %>
-                  <div class="px-3 py-2 bg-neutral-700 peer-checked:bg-sky-700 rounded text-xs text-white text-center transition-colors">
+                  <div class="px-3 py-2 bg-white border border-gray-200 peer-checked:bg-orange-50 peer-checked:border-orange-500 rounded text-xs text-gray-700 peer-checked:text-orange-600 text-center transition-colors font-medium">
                     Soft
                   </div>
                 </label>
                 <label class="flex-1 cursor-pointer">
                   <%= f.radio_button :corner_style, 'sharp', class: 'peer sr-only' %>
-                  <div class="px-3 py-2 bg-neutral-700 peer-checked:bg-sky-700 text-xs text-white text-center transition-colors">
+                  <div class="px-3 py-2 bg-white border border-gray-200 peer-checked:bg-orange-50 peer-checked:border-orange-500 text-xs text-gray-700 peer-checked:text-orange-600 text-center transition-colors font-medium">
                     Sharp
                   </div>
                 </label>
               </div>
-              <%= f.submit 'Save', class: 'w-full mt-3 px-4 py-2 bg-sky-700 hover:bg-sky-600 text-white text-xs rounded transition-colors' %>
+              <%= f.submit 'Save', class: 'w-full mt-3 px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white text-xs rounded transition-colors font-medium' %>
             </div>
           <% end %>
         </div>
@@ -42,23 +45,23 @@
     </div>
     
     <!-- Blocks Section -->
-    <div class="border-b border-zinc-700">
+    <div class="border-b border-gray-200">
       <details open class="group">
-        <summary class="flex items-center justify-between px-6 py-3 cursor-pointer hover:bg-neutral-800 transition-colors">
-          <span class="text-white text-sm font-semibold">📦 Blocks</span>
-          <span class="text-white text-xs group-open:rotate-90 inline-block transition-transform">▶</span>
+        <summary class="flex items-center justify-between px-6 py-3 cursor-pointer hover:bg-gray-50 transition-colors">
+          <span class="text-gray-900 text-sm font-semibold">🧱 Blocks</span>
+          <span class="text-gray-600 text-xs group-open:rotate-90 inline-block transition-transform">▶</span>
         </summary>
         
-        <div class="p-4 bg-neutral-800">
+        <div class="p-4 bg-gray-50 border-t border-gray-200">
           <%= form_with url: admin_blocks_path, method: :post, id: 'add-block-form' do |f| %>
             <div class="grid grid-cols-2 gap-3">
               <% BlockTypes::AVAILABLE_BLOCKS.each do |key, block| %>
                 <%= button_tag type: 'submit', name: 'block_type', value: key,
-                    class: 'flex flex-col items-center gap-2 p-3 bg-neutral-700 hover:bg-neutral-600 rounded-lg transition-colors group' do %>
-                  <div class="w-10 h-10 bg-neutral-600 group-hover:bg-neutral-500 rounded flex items-center justify-center text-2xl">
+                    class: 'flex flex-col items-center gap-2 p-3 bg-white border border-gray-200 hover:border-orange-500 hover:bg-orange-50 rounded-lg transition-colors group' do %>
+                  <div class="w-10 h-10 bg-gray-100 group-hover:bg-orange-100 rounded flex items-center justify-center text-2xl transition-colors">
                     📄
                   </div>
-                  <span class="text-[10px] text-white text-center leading-tight"><%= block[:name] %></span>
+                  <span class="text-[10px] text-gray-700 text-center leading-tight font-medium"><%= block[:name] %></span>
                 <% end %>
               <% end %>
             </div>
@@ -68,101 +71,101 @@
     </div>
     
     <!-- Brand Section -->
-    <div class="border-b border-zinc-700">
+    <div class="border-b border-gray-200">
       <details class="group">
-        <summary class="flex items-center justify-between px-6 py-3 cursor-pointer hover:bg-neutral-800 transition-colors">
-          <span class="text-zinc-400 text-sm font-semibold">🎨 Brand</span>
-          <span class="text-zinc-400 text-xs group-open:rotate-90 inline-block transition-transform">▶</span>
+        <summary class="flex items-center justify-between px-6 py-3 cursor-pointer hover:bg-gray-50 transition-colors">
+          <span class="text-gray-900 text-sm font-semibold">🎨 Brand</span>
+          <span class="text-gray-600 text-xs group-open:rotate-90 inline-block transition-transform">▶</span>
         </summary>
         
-        <div class="px-6 py-4 bg-neutral-800 space-y-4">
+        <div class="px-6 py-4 bg-gray-50 space-y-4 border-t border-gray-200">
           <%= form_with model: @shop, url: admin_settings_path, method: :patch, data: { turbo: false } do |f| %>
             
             <!-- Text (Font) -->
             <div>
-              <label class="text-xs text-zinc-400 block mb-2">Font</label>
+              <label class="text-xs text-gray-600 block mb-2 font-medium">Font</label>
               <%= f.select :font_family, 
                   options_for_select(Shop::FONT_LIBRARY.map { |k,v| [v[:name], k] }, @shop.font_family),
                   {},
-                  class: 'w-full px-3 py-2 bg-neutral-700 text-white text-xs rounded border border-neutral-600 focus:border-sky-700 focus:outline-none' %>
+                  class: 'w-full px-3 py-2 bg-white text-gray-900 text-xs rounded border border-gray-300 focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-100' %>
             </div>
             
             <!-- Primary Color -->
             <div>
-              <label class="text-xs text-zinc-400 block mb-2">Primary Color</label>
+              <label class="text-xs text-gray-600 block mb-2 font-medium">Primary Color</label>
               <div class="flex gap-2">
                 <%= f.color_field :primary_color, 
-                    class: 'w-12 h-10 rounded cursor-pointer bg-neutral-700 border border-neutral-600' %>
+                    class: 'w-12 h-10 rounded cursor-pointer bg-white border border-gray-300 focus:border-orange-500' %>
                 <%= f.text_field :primary_color, 
-                    class: 'flex-1 px-3 py-2 bg-neutral-700 text-white text-xs rounded border border-neutral-600 focus:border-sky-700 focus:outline-none font-mono' %>
+                    class: 'flex-1 px-3 py-2 bg-white text-gray-900 text-xs rounded border border-gray-300 focus:border-orange-500 focus:outline-none font-mono' %>
               </div>
             </div>
             
             <!-- Secondary Color -->
             <div>
-              <label class="text-xs text-zinc-400 block mb-2">Secondary Color</label>
+              <label class="text-xs text-gray-600 block mb-2 font-medium">Secondary Color</label>
               <div class="flex gap-2">
                 <%= f.color_field :secondary_color, 
-                    class: 'w-12 h-10 rounded cursor-pointer bg-neutral-700 border border-neutral-600' %>
+                    class: 'w-12 h-10 rounded cursor-pointer bg-white border border-gray-300 focus:border-orange-500' %>
                 <%= f.text_field :secondary_color, 
-                    class: 'flex-1 px-3 py-2 bg-neutral-700 text-white text-xs rounded border border-neutral-600 focus:border-sky-700 focus:outline-none font-mono' %>
+                    class: 'flex-1 px-3 py-2 bg-white text-gray-900 text-xs rounded border border-gray-300 focus:border-orange-500 focus:outline-none font-mono' %>
               </div>
             </div>
             
             <!-- Logo Upload -->
             <div>
-              <label class="text-xs text-zinc-400 block mb-2">Logo</label>
+              <label class="text-xs text-gray-600 block mb-2 font-medium">Logo</label>
               <%= f.text_field :logo_url, 
                   placeholder: 'Enter logo URL...',
-                  class: 'w-full px-3 py-2 bg-neutral-700 text-white text-xs rounded border border-neutral-600 focus:border-sky-700 focus:outline-none' %>
-              <p class="text-[10px] text-zinc-500 mt-1">Paste image URL or upload file</p>
+                  class: 'w-full px-3 py-2 bg-white text-gray-900 text-xs rounded border border-gray-300 focus:border-orange-500 focus:outline-none' %>
+              <p class="text-[10px] text-gray-500 mt-1">Paste image URL or upload file</p>
             </div>
             
-            <%= f.submit 'Save Brand', class: 'w-full mt-3 px-4 py-2 bg-sky-700 hover:bg-sky-600 text-white text-xs rounded transition-colors' %>
+            <%= f.submit 'Save Brand', class: 'w-full mt-3 px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white text-xs rounded transition-colors font-medium' %>
           <% end %>
         </div>
       </details>
     </div>
     
     <!-- SEO & Content Checklist -->
-    <div class="border-b border-zinc-700">
+    <div class="border-b border-gray-200">
       <details class="group">
-        <summary class="flex items-center justify-between px-6 py-3 cursor-pointer hover:bg-neutral-800 transition-colors">
-          <span class="text-zinc-400 text-sm font-semibold">🔍 SEO & Content</span>
-          <span class="text-zinc-400 text-xs group-open:rotate-90 inline-block transition-transform">▶</span>
+        <summary class="flex items-center justify-between px-6 py-3 cursor-pointer hover:bg-gray-50 transition-colors">
+          <span class="text-gray-900 text-sm font-semibold">🔍 SEO & Content</span>
+          <span class="text-gray-600 text-xs group-open:rotate-90 inline-block transition-transform">▶</span>
         </summary>
         
-        <div class="px-6 py-4 bg-neutral-800 space-y-4">
+        <div class="px-6 py-4 bg-gray-50 space-y-4 border-t border-gray-200">
           <%= form_with model: @shop, url: admin_settings_path, method: :patch, data: { turbo: false } do |f| %>
             
             <!-- Meta Title -->
             <div>
-              <label class="text-xs text-zinc-400 block mb-2">Page Title</label>
+              <label class="text-xs text-gray-600 block mb-2 font-medium">Page Title</label>
               <%= f.text_field :meta_title, 
                   placeholder: 'Best Cannabis in Town | Shop Name',
-                  class: 'w-full px-3 py-2 bg-neutral-700 text-white text-xs rounded border border-neutral-600 focus:border-sky-700 focus:outline-none' %>
-              <p class="text-[10px] text-zinc-500 mt-1">60 characters max</p>
+                  class: 'w-full px-3 py-2 bg-white text-gray-900 text-xs rounded border border-gray-300 focus:border-orange-500 focus:outline-none' %>
+              <p class="text-[10px] text-gray-500 mt-1">60 characters max</p>
             </div>
             
             <!-- Meta Description -->
             <div>
-              <label class="text-xs text-zinc-400 block mb-2">Meta Description</label>
+              <label class="text-xs text-gray-600 block mb-2 font-medium">Meta Description</label>
               <%= f.text_area :meta_description, 
                   rows: 3,
                   placeholder: 'Premium cannabis products delivered to your door...',
-                  class: 'w-full px-3 py-2 bg-neutral-700 text-white text-xs rounded border border-neutral-600 focus:border-sky-700 focus:outline-none resize-none' %>
-              <p class="text-[10px] text-zinc-500 mt-1">160 characters max</p>
+                  class: 'w-full px-3 py-2 bg-white text-gray-900 text-xs rounded border border-gray-300 focus:border-orange-500 focus:outline-none resize-none' %>
+              <p class="text-[10px] text-gray-500 mt-1">160 characters max</p>
             </div>
             
             <!-- Google Preview -->
-            <div class="p-3 bg-neutral-900 rounded border border-neutral-700">
-              <p class="text-[10px] text-zinc-500 mb-2">Google Preview:</p>
-              <div class="text-blue-400 text-xs mb-1 truncate"><%= @shop.meta_title || 'Your Page Title' %></div>
-              <div class="text-emerald-500 text-[10px] mb-1">yourstore.com › page</div>
-              <div class="text-zinc-400 text-[10px] line-clamp-2"><%= @shop.meta_description || 'Your meta description appears here...' %></div>
+            <div class="p-3 bg-white rounded border border-gray-200">
+              <p class="text-[10px] text-gray-600 mb-2 font-medium">Google Preview:</p>
+              <div class="text-blue-600 text-xs mb-1 truncate font-medium"><%= @shop.meta_title || 'Your Page Title' %></div>
+              <div class="text-emerald-600 text-[10px] mb-1">yourstore.com › page</div>
+              <div class="text-gray-600 text-[10px] line-clamp-2"><%= @shop.meta_description || 'Your meta description appears here...' %></div>
             </div>
             
-            <%= f.submit 'Save SEO', class: 'w-full mt-3 px-4 py-2 bg-sky-700 hover:bg-sky-600 text-white text-xs rounded transition-colors' %>
+            <%= f.submit 'Save SEO', class: 'w-full mt-3 px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white text-xs rounded transition-colors font-medium' %>
           <% end %>
         </div>
       </details>
@@ -172,10 +175,10 @@
     <div class="flex-1"></div>
     
     <!-- Back to Dashboard -->
-    <div class="border-t border-zinc-700 p-6">
-      <%= link_to root_path, class: 'flex items-center gap-3 text-zinc-400 hover:text-white transition-colors group' do %>
+    <div class="border-t border-gray-200 p-6">
+      <%= link_to root_path, class: 'flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors group' do %>
         <span class="text-lg">←</span>
-        <span class="text-sm underline">Back to Dashboard</span>
+        <span class="text-sm font-medium">Back to Dashboard</span>
       <% end %>
     </div>
     
@@ -185,22 +188,22 @@
   <div class="flex-1 flex flex-col overflow-hidden">
     
     <!-- Top Toolbar -->
-    <div class="bg-white border-b px-8 py-3 flex items-center justify-between">
+    <div class="bg-white border-b border-gray-200 px-8 py-3 flex items-center justify-between">
       
       <!-- Device Toggles (Center) -->
       <div class="flex-1 flex justify-center">
         <div class="inline-flex bg-gray-100 rounded-lg p-1 gap-1">
-          <button data-action="click->block-selector#setDevice" data-device="desktop" class="device-toggle px-4 py-2 bg-white rounded shadow-sm text-sm">🖥️</button>
-          <button data-action="click->block-selector#setDevice" data-device="tablet" class="device-toggle px-4 py-2 hover:bg-white/50 rounded transition-colors text-sm">📱</button>
-          <button data-action="click->block-selector#setDevice" data-device="mobile" class="device-toggle px-4 py-2 hover:bg-white/50 rounded transition-colors text-sm">📲</button>
+          <button data-action="click->block-selector#setDevice" data-device="desktop" class="device-toggle px-4 py-2 bg-white rounded shadow-sm text-sm font-medium text-gray-900 transition-colors">🖥️ Desktop</button>
+          <button data-action="click->block-selector#setDevice" data-device="tablet" class="device-toggle px-4 py-2 hover:bg-white rounded transition-colors text-sm font-medium text-gray-700">📱 Tablet</button>
+          <button data-action="click->block-selector#setDevice" data-device="mobile" class="device-toggle px-4 py-2 hover:bg-white rounded transition-colors text-sm font-medium text-gray-700">📲 Mobile</button>
         </div>
       </div>
       
       <!-- Actions (Right) -->
       <div class="flex gap-3">
         <%= link_to 'Preview', root_path, target: '_blank',
-            class: 'px-5 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 text-sm font-medium transition-colors' %>
-        <button class="px-6 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 text-sm font-semibold transition-colors">
+            class: 'px-5 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 text-sm font-medium transition-colors text-gray-700' %>
+        <button class="px-6 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 text-sm font-semibold transition-colors">
           Set Live
         </button>
       </div>
@@ -209,7 +212,7 @@
     <!-- Canvas -->
     <div class="flex-1 overflow-y-auto bg-gray-50 p-8">
       <div data-block-selector-target="canvas" class="max-w-6xl mx-auto transition-all duration-300">
-        <div class="bg-white shadow-2xl rounded-xl overflow-hidden min-h-screen">
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden min-h-screen border border-gray-200">
           
           <% if @shop.blocks.any? %>
             <% @shop.blocks.each do |block| %>
@@ -220,11 +223,11 @@
                 
                 <!-- Hover Controls -->
                 <div class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 flex gap-2 transition-opacity z-10">
-                  <button class="px-3 py-1 bg-sky-600 hover:bg-sky-700 text-white text-xs rounded shadow-lg font-medium">
+                  <button class="px-3 py-1 bg-orange-500 hover:bg-orange-600 text-white text-xs rounded shadow-lg font-medium transition-colors">
                     ✏️ Edit
                   </button>
                   <%= button_to admin_block_path(block['id']), method: :delete, data: { turbo: false, confirm: 'Delete this block?' },
-                      class: 'px-3 py-1 bg-red-600 hover:bg-red-700 text-white text-xs rounded shadow-lg font-medium' do %>
+                      class: 'px-3 py-1 bg-red-500 hover:bg-red-600 text-white text-xs rounded shadow-lg font-medium transition-colors' do %>
                     🗑️ Delete
                   <% end %>
                 </div>
@@ -235,8 +238,8 @@
             <div class="h-screen flex items-center justify-center">
               <div class="text-center">
                 <div class="text-8xl mb-4">➕</div>
-                <h3 class="text-2xl font-bold text-gray-700 mb-2">Start Building Your Page</h3>
-                <p class="text-gray-500">Click a block from the sidebar to add it to your page</p>
+                <h3 class="text-2xl font-bold text-gray-900 mb-2">Start Building Your Page</h3>
+                <p class="text-gray-600">Click a block from the sidebar to add it to your page</p>
               </div>
             </div>
           <% end %>
