@@ -2,7 +2,7 @@
   <h2 class="text-xl md:text-2xl lg:text-3xl font-bold mb-8 md:mb-12 text-center">
     <%= config['heading'] || 'Featured Brands' %>
   </h2>
-  <div class="grid gap-2 max-w-6xl mx-auto" style="grid-template-columns: repeat(3, 1fr);">
+  <div class="grid gap-2 max-w-6xl mx-auto md:gap-4 lg:gap-6" style="grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));">
     <% 6.times do %>
       <div class="aspect-square bg-white rounded-lg flex items-center justify-center p-1 hover:shadow-lg transition-shadow">
         <div class="text-gray-400 font-medium text-[8px] md:text-[10px] lg:text-sm text-center">BRAND</div>
