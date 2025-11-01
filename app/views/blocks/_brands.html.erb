@@ -1,16 +1,16 @@
 <div class="py-16 px-4 bg-gray-100">
-  <h2 class="text-3xl font-bold mb-12 text-center">
+  <h2 class="text-2xl md:text-3xl font-bold mb-12 text-center">
     <%= config['heading'] || 'Featured Brands' %>
   </h2>
-  <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 max-w-6xl mx-auto">
+  <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-6 lg:gap-8 max-w-6xl mx-auto">
     <% 6.times do %>
-      <div class="aspect-square bg-white rounded-lg flex items-center justify-center p-4 hover:shadow-lg transition-shadow">
-        <div class="text-gray-400 font-bold text-lg">BRAND</div>
+      <div class="aspect-square bg-white rounded-lg flex items-center justify-center p-2 md:p-4 hover:shadow-lg transition-shadow">
+        <div class="text-gray-400 font-medium text-xs md:text-sm lg:text-lg text-center break-words">BRAND</div>
       </div>
     <% end %>
   </div>
   <div class="text-center mt-8">
-    <button class="px-6 py-2 border-2 border-gray-400 text-gray-600 rounded-lg hover:bg-gray-200 transition-colors font-medium">
+    <button class="px-6 py-2 border-2 border-gray-400 text-gray-600 rounded-lg hover:bg-gray-200 transition-colors font-medium text-sm md:text-base">
       View All Brands
     </button>
   </div>
