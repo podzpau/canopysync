@@ -1,15 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>Admin - CanopySync</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="CanopySync - Cannabis Dispensary Page Builder">
+    <meta name="theme-color" content="#ffffff">
+    <title>CanopySync Editor</title>
+    
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+    </style>
   </head>
 
-  <body class="bg-gray-100">
-    <%= yield %>
+  <body class="bg-gray-50 antialiased" data-turbo-cache="false">
+    <div class="min-h-screen">
+      <%= yield %>
+    </div>
   </body>
 </html>
