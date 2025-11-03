@@ -1,70 +1,72 @@
 <div class="py-16 px-4 bg-white">
-  <div class="max-w-6xl mx-auto">
+  <div class="max-w-7xl mx-auto">
     <!-- Header -->
     <div class="flex items-center justify-between mb-12">
-      <h2 class="text-3xl md:text-4xl font-bold text-gray-900">
+      <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900">
         <%= config['heading'] || 'Flower' %>
       </h2>
-      <div class="flex items-center gap-4">
-        <a href="#" class="text-sm font-semibold text-gray-900 hover:text-orange-500">View All</a>
-        <button class="w-10 h-10 flex items-center justify-center bg-orange-500 text-white rounded-md hover:bg-orange-600">
+      <div class="flex items-center gap-2">
+        <a href="#" class="text-sm md:text-base font-semibold text-gray-900 hover:text-gray-600">View All</a>
+        <button class="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center bg-gray-200 text-gray-700 rounded hover:bg-gray-300">
           ‹
         </button>
-        <button class="w-10 h-10 flex items-center justify-center bg-orange-500 text-white rounded-md hover:bg-orange-600">
+        <button class="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center bg-gray-200 text-gray-700 rounded hover:bg-gray-300">
           ›
         </button>
       </div>
     </div>
 
     <!-- Product Grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      <% 4.times do |i| %>
-        <div class="bg-white border-2 border-gray-300 rounded-2xl overflow-hidden hover:shadow-lg transition-shadow">
-          <!-- Image -->
-          <div class="w-full aspect-square bg-gray-100 rounded-xl m-4 mb-0"></div>
-
-          <!-- Call Out Badge -->
-          <div class="bg-gray-500 text-white text-xs font-bold px-3 py-1 mx-4 mt-4 rounded-md w-fit">
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-6">
+      <% 4.times do %>
+        <!-- Product Card -->
+        <div class="relative bg-white border border-gray-300 rounded-2xl overflow-hidden">
+          
+          <!-- Call Out Badge (Top Left) -->
+          <div class="absolute top-3 left-3 bg-gray-500 text-white text-xs font-bold px-2 py-1 rounded z-10">
             Call Out
           </div>
 
+          <!-- Image Container (Centered) -->
+          <div class="w-full aspect-square bg-gray-100 flex items-center justify-center p-4">
+            <div class="w-3/4 h-3/4 bg-gray-200 rounded-lg"></div>
+          </div>
+
           <!-- Content -->
-          <div class="p-4">
-            <!-- Type & Size -->
-            <div class="flex items-center justify-between mb-3">
-              <div class="flex items-center gap-2">
-                <span class="text-gray-600 text-sm">🌿</span>
-                <span class="text-gray-600 text-xs font-light uppercase">Sativa</span>
-              </div>
-              <span class="text-gray-600 text-xs font-light">1g</span>
+          <div class="p-3 md:p-4">
+            
+            <!-- Type & Size Row -->
+            <div class="flex items-center justify-between mb-2 text-xs md:text-sm">
+              <div class="text-gray-600 font-light uppercase">Sativa</div>
+              <div class="text-gray-600 font-light">1g</div>
             </div>
 
             <!-- THC -->
-            <div class="flex items-center gap-1 mb-3">
-              <span class="text-gray-600 text-xs font-light uppercase">THC</span>
-              <span class="text-gray-600 text-xs">25.70%</span>
+            <div class="text-xs md:text-sm text-gray-600 font-light mb-2">
+              THC 25.70%
             </div>
 
             <!-- Product Name -->
-            <h3 class="text-xl font-semibold text-gray-900 mb-1">
+            <h3 class="text-sm md:text-base font-semibold text-gray-900 mb-1">
               Strain Name
             </h3>
 
             <!-- Brand -->
-            <p class="text-sm font-normal text-gray-600 uppercase mb-4">
+            <p class="text-xs md:text-sm text-gray-500 uppercase mb-3">
               Brand Name
             </p>
 
             <!-- Price -->
             <div class="flex items-center gap-2 mb-4">
-              <span class="text-3xl font-bold text-gray-900">$39</span>
-              <span class="text-sm text-gray-500 line-through">$45</span>
+              <span class="text-2xl md:text-3xl font-bold text-gray-900">$39</span>
+              <span class="text-xs md:text-sm text-gray-400 line-through">$45</span>
             </div>
 
             <!-- Add to Bag Button -->
-            <button class="w-full bg-gray-300 text-gray-800 font-bold py-2 rounded-full hover:bg-gray-400 transition-colors flex items-center justify-center gap-2">
-              🛒 Add To Bag
+            <button class="w-full bg-gray-300 text-gray-800 font-bold py-2 md:py-3 rounded-full hover:bg-gray-400 transition-colors text-sm md:text-base">
+              Add To Bag
             </button>
+            
           </div>
         </div>
       <% end %>
