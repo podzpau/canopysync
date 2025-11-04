@@ -1,32 +1,12 @@
 module BlockTypes
-  AVAILABLE_BLOCKS = {
-    'hero' => {
-      name: 'Hero Section',
-      fields: %w[heading subheading button_text button_url image_url]
-    },
-    'product_card' => {
-      name: 'Product Card',
-      fields: %w[heading description price image_url]
-    },
-    'promo_banner' => {
-      name: 'Promotional',
-      fields: %w[text background_color]
-    },
-    'new_products' => {
-      name: 'New Products',
-      fields: %w[heading limit]
-    },
-    'sales' => {
-      name: 'Sales Section',
-      fields: %w[heading discount_text cta_text]
-    },
-    'brands' => {
-      name: 'Brands',
-      fields: %w[heading]
-    },
-    'cta' => {
-      name: 'Call to Action',
-      fields: %w[heading text button_text button_url]
-    }
+  BLOCK_TYPES = {
+    'hero' => { name: 'Hero Section', icon: '🎯' },
+    'product_grid' => { name: 'Product Grid', icon: '🛍️' },
+    'product_card' => { name: 'Product Card', icon: '🏷️' },
+    'brands' => { name: 'Brands', icon: '🏢' },
+    'promotional' => { name: 'Promotional', icon: '🎁' },
+    'new_products' => { name: 'New Products', icon: '✨' },
+    'sales' => { name: 'Sales Section', icon: '💰' },
+    'cta' => { name: 'Call to Action', icon: '📣' }
   }.freeze
 end

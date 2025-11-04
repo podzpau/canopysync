@@ -1,21 +1,16 @@
-<div class="product-grid py-16 px-4">
-  <h2 class="text-4xl font-bold mb-12 text-center text-primary">
-    <%= config['heading'] %>
-  </h2>
-  
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-    <%# Mock products - you'll replace this %>
-    <% 3.times do |i| %>
-      <div class="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
-        <div class="aspect-square bg-primary-light"></div>
-        <div class="p-4">
-          <h3 class="font-semibold mb-2">Product Name</h3>
-          <p class="text-sm text-gray-600 mb-3">Category • Brand</p>
-          <button class="w-full py-2 btn-primary rounded-lg font-semibold">
-            View Details
-          </button>
-        </div>
-      </div>
-    <% end %>
+<!-- app/views/blocks/_product_grid.html.erb -->
+<div class="px-4 py-8">
+  <div class="flex items-center justify-between mb-6">
+    <h2 class="text-2xl font-bold">Products</h2>
+    <button class="text-sm text-neutral-600 hover:text-black">
+      View All →
+    </button>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+    <%= render partial: "blocks/product_card" %>
+    <%= render partial: "blocks/product_card" %>
+    <%= render partial: "blocks/product_card" %>
+    <%= render partial: "blocks/product_card" %>
   </div>
 </div>

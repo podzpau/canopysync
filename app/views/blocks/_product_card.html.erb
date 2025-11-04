@@ -1,73 +1,51 @@
-<div class="py-16 px-4 bg-white">
-  <div class="max-w-7xl mx-auto">
-    <!-- Header -->
-    <div class="flex items-center justify-between mb-12">
-      <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900">
-        <%= config['heading'] || 'Flower' %>
-      </h2>
-      <div class="flex items-center gap-2">
-        <a href="#" class="text-sm md:text-base font-semibold text-gray-900">View All</a>
-        <button class="w-10 h-10 flex items-center justify-center bg-gray-200 rounded">‹</button>
-        <button class="w-10 h-10 flex items-center justify-center bg-gray-200 rounded">›</button>
-      </div>
+<!-- app/views/blocks/_product_card.html.erb -->
+<div class="bg-white rounded-xl border border-black p-4 w-full max-w-sm mx-auto">
+  <!-- Image Container with Call Out Badge -->
+  <div class="relative mb-4">
+    <div class="aspect-square bg-white rounded-xl border border-black overflow-hidden">
+      <%= image_tag("placeholder-product.jpg", 
+                    alt: "Product image", 
+                    class: "w-full h-full object-cover") %>
     </div>
-
-    <!-- Product Grid -->
-    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-      <% 4.times do %>
-        <div class="bg-white border-2 border-gray-800 rounded-3xl overflow-hidden">
-          
-          <!-- Image Container (Large) -->
-          <div class="relative p-5 pb-0">
-            <div class="w-full aspect-square bg-white border-2 border-gray-800 rounded-2xl"></div>
-            
-            <!-- Call Out Badge (Overlapping) -->
-            <div class="absolute top-5 left-5 bg-gray-600 text-white text-xs font-bold px-3 py-1.5 rounded">
-              Call Out
-            </div>
-          </div>
-
-          <!-- Content -->
-          <div class="px-5 py-4">
-            
-            <!-- Type & Size -->
-            <div class="flex items-center justify-between mb-2 text-xs">
-              <div class="flex items-center gap-1 text-gray-700">
-                <span>🌿</span>
-                <span class="font-medium uppercase">Sativa</span>
-              </div>
-              <span class="text-gray-700 font-medium">1g</span>
-            </div>
-
-            <!-- THC -->
-            <div class="text-xs text-gray-700 font-medium mb-3 uppercase">
-              THC 25.70%
-            </div>
-
-            <!-- Product Name -->
-            <h3 class="text-lg md:text-xl font-bold text-gray-900 mb-1">
-              Strain Name
-            </h3>
-
-            <!-- Brand -->
-            <p class="text-xs md:text-sm text-gray-600 uppercase mb-4">
-              Brand Name
-            </p>
-
-            <!-- Price -->
-            <div class="flex items-baseline gap-2 mb-4">
-              <span class="text-3xl md:text-4xl font-bold text-gray-900">$39</span>
-              <span class="text-xs md:text-sm text-gray-500 line-through">$45</span>
-            </div>
-
-            <!-- Add to Bag Button -->
-            <button class="w-full bg-gray-400 text-gray-900 font-bold py-2.5 md:py-3 rounded-full hover:bg-gray-500 transition-colors text-sm md:text-base flex items-center justify-center gap-2">
-              🛒 Add To Bag
-            </button>
-            
-          </div>
-        </div>
-      <% end %>
+    <!-- Call Out Badge -->
+    <div class="absolute top-0 -left-4 bg-neutral-500 text-white text-xs font-bold px-2.5 py-1 rounded-r-sm">
+      Call Out
     </div>
   </div>
+
+  <!-- Product Type & Weight -->
+  <div class="flex items-center justify-between mb-3">
+    <div class="flex items-center gap-2">
+      <!-- Sativa Icon (placeholder - replace with actual icon/emoji) -->
+      <span class="text-sm">🌿</span>
+      <span class="text-black text-xs font-light uppercase">Sativa</span>
+    </div>
+    <span class="text-black text-xs font-light">1g</span>
+  </div>
+
+  <!-- THC Info -->
+  <div class="text-neutral-500 text-xs font-light uppercase mb-3">
+    THC <span class="font-normal">25.70%</span>
+  </div>
+
+  <!-- Strain Name -->
+  <h3 class="text-neutral-600 text-2xl font-semibold mb-1.5">
+    Strain Name
+  </h3>
+
+  <!-- Brand Name -->
+  <p class="text-neutral-500 text-sm uppercase mb-4">
+    Brand Name
+  </p>
+
+  <!-- Pricing -->
+  <div class="flex items-baseline gap-2 mb-4">
+    <span class="text-black text-4xl font-extrabold">$39</span>
+    <span class="text-neutral-500 text-sm line-through">$45</span>
+  </div>
+
+  <!-- Add to Bag Button -->
+  <button class="w-full bg-zinc-300 hover:bg-zinc-400 text-zinc-800 font-bold py-2.5 px-4 rounded-2xl transition-colors">
+    Add to Bag
+  </button>
 </div>
