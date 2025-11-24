@@ -3,9 +3,13 @@
   <!-- Image Container with Call Out Badge -->
   <div class="relative mb-4">
     <div class="aspect-square bg-white rounded-xl border border-black overflow-hidden">
-      <%= image_tag("placeholder-product.jpg", 
-                    alt: "Product image", 
-                    class: "w-full h-full object-cover") %>
+      <% if config['image_url'].present? %>
+        <img src="<%= config['image_url'] %>" alt="Product image" class="w-full h-full object-cover" />
+      <% else %>
+        <div class="w-full h-full bg-gray-200 flex items-center justify-center text-gray-400 text-sm">
+          No image
+        </div>
+      <% end %>
     </div>
     <!-- Call Out Badge -->
     <div class="absolute top-0 -left-4 bg-neutral-500 text-white text-xs font-bold px-2.5 py-1 rounded-r-sm">

@@ -1,17 +1,43 @@
-<div class="hero relative py-20 px-4 bg-primary overflow-hidden">
-  <% if config['image_url'].present? %>
-    <div class="absolute inset-0 opacity-20">
-      <img src="<%= config['image_url'] %>" class="w-full h-full object-cover" alt="">
+<div class="relative isolate overflow-hidden bg-white">
+  <!-- Background Image (when dispensary uploads one) -->
+  <% if false # TODO: Replace with @shop.hero_background_image_url when implemented %>
+    <div class="absolute inset-0 -z-10">
+      <img src="<%= @shop.hero_background_image_url %>" alt="" class="h-full w-full object-cover" />
+      <div class="absolute inset-0 bg-gray-900/50"></div> <!-- Dark overlay for text readability -->
     </div>
   <% end %>
-  
-  <div class="relative max-w-4xl mx-auto text-center">
-    <h1 class="text-5xl font-bold mb-4 text-on-primary"><%= config['heading'] %></h1>
-    <p class="text-xl mb-8 text-on-primary opacity-90"><%= config['subheading'] %></p>
-    
-    <% if config['button_text'].present? %>
-      <%= link_to config['button_text'], config['button_url'] || '#', 
-          class: "inline-block px-8 py-4 bg-secondary text-on-secondary rounded-lg font-semibold hover:bg-secondary-dark transition-colors" %>
-    <% end %>
+
+  <!-- Hero Content -->
+  <div class="px-6 pt-14 lg:px-8">
+    <div class="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
+      
+      <!-- Announcement Pill -->
+      <div class="mb-8 flex justify-center">
+        <div class="rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 bg-white">
+          We serve you in Pheonix.
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="text-center">
+        <!-- Headline -->
+        <h1 class="text-5xl font-semibold tracking-tight text-gray-900 sm:text-7xl" style="text-wrap: balance;">
+          The best local dispensary in town.
+        </h1>
+        
+        <!-- Subheadline -->
+        <p class="mt-8 text-lg font-medium text-gray-600 sm:text-xl sm:leading-8" style="text-wrap: pretty;">
+          Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat.
+        </p>
+        
+        <!-- CTA Button -->
+        <div class="mt-10 flex justify-center">
+          <a href="#" class="rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
+            Shop Now
+          </a>
+        </div>
+      </div>
+
+    </div>
   </div>
 </div>

@@ -2,12 +2,11 @@ Rails.application.routes.draw do
   root 'admin/settings#edit'
   
   namespace :admin do
-    resource :settings, only: [:edit, :update]
-    resources :blocks, only: [:create, :edit, :update, :destroy] do
+    resource :settings, only: [:edit, :update] do
       collection do
-        patch :reorder
+        get :preview
       end
     end
-    get 'preview', to: 'blocks#preview'
+    resources :blocks, only: [:create, :destroy]
   end
 end

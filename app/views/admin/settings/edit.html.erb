@@ -1,141 +1,176 @@
-<div class="flex h-screen bg-gray-50 overflow-hidden" data-controller="block-selector">
+<div class="flex h-screen overflow-hidden m-0 p-0">
   
-  <!-- Left Sidebar - 320px (w-80) -->
-  <aside class="w-80 bg-white border-r border-gray-200 flex flex-col overflow-y-auto">
-    
-<!-- Logo -->
-<div class="px-6 py-8 border-b border-gray-200 flex items-center justify-center">
-  <%= image_tag "canopylogo.svg", alt: "CanopySync", class: "h-16 w-auto" %>
-</div>
-    
-    <!-- Style Section -->
-    <div class="border-b border-gray-200">
-      <details class="group">
-        <summary class="flex items-center justify-between px-6 py-3 cursor-pointer hover:bg-gray-50 transition-colors">
-          <span class="text-gray-900 text-sm font-semibold">⚙️ Style</span>
-          <span class="text-gray-600 text-xs group-open:rotate-90 inline-block transition-transform">▶</span>
-        </summary>
-        
-        <div class="px-6 py-4 bg-gray-50 border-t border-gray-200">
-          <%= form_with model: @shop, url: admin_settings_path, method: :patch, data: { turbo: false } do |f| %>
-            <div class="space-y-3">
-              <label class="text-xs text-gray-600 block mb-2">Corner Style</label>
-              <div class="flex gap-2">
-                <label class="flex-1 cursor-pointer">
-                  <%= f.radio_button :corner_style, 'rounded', class: 'peer sr-only' %>
-                  <div class="px-3 py-2 bg-white border border-gray-200 peer-checked:bg-orange-50 peer-checked:border-orange-500 rounded text-xs text-gray-700 peer-checked:text-orange-600 text-center transition-colors font-medium">
-                    Soft
-                  </div>
-                </label>
-                <label class="flex-1 cursor-pointer">
-                  <%= f.radio_button :corner_style, 'sharp', class: 'peer sr-only' %>
-                  <div class="px-3 py-2 bg-white border border-gray-200 peer-checked:bg-orange-50 peer-checked:border-orange-500 text-xs text-gray-700 peer-checked:text-orange-600 text-center transition-colors font-medium">
-                    Sharp
-                  </div>
-                </label>
-              </div>
-              <%= f.submit 'Save', class: 'w-full mt-3 px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white text-xs rounded transition-colors font-medium' %>
-            </div>
-          <% end %>
+<!-- Left Sidebar -->
+<aside class="w-80 bg-white border-r border-gray-200 flex flex-col h-screen m-0 p-0">
+  
+  <!-- Logo -->
+  <div style="padding: 1.5rem 1.5rem 2.5rem 1.5rem; border-bottom: 1px solid #E5E7EB; display: flex; align-items: center; justify-content: center;">
+    <%= image_tag "canopylogo.svg", alt: "CanopySync", style: "height: 4rem; width: auto;" %>
+  </div>
+  
+  <!-- Spacer after logo -->
+  <div style="height: 2.5rem;"></div>
+  
+  <!-- Style Section -->
+  <div class="px-4 pb-3">
+    <details class="group rounded-lg" style="outline: none;">
+      <summary class="flex items-center justify-between px-4 py-3 cursor-pointer hover:bg-gray-50 transition-colors rounded-lg" style="outline: none; list-style: none;">
+        <div class="flex items-center gap-3">
+          <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
+          </svg>
+          <span class="text-gray-700 text-sm font-semibold">Style</span>
         </div>
-      </details>
-    </div>
-    
-    <!-- Blocks Section -->
-    <div class="border-b border-gray-200">
-      <details open class="group">
-        <summary class="flex items-center justify-between px-6 py-3 cursor-pointer hover:bg-gray-50 transition-colors">
-          <span class="text-gray-900 text-sm font-semibold">🧱 Blocks</span>
-          <span class="text-gray-600 text-xs group-open:rotate-90 inline-block transition-transform">▶</span>
-        </summary>
-        
-        <div class="p-4 bg-gray-50 border-t border-gray-200">
-          <%= form_with url: admin_blocks_path, method: :post, id: 'add-block-form' do |f| %>
-            <div class="grid grid-cols-2 gap-3">
-              <% BlockTypes::AVAILABLE_BLOCKS.each do |key, block| %>
-                <%= button_tag type: 'submit', name: 'block_type', value: key,
-                    class: 'flex flex-col items-center gap-2 p-3 bg-white border border-gray-200 hover:border-orange-500 hover:bg-orange-50 rounded-lg transition-colors group' do %>
-                  <div class="w-10 h-10 bg-gray-100 group-hover:bg-orange-100 rounded flex items-center justify-center text-2xl transition-colors">
-                    📄
+        <svg class="chevron-right w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="transition: transform 0.2s;">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </summary>
+      
+      <div class="px-4 py-4 mt-2 rounded-lg">
+        <%= form_with model: @shop, url: admin_settings_path, method: :patch, data: { turbo: false } do |f| %>
+          <div class="space-y-3">
+            <label class="text-xs text-gray-600 block mb-2">Corner Style</label>
+            <div class="flex gap-2">
+              <label class="flex-1 cursor-pointer">
+                <%= f.radio_button :corner_style, 'rounded', class: 'peer sr-only' %>
+                <div class="px-3 py-2 bg-white border border-gray-200 peer-checked:bg-orange-50 peer-checked:border-orange-500 rounded text-xs text-gray-700 peer-checked:text-orange-600 text-center transition-colors font-medium">
+                  Soft
+                </div>
+              </label>
+              <label class="flex-1 cursor-pointer">
+                <%= f.radio_button :corner_style, 'sharp', class: 'peer sr-only' %>
+                <div class="px-3 py-2 bg-white border border-gray-200 peer-checked:bg-orange-50 peer-checked:border-orange-500 text-xs text-gray-700 peer-checked:text-orange-600 text-center transition-colors font-medium">
+                  Sharp
+                </div>
+              </label>
+            </div>
+            <%= f.submit 'Save', class: 'w-full mt-3 px-4 py-2 bg-orange-500 hover:bg-orange-600 text-gray-800 text-xs rounded transition-colors font-medium' %>
+          </div>
+        <% end %>
+      </div>
+    </details>
+  </div>
+  
+ <!-- Blocks Section -->
+  <div class="px-4 py-3">
+    <details open class="group rounded-lg blocks-section" style="outline: none;">
+      <summary class="flex items-center justify-between px-4 py-3 cursor-pointer hover:bg-gray-50 transition-colors rounded-lg" style="outline: none; list-style: none;">
+        <div class="flex items-center gap-3">
+          <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
+          </svg>
+          <span class="text-gray-700 text-sm font-semibold">Blocks</span>
+        </div>
+        <svg class="chevron-blocks w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="transition: transform 0.2s; transform: rotate(0deg);">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </summary>
+      
+      <div class="px-4 pb-4 pt-2">
+        <%= form_with url: admin_blocks_path, method: :post, id: 'add-block-form' do |f| %>
+          <div class="grid grid-cols-2 gap-4">
+            
+            <!-- Navigation -->
+            <%= button_tag type: 'submit', name: 'block_type', value: 'navigation',
+                class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
+              <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
+                <div class="w-full h-full flex flex-col gap-1.5">
+                  <div class="h-2 bg-gray-800 rounded-sm"></div>
+                  <div class="flex gap-1">
+                    <div class="h-1 flex-1 bg-gray-600 rounded-sm"></div>
+                    <div class="h-1 flex-1 bg-gray-600 rounded-sm"></div>
+                    <div class="h-1 flex-1 bg-gray-600 rounded-sm"></div>
                   </div>
-                  <span class="text-[10px] text-gray-700 text-center leading-tight font-medium"><%= block[:name] %></span>
-                <% end %>
-              <% end %>
-            </div>
-          <% end %>
-        </div>
-      </details>
-    </div>
-    
-    <!-- Brand Section -->
-    <div class="border-b border-gray-200">
-      <details class="group">
-        <summary class="flex items-center justify-between px-6 py-3 cursor-pointer hover:bg-gray-50 transition-colors">
-          <span class="text-gray-900 text-sm font-semibold">🎨 Brand</span>
-          <span class="text-gray-600 text-xs group-open:rotate-90 inline-block transition-transform">▶</span>
-        </summary>
-        
-        <div class="px-6 py-4 bg-gray-50 space-y-4 border-t border-gray-200">
-          <%= form_with model: @shop, url: admin_settings_path, method: :patch, data: { turbo: false } do |f| %>
-            
-            <!-- Text (Font) -->
-            <div>
-              <label class="text-xs text-gray-600 block mb-2 font-medium">Font</label>
-              <%= f.select :font_family, 
-                  options_for_select(Shop::FONT_LIBRARY.map { |k,v| [v[:name], k] }, @shop.font_family),
-                  {},
-                  class: 'w-full px-3 py-2 bg-white text-gray-900 text-xs rounded border border-gray-300 focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-100' %>
-            </div>
-            
-            <!-- Primary Color -->
-            <div>
-              <label class="text-xs text-gray-600 block mb-2 font-medium">Primary Color</label>
-              <div class="flex gap-2">
-                <%= f.color_field :primary_color, 
-                    class: 'w-12 h-10 rounded cursor-pointer bg-white border border-gray-300 focus:border-orange-500' %>
-                <%= f.text_field :primary_color, 
-                    class: 'flex-1 px-3 py-2 bg-white text-gray-900 text-xs rounded border border-gray-300 focus:border-orange-500 focus:outline-none font-mono' %>
+                </div>
               </div>
-            </div>
-            
-            <!-- Secondary Color -->
-            <div>
-              <label class="text-xs text-gray-600 block mb-2 font-medium">Secondary Color</label>
-              <div class="flex gap-2">
-                <%= f.color_field :secondary_color, 
-                    class: 'w-12 h-10 rounded cursor-pointer bg-white border border-gray-300 focus:border-orange-500' %>
-                <%= f.text_field :secondary_color, 
-                    class: 'flex-1 px-3 py-2 bg-white text-gray-900 text-xs rounded border border-gray-300 focus:border-orange-500 focus:outline-none font-mono' %>
-              </div>
-            </div>
-            
-            <!-- Logo Upload -->
-            <div>
-              <label class="text-xs text-gray-600 block mb-2 font-medium">Logo</label>
-              <%= f.text_field :logo_url, 
-                  placeholder: 'Enter logo URL...',
-                  class: 'w-full px-3 py-2 bg-white text-gray-900 text-xs rounded border border-gray-300 focus:border-orange-500 focus:outline-none' %>
-              <p class="text-[10px] text-gray-500 mt-1">Paste image URL or upload file</p>
-            </div>
-            
-            <%= f.submit 'Save Brand', class: 'w-full mt-3 px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white text-xs rounded transition-colors font-medium' %>
-          <% end %>
-        </div>
-      </details>
+              <span class="text-xs text-gray-700 text-center leading-tight font-medium">Navigation</span>
+            <% end %>
+
+            <!-- Ribbon -->
+<%= button_tag type: 'submit', name: 'block_type', value: 'ribbon',
+    class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
+  <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
+    <div class="w-full h-full flex items-center justify-center">
+      <div class="w-full h-3 bg-indigo-600 rounded-sm"></div>
     </div>
-    
-    <!-- SEO & Content Checklist -->
-    <div class="border-b border-gray-200">
-      <details class="group">
-        <summary class="flex items-center justify-between px-6 py-3 cursor-pointer hover:bg-gray-50 transition-colors">
-          <span class="text-gray-900 text-sm font-semibold">🔍 SEO & Content</span>
-          <span class="text-gray-600 text-xs group-open:rotate-90 inline-block transition-transform">▶</span>
-        </summary>
-        
-        <div class="px-6 py-4 bg-gray-50 space-y-4 border-t border-gray-200">
-          <%= form_with model: @shop, url: admin_settings_path, method: :patch, data: { turbo: false } do |f| %>
+  </div>
+  <span class="text-xs text-gray-700 text-center leading-tight font-medium">Ribbon</span>
+<% end %>
             
-            <!-- Meta Title -->
+            <!-- Hero Section -->
+            <%= button_tag type: 'submit', name: 'block_type', value: 'hero',
+                class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
+              <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
+                <div class="w-full h-full flex gap-1.5">
+                  <div class="w-6 h-full bg-gray-800 rounded-sm"></div>
+                  <div class="flex-1 flex flex-col gap-1 justify-center">
+                    <div class="h-2 bg-gray-800 rounded-sm"></div>
+                    <div class="h-1 bg-gray-600 rounded-sm"></div>
+                    <div class="h-1 bg-gray-500 rounded-sm"></div>
+                    <div class="h-0.5 bg-gray-400"></div>
+                    <div class="h-0.5 bg-gray-300"></div>
+                  </div>
+                </div>
+              </div>
+              <span class="text-xs text-gray-700 text-center leading-tight font-medium">Hero Section</span>
+            <% end %>
+            
+            <!-- Product Card -->
+            <%= button_tag type: 'submit', name: 'block_type', value: 'product_grid',
+                class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
+              <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
+                <div class="w-full h-full bg-gray-800 rounded-sm flex flex-col p-2.5 gap-1">
+                  <div class="w-6 h-6 bg-gray-300 rounded-sm"></div>
+                  <div class="h-1 bg-gray-300 rounded-sm"></div>
+                  <div class="h-0.5 bg-gray-400"></div>
+                  <div class="h-0.5 bg-gray-400"></div>
+                  <div class="flex-1"></div>
+                  <div class="h-1.5 bg-gray-300 rounded-sm"></div>
+                </div>
+              </div>
+              <span class="text-xs text-gray-700 text-center leading-tight font-medium">Product Card</span>
+            <% end %>
+
+            <!-- Footer -->
+<%= button_tag type: 'submit', name: 'block_type', value: 'footer',
+    class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
+  <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
+    <div class="w-full h-full flex flex-col gap-1 justify-end">
+      <div class="grid grid-cols-3 gap-0.5 mb-1">
+        <div class="h-1 bg-gray-600 rounded-sm"></div>
+        <div class="h-1 bg-gray-600 rounded-sm"></div>
+        <div class="h-1 bg-gray-600 rounded-sm"></div>
+      </div>
+      <div class="h-0.5 bg-gray-400 rounded-sm"></div>
+    </div>
+  </div>
+  <span class="text-xs text-gray-700 text-center leading-tight font-medium">Footer</span>
+<% end %>
+            
+          </div>
+        <% end %>
+      </div>
+    </details>
+  </div>
+
+  <!-- SEO Checklist Section -->
+  <div class="px-4 py-3">
+    <details class="group rounded-lg" style="outline: none;">
+      <summary class="flex items-center justify-between px-4 py-3 cursor-pointer hover:bg-gray-50 transition-colors rounded-lg" style="outline: none; list-style: none;">
+        <div class="flex items-center gap-3">
+          <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+          </svg>
+          <span class="text-gray-700 text-sm font-semibold">SEO Checklist</span>
+        </div>
+        <svg class="chevron-right w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="transition: transform 0.2s;">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </summary>
+      
+      <div class="px-4 py-4 mt-2 rounded-lg">
+        <%= form_with model: @shop, url: admin_settings_path, method: :patch, data: { turbo: false } do |f| %>
+          <div class="space-y-4">
             <div>
               <label class="text-xs text-gray-600 block mb-2 font-medium">Page Title</label>
               <%= f.text_field :meta_title, 
@@ -144,7 +179,6 @@
               <p class="text-[10px] text-gray-500 mt-1">60 characters max</p>
             </div>
             
-            <!-- Meta Description -->
             <div>
               <label class="text-xs text-gray-600 block mb-2 font-medium">Meta Description</label>
               <%= f.text_area :meta_description, 
@@ -154,97 +188,265 @@
               <p class="text-[10px] text-gray-500 mt-1">160 characters max</p>
             </div>
             
-            <!-- Google Preview -->
-            <div class="p-3 bg-white rounded border border-gray-200">
-              <p class="text-[10px] text-gray-600 mb-2 font-medium">Google Preview:</p>
-              <div class="text-blue-600 text-xs mb-1 truncate font-medium"><%= @shop.meta_title || 'Your Page Title' %></div>
-              <div class="text-emerald-600 text-[10px] mb-1">yourstore.com › page</div>
-              <div class="text-gray-600 text-[10px] line-clamp-2"><%= @shop.meta_description || 'Your meta description appears here...' %></div>
+            <%= f.submit 'Save SEO', class: 'w-full mt-3 px-4 py-2 bg-orange-500 hover:bg-orange-600 text-gray-800 text-xs rounded transition-colors font-medium' %>
+          </div>
+        <% end %>
+      </div>
+    </details>
+  </div>
+  
+  <!-- Brand Section -->
+  <div class="px-4 py-3">
+    <details class="group rounded-lg" style="outline: none;">
+      <summary class="flex items-center justify-between px-4 py-3 cursor-pointer hover:bg-gray-50 transition-colors rounded-lg" style="outline: none; list-style: none;">
+        <div class="flex items-center gap-3">
+          <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
+          </svg>
+          <span class="text-gray-700 text-sm font-semibold">Brand</span>
+        </div>
+        <svg class="chevron-right w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="transition: transform 0.2s;">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </summary>
+      
+      <div class="px-4 py-4 mt-2 rounded-lg">
+        <%= form_with model: @shop, url: admin_settings_path, method: :patch, data: { turbo: false } do |f| %>
+          <div class="space-y-4">
+            <div>
+              <label class="text-xs text-gray-600 block mb-2 font-medium">Font</label>
+              <%= f.select :font_family, 
+                  options_for_select(Shop::FONT_LIBRARY.map { |k,v| [v[:name], k] }, @shop.font_family),
+                  {},
+                  class: 'w-full px-3 py-2 bg-white text-gray-900 text-xs rounded border border-gray-300 focus:border-orange-500 focus:outline-none' %>
             </div>
             
-            <%= f.submit 'Save SEO', class: 'w-full mt-3 px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white text-xs rounded transition-colors font-medium' %>
-          <% end %>
-        </div>
-      </details>
-    </div>
-    
-    <!-- Spacer -->
-    <div class="flex-1"></div>
-    
-    <!-- Back to Dashboard -->
-    <div class="border-t border-gray-200 p-6">
-      <%= link_to root_path, class: 'flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors group' do %>
-        <span class="text-lg">←</span>
-        <span class="text-sm font-medium">Back to Dashboard</span>
-      <% end %>
-    </div>
-    
-  </aside>
-  
-  <!-- Main Content Area -->
-  <div class="flex-1 flex flex-col overflow-hidden">
-    
-    <!-- Top Toolbar -->
-    <div class="bg-white border-b border-gray-200 px-8 py-3 flex items-center justify-between">
-      
-      <!-- Device Toggles (Center) -->
-      <div class="flex-1 flex justify-center">
-        <div class="inline-flex bg-gray-100 rounded-lg p-1 gap-1">
-          <button data-action="click->block-selector#setDevice" data-device="desktop" class="device-toggle px-4 py-2 bg-white rounded shadow-sm text-sm font-medium text-gray-900 transition-colors">🖥️ Desktop</button>
-          <button data-action="click->block-selector#setDevice" data-device="tablet" class="device-toggle px-4 py-2 hover:bg-white rounded transition-colors text-sm font-medium text-gray-700">📱 Tablet</button>
-          <button data-action="click->block-selector#setDevice" data-device="mobile" class="device-toggle px-4 py-2 hover:bg-white rounded transition-colors text-sm font-medium text-gray-700">📲 Mobile</button>
-        </div>
-      </div>
-      
-      <!-- Actions (Right) -->
-      <div class="flex gap-3">
-        <%= link_to 'Preview', root_path, target: '_blank',
-            class: 'px-5 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 text-sm font-medium transition-colors text-gray-700' %>
-        <button class="px-6 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 text-sm font-semibold transition-colors">
-          Set Live
-        </button>
-      </div>
-    </div>
-    
-    <!-- Canvas -->
-    <div class="flex-1 overflow-y-auto bg-gray-50 p-8">
-      <div data-block-selector-target="canvas" class="max-w-6xl mx-auto transition-all duration-300">
-        <div class="bg-white shadow-lg rounded-lg overflow-hidden min-h-screen border border-gray-200">
-          
-          <% if @shop.blocks.any? %>
-            <% @shop.blocks.each do |block| %>
-              <div class="block-item relative group transition-all cursor-pointer"
-                   data-block-id="<%= block['id'] %>"
-                   data-action="click->block-selector#selectBlock">
-                <%= render "blocks/#{block['type']}", config: block['config'] %>
-                
-                <!-- Hover Controls -->
-                <div class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 flex gap-2 transition-opacity z-10">
-                  <button class="px-3 py-1 bg-orange-500 hover:bg-orange-600 text-white text-xs rounded shadow-lg font-medium transition-colors">
-                    ✏️ Edit
-                  </button>
-                  <%= button_to admin_block_path(block['id']), method: :delete, data: { turbo: false, confirm: 'Delete this block?' },
-                      class: 'px-3 py-1 bg-red-500 hover:bg-red-600 text-white text-xs rounded shadow-lg font-medium transition-colors' do %>
-                    🗑️ Delete
-                  <% end %>
-                </div>
-              </div>
-            <% end %>
-          <% else %>
-            <!-- Empty State -->
-            <div class="h-screen flex items-center justify-center">
-              <div class="text-center">
-                <div class="text-8xl mb-4">➕</div>
-                <h3 class="text-2xl font-bold text-gray-900 mb-2">Start Building Your Page</h3>
-                <p class="text-gray-600">Click a block from the sidebar to add it to your page</p>
+            <div>
+              <label class="text-xs text-gray-600 block mb-2 font-medium">Primary Color</label>
+              <div class="flex gap-2">
+                <%= f.color_field :primary_color, 
+                    class: 'w-12 h-10 rounded cursor-pointer bg-white border border-gray-300' %>
+                <%= f.text_field :primary_color, 
+                    class: 'flex-1 px-3 py-2 bg-white text-gray-900 text-xs rounded border border-gray-300 focus:border-orange-500 focus:outline-none font-mono' %>
               </div>
             </div>
-          <% end %>
-          
+            
+            <div>
+              <label class="text-xs text-gray-600 block mb-2 font-medium">Secondary Color</label>
+              <div class="flex gap-2">
+                <%= f.color_field :secondary_color, 
+                    class: 'w-12 h-10 rounded cursor-pointer bg-white border border-gray-300' %>
+                <%= f.text_field :secondary_color, 
+                    class: 'flex-1 px-3 py-2 bg-white text-gray-900 text-xs rounded border border-gray-300 focus:border-orange-500 focus:outline-none font-mono' %>
+              </div>
+            </div>
+            
+            <div>
+              <label class="text-xs text-gray-600 block mb-2 font-medium">Logo</label>
+              <%= f.text_field :logo_url, 
+                  placeholder: 'Enter logo URL...',
+                  class: 'w-full px-3 py-2 bg-white text-gray-900 text-xs rounded border border-gray-300 focus:border-orange-500 focus:outline-none' %>
+            </div>
+            
+            <%= f.submit 'Save Brand', class: 'w-full mt-3 px-4 py-2 bg-orange-500 hover:bg-orange-600 text-gray-800 text-xs rounded transition-colors font-medium' %>
+          </div>
+        <% end %>
+      </div>
+    </details>
+  </div>
+  
+  <!-- Spacer to push content to bottom -->
+  <div class="flex-1"></div>
+  
+  <!-- Bottom Section - Fixed to bottom -->
+  <div class="mt-auto">
+    <!-- User Profile -->
+    <div class="px-6 py-4 flex items-center justify-between border-t border-gray-200">
+      <div class="flex items-center gap-3">
+        <div style="width: 40px; height: 40px; background-color: #9CA3AF; border-radius: 9999px; flex-shrink: 0;"></div>
+        <div>
+          <div class="text-sm font-medium text-gray-900">Evano</div>
+          <div class="text-xs text-gray-500">Manager</div>
         </div>
       </div>
+      <button class="text-gray-400 hover:text-gray-600">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+      </button>
     </div>
     
+    <!-- Back to Dashboard -->
+    <div class="px-6 py-4 flex justify-center">
+      <%= link_to root_path, class: 'flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors' do %>
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+        </svg>
+        <span class="text-sm underline">Back to Dashboard</span>
+      <% end %>
+    </div>
+  </div>
+  
+  <script>
+    // Fix chevron rotations and gray backgrounds with JavaScript
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('aside details').forEach(detail => {
+        const chevronRight = detail.querySelector('summary svg.chevron-right');
+        const chevronBlocks = detail.querySelector('summary svg.chevron-blocks');
+        
+        const toggleDetail = () => {
+          if (detail.open) {
+            // When open: gray background on entire section, chevron down
+            detail.style.backgroundColor = '#F5F5F5';
+            if (chevronRight) chevronRight.style.transform = 'rotate(90deg)';
+            if (chevronBlocks) chevronBlocks.style.transform = 'rotate(90deg)';
+          } else {
+            // When closed: transparent background, chevron right
+            detail.style.backgroundColor = 'transparent';
+            if (chevronRight) chevronRight.style.transform = 'rotate(0deg)';
+            if (chevronBlocks) chevronBlocks.style.transform = 'rotate(0deg)';
+          }
+        };
+        
+        detail.addEventListener('toggle', toggleDetail);
+        toggleDetail(); // Set initial state
+      });
+    });
+  </script>
+  
+</aside>
+
+<!-- Right Side: Canvas Area -->
+<div class="flex-1 flex flex-col bg-gray-50">
+  
+  <!-- Device Selector Toolbar -->
+  <div class="bg-white border-b border-gray-200 px-6 py-4">
+    <div class="flex items-center gap-2">
+      <button data-device="desktop" class="device-btn active flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg transition-colors">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+        </svg>
+        <span>Desktop</span>
+        <span class="text-xs text-gray-500">1440px</span>
+      </button>
+      
+      <button data-device="tablet" class="device-btn flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg transition-colors">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+        </svg>
+        <span>Tablet</span>
+        <span class="text-xs text-gray-500">744px</span>
+      </button>
+      
+      <button data-device="mobile" class="device-btn flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg transition-colors">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+        </svg>
+        <span>Mobile</span>
+        <span class="text-xs text-gray-500">390px</span>
+      </button>
+    </div>
+  </div>
+  
+  <!-- Canvas Workspace -->
+  <div class="flex-1 overflow-auto p-4 bg-gray-50" style="height: calc(100vh - 80px);">
+    <div class="mx-auto" id="preview-container" style="transition: all 0.3s;">
+      <iframe 
+        id="preview-frame"
+        src="<%= preview_admin_settings_path %>"
+        style="
+          width: 1440px;
+          height: 100%;
+          min-height: 900px;
+          border: none;
+          background: white;
+          box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+          transition: all 0.3s;
+          margin: 0 auto;
+          display: block;
+        "
+      ></iframe>
+    </div>
   </div>
   
 </div>
+
+</div>
+
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .device-btn {
+    background: white;
+    border: 1px solid #E5E7EB;
+    color: #6B7280;
+  }
+  .device-btn.active {
+    background: #F97316;
+    color: #1F2937;
+    border-color: #F97316;
+  }
+  .device-btn.active .text-gray-500 {
+    color: #4B5563;
+  }
+  .device-btn:hover:not(.active) {
+    background: #F9FAFB;
+    border-color: #D1D5DB;
+  }
+</style>
+
+<script>
+  // Device preview switching - runs after DOM loads
+  function initDevicePreview() {
+    const iframe = document.getElementById('preview-frame');
+    const buttons = document.querySelectorAll('.device-btn');
+    
+    if (!iframe) {
+      console.error('Preview iframe not found!');
+      return;
+    }
+    
+    const widths = {
+      desktop: '1440px',
+      tablet: '744px',
+      mobile: '390px'
+    };
+    
+    buttons.forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const device = this.dataset.device;
+        
+        console.log('Switching to device:', device, 'width:', widths[device]);
+        
+        // Remove active from all buttons
+        buttons.forEach(b => b.classList.remove('active'));
+        
+        // Add active to clicked button
+        this.classList.add('active');
+        
+        // Change iframe width
+        iframe.style.width = widths[device];
+        
+        console.log('Iframe width set to:', iframe.style.width);
+      });
+    });
+    
+    console.log('Device preview initialized with', buttons.length, 'buttons');
+  }
+  
+  // Run on both DOMContentLoaded and turbo:load
+  document.addEventListener('DOMContentLoaded', initDevicePreview);
+  document.addEventListener('turbo:load', initDevicePreview);
+  
+  // Also run immediately in case we're already loaded
+  if (document.readyState === 'loading') {
+    // Still loading, wait for DOMContentLoaded
+  } else {
+    // DOM already loaded
+    initDevicePreview();
+  }
+</script>

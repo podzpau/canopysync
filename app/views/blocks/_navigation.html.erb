@@ -1,0 +1,206 @@
+<nav class="bg-white border-b border-gray-200 py-7">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="flex h-16 items-center justify-between">
+      
+      <!-- Mobile: Hamburger + Logo + Cart -->
+      <div class="flex items-center lg:hidden w-full">
+        <!-- Hamburger Button -->
+        <button type="button" id="mobile-menu-button" class="rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500">
+          <span class="sr-only">Open menu</span>
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+          </svg>
+        </button>
+        
+        <!-- Logo (Centered on Mobile) -->
+        <div class="flex-1 flex justify-center">
+          <a href="#" class="flex items-center">
+            <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company" class="h-8 w-auto" />
+          </a>
+        </div>
+        
+        <!-- Cart Icon (Mobile) -->
+        <a href="#" class="p-2 text-gray-400 hover:text-gray-500 relative">
+          <span class="sr-only">Cart</span>
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+          </svg>
+          <span class="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-indigo-600 text-xs font-medium text-white">3</span>
+        </a>
+      </div>
+
+      <!-- Desktop: Full Navigation -->
+      <div class="hidden lg:flex lg:items-center lg:justify-between lg:w-full">
+        
+        <!-- Logo (Desktop Left) -->
+        <div class="flex items-center">
+          <a href="#" class="flex items-center">
+            <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company" class="h-8 w-auto" />
+          </a>
+        </div>
+
+        <!-- Navigation Links (Desktop Center) -->
+        <div class="flex items-center space-x-8">
+          <!-- Shop (with dropdown indicator) -->
+          <div class="relative group">
+            <button class="flex items-center text-sm font-medium text-gray-700 hover:text-gray-900">
+              Shop
+              <svg class="ml-1 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+              </svg>
+            </button>
+            <!-- Dropdown placeholder for future -->
+            <!-- <div class="hidden group-hover:block absolute top-full left-0 mt-2 w-48 bg-white shadow-lg rounded-md">
+              Dropdown content here
+            </div> -->
+          </div>
+          
+          <a href="#" class="text-sm font-medium text-gray-700 hover:text-gray-900">Find Dispensary</a>
+          <a href="#" class="text-sm font-medium text-gray-700 hover:text-gray-900">About Us</a>
+          <a href="#" class="text-sm font-medium text-gray-700 hover:text-gray-900">Education</a>
+        </div>
+
+        <!-- Right Side: Search + Cart (Desktop) -->
+        <div class="flex items-center space-x-4">
+          
+          <!-- Search with slide animation -->
+          <div class="relative" id="search-container">
+            <button id="search-button" class="p-2 text-gray-400 hover:text-gray-500">
+              <span class="sr-only">Search</span>
+              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+              </svg>
+            </button>
+            
+            <!-- Search Input (slides in from right) -->
+            <input 
+              type="text" 
+              id="search-input"
+              placeholder="Search products..."
+              class="absolute right-0 top-1/2 -translate-y-1/2 w-0 opacity-0 transition-all duration-300 ease-in-out rounded-full border border-gray-300 px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+              style="transition: width 0.3s, opacity 0.3s;"
+            />
+          </div>
+
+          <!-- Cart with Badge -->
+          <a href="#" class="relative p-2 text-gray-400 hover:text-gray-500">
+            <span class="sr-only">Cart</span>
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+            </svg>
+            <span class="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-indigo-600 text-xs font-medium text-white">3</span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Menu (Slide-out) -->
+  <div id="mobile-menu" class="fixed inset-0 z-50 hidden">
+    <!-- Backdrop -->
+    <div class="fixed inset-0 bg-black bg-opacity-25" id="mobile-menu-backdrop"></div>
+    
+    <!-- Slide-out Panel -->
+    <div class="fixed inset-y-0 left-0 w-full max-w-xs bg-white shadow-xl transform -translate-x-full transition-transform duration-300 ease-in-out" id="mobile-menu-panel">
+      
+      <!-- Close Button -->
+      <div class="flex items-center justify-between p-4 border-b border-gray-200">
+        <span class="text-lg font-semibold text-gray-900">Menu</span>
+        <button type="button" id="mobile-menu-close" class="rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500">
+          <span class="sr-only">Close menu</span>
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile Navigation Links -->
+      <div class="overflow-y-auto p-4">
+        <div class="space-y-1">
+          <a href="#" class="block px-4 py-3 text-base font-medium text-gray-900 hover:bg-gray-50 rounded-lg">Shop</a>
+          <a href="#" class="block px-4 py-3 text-base font-medium text-gray-900 hover:bg-gray-50 rounded-lg">Find Dispensary</a>
+          <a href="#" class="block px-4 py-3 text-base font-medium text-gray-900 hover:bg-gray-50 rounded-lg">About Us</a>
+          <a href="#" class="block px-4 py-3 text-base font-medium text-gray-900 hover:bg-gray-50 rounded-lg">Education</a>
+        </div>
+
+        <!-- Mobile Search -->
+        <div class="mt-6 pt-6 border-t border-gray-200">
+          <input 
+            type="text" 
+            placeholder="Search products..." 
+            class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+          />
+        </div>
+      </div>
+
+    </div>
+  </div>
+</nav>
+
+<script>
+  // Desktop Search Animation
+  document.addEventListener('DOMContentLoaded', function() {
+    const searchButton = document.getElementById('search-button');
+    const searchInput = document.getElementById('search-input');
+    let searchOpen = false;
+
+    if (searchButton && searchInput) {
+      searchButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        searchOpen = !searchOpen;
+        
+        if (searchOpen) {
+          searchInput.style.width = '250px';
+          searchInput.style.opacity = '1';
+          searchInput.focus();
+        } else {
+          searchInput.style.width = '0';
+          searchInput.style.opacity = '0';
+        }
+      });
+
+      // Close search when clicking outside
+      document.addEventListener('click', function(e) {
+        if (searchOpen && !searchButton.contains(e.target) && !searchInput.contains(e.target)) {
+          searchInput.style.width = '0';
+          searchInput.style.opacity = '0';
+          searchOpen = false;
+        }
+      });
+    }
+
+    // Mobile Menu
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileMenuPanel = document.getElementById('mobile-menu-panel');
+    const mobileMenuClose = document.getElementById('mobile-menu-close');
+    const mobileMenuBackdrop = document.getElementById('mobile-menu-backdrop');
+
+    function openMobileMenu() {
+      mobileMenu.classList.remove('hidden');
+      setTimeout(() => {
+        mobileMenuPanel.classList.remove('-translate-x-full');
+      }, 10);
+    }
+
+    function closeMobileMenu() {
+      mobileMenuPanel.classList.add('-translate-x-full');
+      setTimeout(() => {
+        mobileMenu.classList.add('hidden');
+      }, 300);
+    }
+
+    if (mobileMenuButton) {
+      mobileMenuButton.addEventListener('click', openMobileMenu);
+    }
+
+    if (mobileMenuClose) {
+      mobileMenuClose.addEventListener('click', closeMobileMenu);
+    }
+
+    if (mobileMenuBackdrop) {
+      mobileMenuBackdrop.addEventListener('click', closeMobileMenu);
+    }
+  });
+</script>

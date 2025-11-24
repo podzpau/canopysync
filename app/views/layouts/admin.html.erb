@@ -20,6 +20,44 @@
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
       }
+      
+      /* Fix SVG icon sizing in sidebar */
+      aside details summary svg {
+        flex-shrink: 0;
+      }
+      
+      /* Remove default details markers */
+      aside details summary {
+        list-style: none;
+      }
+      
+      aside details summary::-webkit-details-marker {
+        display: none;
+      }
+      
+      /* Ensure icons stay proper size */
+      aside svg[class*="w-5"] {
+        width: 1.25rem !important;
+        height: 1.25rem !important;
+      }
+      
+      aside svg[class*="w-6"] {
+        width: 1.5rem !important;
+        height: 1.5rem !important;
+      }
+      
+      /* Fix chevron rotation */
+      aside details[open] summary svg.group-open\:rotate-90 {
+        transform: rotate(90deg);
+      }
+      
+      aside details[open] summary svg.group-open\:rotate-180 {
+        transform: rotate(180deg);
+      }
+      
+      aside details[open] summary svg.group-open\:rotate-0 {
+        transform: rotate(0deg);
+      }
     </style>
   </head>
 

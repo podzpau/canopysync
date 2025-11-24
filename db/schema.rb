@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_12_024942) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_20_033920) do
+  create_table "blocks", force: :cascade do |t|
+    t.integer "shop_id", null: false
+    t.string "block_type"
+    t.integer "position"
+    t.json "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["shop_id"], name: "index_blocks_on_shop_id"
+  end
+
   create_table "shops", force: :cascade do |t|
     t.string "name"
     t.string "domain"
@@ -41,4 +51,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_12_024942) do
     t.string "corner_style"
     t.index ["domain"], name: "index_shops_on_domain", unique: true
   end
+
+  add_foreign_key "blocks", "shops"
 end

@@ -1,0 +1,5 @@
+<% if @shop.blocks.present? && @shop.blocks.is_a?(Array) %>
+  <% @shop.blocks.each do |block| %>
+    <%= render partial: "blocks/#{block['type']}" %>
+  <% end %>
+<% end %>

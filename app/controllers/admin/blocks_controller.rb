@@ -6,7 +6,7 @@ class Admin::BlocksController < AdminController
     Rails.logger.info "Block type: #{params[:block_type]}"
     
     block_type = params[:block_type]
-    default_config = BlockTypes::AVAILABLE_BLOCKS[block_type][:fields].index_with { '' }
+    default_config = {}
     @shop.add_block(block_type, default_config)
     
     redirect_to edit_admin_settings_path, notice: 'Block added'
