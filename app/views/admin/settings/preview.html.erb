@@ -120,6 +120,9 @@ function moveBlockUp(event, index) {
   
   wrapper.scrollIntoView({ behavior: 'smooth', block: 'center' });
   
+  // Trigger resize after move
+  setTimeout(() => notifyParentOfHeight(), 150);
+  
   fetch('/admin/blocks/reorder', {
     method: 'POST',
     headers: {
@@ -140,6 +143,9 @@ function moveBlockDown(event, index) {
   wrapper.parentNode.insertBefore(next, wrapper);
   
   wrapper.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  
+  // Trigger resize after move
+  setTimeout(() => notifyParentOfHeight(), 150);
   
   fetch('/admin/blocks/reorder', {
     method: 'POST',
@@ -162,9 +168,9 @@ function deleteBlock(event, index) {
   
   setTimeout(() => {
     wrapper.remove();
-    // Notify parent to resize after deletion
+    // Force immediate resize after deletion
     notifyParentOfHeight();
-  }, 300);
+  }, 350);
   
   fetch('/admin/blocks/delete', {
     method: 'DELETE',
@@ -200,7 +206,7 @@ window.addEventListener('load', notifyParentOfHeight);
 
 // Watch for DOM changes (blocks added/removed/moved)
 const observer = new MutationObserver(() => {
-  setTimeout(notifyParentOfHeight, 100);
+  setTimeout(notifyParentOfHeight, 150);
 });
 
 observer.observe(document.body, { 
