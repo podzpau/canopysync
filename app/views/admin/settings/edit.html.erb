@@ -539,25 +539,24 @@ document.addEventListener('click', (e) => {
   </div>
   
   <!-- Canvas Workspace -->
-  <div class="flex-1 overflow-auto p-4 bg-gray-50" style="height: calc(100vh - 80px);">
-    <div class="mx-auto" id="preview-container" style="transition: all 0.3s;">
-      <iframe 
-        id="preview-frame"
-        src="<%= preview_admin_settings_path %>"
-        style="
-          width: 1440px;
-          height: 100%;
-          min-height: 900px;
-          border: none;
-          background: white;
-          box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
-          transition: all 0.3s;
-          margin: 0 auto;
-          display: block;
-        "
-      ></iframe>
-    </div>
+<div class="flex-1 overflow-auto p-4 bg-gray-50" style="min-height: calc(100vh - 80px);">
+  <div class="mx-auto pb-20" id="preview-container" style="transition: all 0.3s;">
+    <iframe 
+      id="preview-frame"
+      src="<%= preview_admin_settings_path %>"
+      style="
+        width: 1440px;
+        height: 900px;
+        border: none;
+        background: white;
+        box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+        transition: all 0.3s;
+        margin: 0 auto;
+        display: block;
+      "
+    ></iframe>
   </div>
+</div>
   
 </div>
 
