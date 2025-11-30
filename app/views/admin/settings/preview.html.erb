@@ -180,4 +180,31 @@ document.addEventListener('click', (e) => {
     selectedBlock = null;
   }
 });
+
+// Auto-resize iframe to fit content
+function notifyParentOfHeight() {
+  const height = document.documentElement.scrollHeight;
+  window.parent.postMessage({ 
+    type: 'resize', 
+    height: height 
+  }, '*');
+}
+
+// Initial resize
+notifyParentOfHeight();
+
+// Resize on window load (images loaded)
+window.addEventListener('load', notifyParentOfHeight);
+
+// Watch for DOM changes (blocks added/removed/moved)
+const observer = new MutationObserver(() => {
+  setTimeout(notifyParentOfHeight, 100);
+});
+
+observer.observe(document.body, { 
+  childList: true, 
+  subtree: true,
+  attributes: true,
+  attributeFilter: ['style']
+});
 </script>

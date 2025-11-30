@@ -156,7 +156,6 @@ document.addEventListener('click', (e) => {
           <%= form_with url: admin_blocks_path, method: :post, id: 'add-block-form' do |f| %>
             <div class="grid grid-cols-2 gap-4">
               
-              <!-- All your existing blocks... (keeping them exactly as they are) -->
               <%= button_tag type: 'submit', name: 'block_type', value: 'navigation',
                   class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
                 <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
@@ -539,28 +538,40 @@ document.addEventListener('click', (e) => {
   </div>
   
   <!-- Canvas Workspace -->
-<div class="flex-1 overflow-auto p-4 bg-gray-50" style="min-height: calc(100vh - 80px);">
-  <div class="mx-auto pb-20" id="preview-container" style="transition: all 0.3s;">
-    <iframe 
-      id="preview-frame"
-      src="<%= preview_admin_settings_path %>"
-      style="
-        width: 1440px;
-        height: 900px;
-        border: none;
-        background: white;
-        box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
-        transition: all 0.3s;
-        margin: 0 auto;
-        display: block;
-      "
-    ></iframe>
+  <div class="flex-1 overflow-auto p-4 bg-gray-50" style="min-height: calc(100vh - 80px);">
+    <div class="mx-auto pb-20" id="preview-container" style="transition: all 0.3s;">
+      <iframe 
+        id="preview-frame"
+        src="<%= preview_admin_settings_path %>"
+        style="
+          width: 1440px;
+          height: 900px;
+          border: none;
+          background: white;
+          box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+          transition: all 0.3s;
+          margin: 0 auto;
+          display: block;
+        "
+      ></iframe>
+    </div>
   </div>
-</div>
-  
-</div>
 
 </div>
+<!-- End Right Side Canvas -->
+
+</div>
+<!-- End Main Flex Container -->
+
+<script>
+  // Auto-resize iframe based on content height
+  window.addEventListener('message', function(e) {
+    if (e.data.type === 'resize' && e.data.height) {
+      const iframe = document.getElementById('preview-frame');
+      iframe.style.height = (e.data.height + 40) + 'px';
+    }
+  });
+</script>
 
 <style>
   body {
