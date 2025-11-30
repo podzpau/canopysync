@@ -1,5 +1,183 @@
+<style>
+.block-wrapper {
+  position: relative;
+  transition: all 0.2s;
+  cursor: pointer;
+  border: 3px solid transparent;
+}
+
+.block-wrapper:hover {
+  border-color: #93c5fd;
+}
+
+.block-wrapper.selected {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 1px #3b82f6;
+}
+
+.block-controls {
+  display: none;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  gap: 6px;
+  z-index: 9999;
+}
+
+.block-wrapper:hover .block-controls,
+.block-wrapper.selected .block-controls {
+  display: flex;
+}
+
+.control-btn {
+  width: 36px;
+  height: 36px;
+  background: white;
+  border: none;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.control-btn:hover {
+  background: #f3f4f6;
+}
+
+.control-btn.delete-btn {
+  background: #fecaca;
+}
+
+.control-btn.delete-btn:hover {
+  background: #ef4444;
+}
+
+.control-btn.delete-btn:hover svg {
+  stroke: white;
+}
+
+.control-btn svg {
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+}
+</style>
+
 <% if @shop.blocks.present? && @shop.blocks.is_a?(Array) %>
-  <% @shop.blocks.each do |block| %>
-    <%= render partial: "blocks/#{block['type']}" %>
+  <% @shop.blocks.each_with_index do |block, index| %>
+    <div class="block-wrapper" data-block-id="<%= block['id'] %>" data-index="<%= index %>" onclick="selectBlock(event, this)">
+      
+      <div class="block-controls">
+        <button type="button" class="control-btn" onclick="moveBlockUp(event, <%= index %>)" title="Move Up">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/>
+          </svg>
+        </button>
+        
+        <button type="button" class="control-btn" onclick="moveBlockDown(event, <%= index %>)" title="Move Down">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </button>
+        
+        <button type="button" class="control-btn" onclick="deleteBlock(event, <%= index %>)" title="Delete">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+          </svg>
+        </button>
+      </div>
+      
+      <%= render "blocks/#{block['type']}", block: block %>
+    </div>
   <% end %>
 <% end %>
+
+<script>
+let selectedBlock = null;
+
+function selectBlock(event, element) {
+  if (event.target.closest('.control-btn')) return;
+  
+  if (selectedBlock) {
+    selectedBlock.classList.remove('selected');
+  }
+  
+  element.classList.add('selected');
+  selectedBlock = element;
+}
+
+function moveBlockUp(event, index) {
+  event.stopPropagation();
+  if (index === 0) return;
+  
+  const wrapper = event.target.closest('.block-wrapper');
+  const prev = wrapper.previousElementSibling;
+  if (!prev) return;
+  
+  wrapper.parentNode.insertBefore(wrapper, prev);
+  
+  wrapper.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  
+  fetch('/admin/blocks/reorder', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
+    },
+    body: JSON.stringify({ from: index, to: index - 1 })
+  });
+}
+
+function moveBlockDown(event, index) {
+  event.stopPropagation();
+  
+  const wrapper = event.target.closest('.block-wrapper');
+  const next = wrapper.nextElementSibling;
+  if (!next) return;
+  
+  wrapper.parentNode.insertBefore(next, wrapper);
+  
+  wrapper.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  
+  fetch('/admin/blocks/reorder', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
+    },
+    body: JSON.stringify({ from: index, to: index + 1 })
+  });
+}
+
+function deleteBlock(event, index) {
+  event.stopPropagation();
+  
+  if (!confirm('Delete this block?')) return;
+  
+  const wrapper = event.target.closest('.block-wrapper');
+  wrapper.style.transition = 'opacity 0.3s';
+  wrapper.style.opacity = '0';
+  
+  setTimeout(() => {
+    wrapper.remove();
+  }, 300);
+  
+  fetch('/admin/blocks/delete', {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
+    },
+    body: JSON.stringify({ index: index })
+  });
+}
+
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.block-wrapper') && selectedBlock) {
+    selectedBlock.classList.remove('selected');
+    selectedBlock = null;
+  }
+});
+</script>

@@ -1,0 +1,122 @@
+
+<!-- app/views/blocks/_faq.html.erb -->
+<div class="bg-white py-16 sm:py-24">
+  <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+    <!-- Section Header -->
+    <div class="mb-12 text-center">
+      <h2 class="text-3xl font-bold text-gray-900">Frequently Asked Questions</h2>
+      <p class="mt-4 text-lg text-gray-600">Find answers to common questions about our services</p>
+    </div>
+
+    <!-- FAQ Accordion -->
+    <div class="space-y-4">
+      
+      <!-- FAQ Item 1 -->
+      <div class="overflow-hidden">
+        <button type="button" 
+                class="faq-toggle w-full flex items-center justify-between px-6 py-4 text-left bg-white hover:bg-gray-50 transition-colors"
+                data-faq="1">
+          <span class="font-semibold text-gray-900">How do I create an account?</span>
+          <svg class="faq-icon w-5 h-5 text-gray-500 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div class="faq-content hidden px-6 pb-4 text-sm text-gray-600">
+          Click the "Sign Up" button in the top right corner and follow the registration process.
+        </div>
+      </div>
+
+      <!-- FAQ Item 2 -->
+      <div class="overflow-hidden">
+        <button type="button" 
+                class="faq-toggle w-full flex items-center justify-between px-6 py-4 text-left bg-white hover:bg-gray-50 transition-colors"
+                data-faq="2">
+          <span class="font-semibold text-gray-900">I forgot my password. What should I do?</span>
+          <svg class="faq-icon w-5 h-5 text-gray-500 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div class="faq-content hidden px-6 pb-4 text-sm text-gray-600">
+          Click on "Forgot Password" on the login page and follow the instructions sent to your email.
+        </div>
+      </div>
+
+      <!-- FAQ Item 3 -->
+      <div class="overflow-hidden">
+        <button type="button" 
+                class="faq-toggle w-full flex items-center justify-between px-6 py-4 text-left bg-white hover:bg-gray-50 transition-colors"
+                data-faq="3">
+          <span class="font-semibold text-gray-900">How do I update my profile information?</span>
+          <svg class="faq-icon w-5 h-5 text-gray-500 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div class="faq-content hidden px-6 pb-4 text-sm text-gray-600">
+          Go to "My Account" settings and select "Edit Profile" to make changes.
+        </div>
+      </div>
+
+      <!-- FAQ Item 4 -->
+      <div class="overflow-hidden">
+        <button type="button" 
+                class="faq-toggle w-full flex items-center justify-between px-6 py-4 text-left bg-white hover:bg-gray-50 transition-colors"
+                data-faq="4">
+          <span class="font-semibold text-gray-900">What payment methods do you accept?</span>
+          <svg class="faq-icon w-5 h-5 text-gray-500 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div class="faq-content hidden px-6 pb-4 text-sm text-gray-600">
+          We accept cash, debit cards, and approved digital payment methods in compliance with local regulations.
+        </div>
+      </div>
+
+      <!-- FAQ Item 5 -->
+      <div class="overflow-hidden">
+        <button type="button" 
+                class="faq-toggle w-full flex items-center justify-between px-6 py-4 text-left bg-white hover:bg-gray-50 transition-colors"
+                data-faq="5">
+          <span class="font-semibold text-gray-900">How long does delivery take?</span>
+          <svg class="faq-icon w-5 h-5 text-gray-500 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div class="faq-content hidden px-6 pb-4 text-sm text-gray-600">
+          Delivery typically takes 30-60 minutes depending on your location and current order volume.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const faqToggles = document.querySelectorAll('.faq-toggle');
+    
+    faqToggles.forEach(toggle => {
+      toggle.addEventListener('click', function() {
+        const content = this.nextElementSibling;
+        const icon = this.querySelector('.faq-icon');
+        const isOpen = !content.classList.contains('hidden');
+        
+        // Close all other FAQs (accordion behavior - one at a time)
+        document.querySelectorAll('.faq-content').forEach(c => {
+          c.classList.add('hidden');
+        });
+        document.querySelectorAll('.faq-icon').forEach(i => {
+          i.style.transform = 'rotate(0deg)';
+        });
+        
+        // Toggle current FAQ
+        if (isOpen) {
+          content.classList.add('hidden');
+          icon.style.transform = 'rotate(0deg)';
+        } else {
+          content.classList.remove('hidden');
+          icon.style.transform = 'rotate(180deg)';
+        }
+      });
+    });
+  });
+</script>

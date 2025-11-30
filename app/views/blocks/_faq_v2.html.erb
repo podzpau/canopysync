@@ -1,0 +1,109 @@
+<div class="bg-white py-16 sm:py-24">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    
+    <div class="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
+      
+      <!-- Image - on top for mobile/tablet, left for desktop -->
+      <div class="w-full lg:w-1/2 order-1 lg:order-1 mb-8 lg:mb-0">
+        <div class="w-full bg-gray-300 rounded-2xl" style="height: 300px;"></div>
+      </div>
+
+      <!-- FAQ Content -->
+      <div class="w-full lg:w-1/2 order-2 lg:order-2">
+
+        <!-- Title - centered mobile, left desktop, aligned with accordions -->
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center lg:text-left lg:px-6">
+          Looking for answers?
+        </h2>
+
+        <!-- Accordion -->
+        <div class="space-y-4">
+          
+          <div class="overflow-hidden">
+            <button type="button" class="faq-toggle-v2 w-full flex items-center justify-between px-6 py-4 text-left bg-white hover:bg-gray-50 transition-colors">
+              <span class="font-semibold text-gray-900">Do you charge for each upgrade?</span>
+              <span class="faq-icon-v2 flex-shrink-0 text-gray-500 text-xl">−</span>
+            </button>
+            <div class="faq-content-v2 px-6 pb-4 text-sm text-gray-600">
+              Lemon drops chocolate cake gummies carrot cake chupa chups muffin topping. Sesame snaps icing marzipan gummi bears macaroon dragée danish caramels powder. Bear claw dragée pastry topping soufflé. Wafer gummi bears marshmallow pastry pie
+            </div>
+          </div>
+
+          <div class="overflow-hidden">
+            <button type="button" class="faq-toggle-v2 w-full flex items-center justify-between px-6 py-4 text-left bg-white hover:bg-gray-50 transition-colors">
+              <span class="font-semibold text-gray-900">Do I need to purchase a license for each website?</span>
+              <span class="faq-icon-v2 flex-shrink-0 text-gray-500 text-xl">+</span>
+            </button>
+            <div class="faq-content-v2 hidden px-6 pb-4 text-sm text-gray-600">
+              Yes, you'll need a separate license for each domain where you use our platform. This ensures compliance and optimal performance for each of your dispensary locations.
+            </div>
+          </div>
+
+          <div class="overflow-hidden">
+            <button type="button" class="faq-toggle-v2 w-full flex items-center justify-between px-6 py-4 text-left bg-white hover:bg-gray-50 transition-colors">
+              <span class="font-semibold text-gray-900">What is regular license?</span>
+              <span class="faq-icon-v2 flex-shrink-0 text-gray-500 text-xl">+</span>
+            </button>
+            <div class="faq-content-v2 hidden px-6 pb-4 text-sm text-gray-600">
+              A regular license covers a single dispensary location and includes all core features, POS integration, inventory management, and standard support. Perfect for single-location operations.
+            </div>
+          </div>
+
+          <div class="overflow-hidden">
+            <button type="button" class="faq-toggle-v2 w-full flex items-center justify-between px-6 py-4 text-left bg-white hover:bg-gray-50 transition-colors">
+              <span class="font-semibold text-gray-900">What is extended license?</span>
+              <span class="faq-icon-v2 flex-shrink-0 text-gray-500 text-xl">+</span>
+            </button>
+            <div class="faq-content-v2 hidden px-6 pb-4 text-sm text-gray-600">
+              Extended license is designed for multi-location dispensaries and includes enterprise features like centralized inventory, advanced analytics, priority support, and custom integrations. Ideal for growing chains.
+            </div>
+          </div>
+
+          <div class="overflow-hidden">
+            <button type="button" class="faq-toggle-v2 w-full flex items-center justify-between px-6 py-4 text-left bg-white hover:bg-gray-50 transition-colors">
+              <span class="font-semibold text-gray-900">How long does delivery take?</span>
+              <span class="faq-icon-v2 flex-shrink-0 text-gray-500 text-xl">+</span>
+            </button>
+            <div class="faq-content-v2 hidden px-6 pb-4 text-sm text-gray-600">
+              Delivery typically takes 30-60 minutes depending on your location and current order volume. We provide real-time tracking so customers know exactly when to expect their order.
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function() {
+  function initFaqV2() {
+    const toggles = document.querySelectorAll('.faq-toggle-v2');
+    
+    toggles.forEach(toggle => {
+      toggle.addEventListener('click', function() {
+        const content = this.nextElementSibling;
+        const icon = this.querySelector('.faq-icon-v2');
+        const isOpen = !content.classList.contains('hidden');
+        
+        document.querySelectorAll('.faq-content-v2').forEach(c => c.classList.add('hidden'));
+        document.querySelectorAll('.faq-icon-v2').forEach(i => i.textContent = '+');
+        
+        if (!isOpen) {
+          content.classList.remove('hidden');
+          icon.textContent = '−';
+        }
+      });
+    });
+  }
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initFaqV2);
+  } else {
+    initFaqV2();
+  }
+})();
+</script>

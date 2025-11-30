@@ -3,11 +3,11 @@
 one:
   shop: one
   block_type: MyString
+  config: 
   position: 1
-  content: 
 
 two:
   shop: two
   block_type: MyString
+  config: 
   position: 1
-  content: 

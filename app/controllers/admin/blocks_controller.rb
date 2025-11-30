@@ -1,55 +1,47 @@
-class Admin::BlocksController < AdminController
-  before_action :load_shop
-  
+class Admin::BlocksController < ApplicationController
+  before_action :set_shop
+
   def create
-    Rails.logger.info "=== CREATE BLOCK CALLED ==="
-    Rails.logger.info "Block type: #{params[:block_type]}"
-    
     block_type = params[:block_type]
-    default_config = {}
-    @shop.add_block(block_type, default_config)
-    
-    redirect_to edit_admin_settings_path, notice: 'Block added'
+    @shop.add_block(block_type)
+    redirect_to edit_admin_settings_path
   end
-  
-  def edit
-    @block_index = @shop.blocks.index { |b| b['id'] == params[:id] }
-    @block = @shop.blocks[@block_index]
-    render layout: false
-  end
-  
-  def update
-    block_index = @shop.blocks.index { |b| b['id'] == params[:id] }
-    @shop.blocks[block_index]['config'] = block_params
-    @shop.save
-    head :ok
-  end
-  
+
   def destroy
-    @shop.blocks.reject! { |b| b['id'] == params[:id] }
-    @shop.save
-    head :ok
+    blocks = @shop.blocks.dup
+    blocks.reject! { |b| b['id'] == params[:id] }
+    @shop.update(blocks_config: blocks)
+    redirect_to edit_admin_settings_path
   end
-  
+
   def reorder
-    order = params[:order]
-    reordered_blocks = order.map { |id| @shop.blocks.find { |b| b['id'] == id } }
-    @shop.blocks = reordered_blocks
-    @shop.save
-    head :ok
+    blocks = @shop.blocks.dup
+    from = params[:from].to_i
+    to = params[:to].to_i
+    
+    return head :bad_request if from < 0 || to < 0 || from >= blocks.length
+    
+    blocks.insert(to, blocks.delete_at(from))
+    @shop.update(blocks_config: blocks)
+    
+    render json: { success: true }
   end
-  
-  def preview
-    render partial: 'admin/preview', layout: false
+
+  def delete
+    blocks = @shop.blocks.dup
+    index = params[:index].to_i
+    
+    return head :bad_request if index < 0 || index >= blocks.length
+    
+    blocks.delete_at(index)
+    @shop.update(blocks_config: blocks)
+    
+    render json: { success: true }
   end
-  
+
   private
-  
-  def load_shop
+
+  def set_shop
     @shop = Shop.first
-  end
-  
-  def block_params
-    params.require(:config).permit!
   end
 end

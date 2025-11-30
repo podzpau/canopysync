@@ -7,6 +7,11 @@ Rails.application.routes.draw do
         get :preview
       end
     end
-    resources :blocks, only: [:create, :destroy]
+    resources :blocks, only: [:create, :destroy] do
+      collection do
+        post :reorder
+        delete :delete
+      end
+    end
   end
 end

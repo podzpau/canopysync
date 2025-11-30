@@ -1,4 +1,5 @@
 class Shop < ApplicationRecord
+  has_many :blocks, dependent: :destroy
   include BlockTypes
   
   serialize :blocks_config, coder: JSON
