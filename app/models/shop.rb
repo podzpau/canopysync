@@ -2,7 +2,6 @@ class Shop < ApplicationRecord
   has_many :blocks, dependent: :destroy
   include BlockTypes
   
-  serialize :blocks_config, coder: JSON
   enum :template, { modern: 0, classic: 1, minimal: 2 }
   attribute :corner_style, :string, default: 'rounded'
 
@@ -41,21 +40,10 @@ class Shop < ApplicationRecord
     }
   }.freeze
   
-  def blocks
-    blocks_config.is_a?(Array) ? blocks_config : []
-  end
-  
-  def blocks=(value)
-    self.blocks_config = value
-  end
-  
   def add_block(type, config = {})
-    current_blocks = blocks.dup # Get a copy of current blocks
-    current_blocks << { 'type' => type, 'config' => config, 'id' => SecureRandom.hex(4) }
-    self.blocks_config = current_blocks # Save it back
-    save
+    Block.create!(shop: self, block_type: type, position: blocks.count + 1, content: config)
   end
-  
+
   # Generate accessible color variants from primary/secondary
   def theme_colors
     {
