@@ -15,6 +15,10 @@
   box-shadow: 0 0 0 1px #3b82f6;
 }
 
+.block-wrapper.sortable-ghost {
+  opacity: 0.4;
+}
+
 .block-controls {
   display: none;
   position: absolute;
@@ -58,6 +62,14 @@
   stroke: white;
 }
 
+.control-btn.drag-handle {
+  cursor: grab;
+}
+
+.control-btn.drag-handle:active {
+  cursor: grabbing;
+}
+
 .control-btn svg {
   width: 18px;
   height: 18px;
@@ -65,119 +77,67 @@
 }
 </style>
 
-<% if @shop.blocks.present? && @shop.blocks.is_a?(Array) %>
-  <% @shop.blocks.each_with_index do |block, index| %>
-    <div class="block-wrapper" data-block-id="<%= block['id'] %>" data-index="<%= index %>" onclick="selectBlock(event, this)">
-      
+<div id="blocks-container">
+  <% @shop.blocks.order(:position).each do |block| %>
+    <div class="block-wrapper" data-block-id="<%= block.id %>" onclick="selectBlock(event, this)">
+
       <div class="block-controls">
-        <button type="button" class="control-btn" onclick="moveBlockUp(event, <%= index %>)" title="Move Up">
+        <button type="button" class="control-btn drag-handle" title="Drag to reorder">
           <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16"/>
           </svg>
         </button>
-        
-        <button type="button" class="control-btn" onclick="moveBlockDown(event, <%= index %>)" title="Move Down">
-          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-          </svg>
-        </button>
-        
-        <button type="button" class="control-btn" onclick="deleteBlock(event, <%= index %>)" title="Delete">
+
+        <button type="button" class="control-btn delete-btn" onclick="deleteBlock(event)" title="Delete">
           <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
           </svg>
         </button>
       </div>
-      
-      <%= render "blocks/#{block['type']}", block: block %>
+
+      <%= render "blocks/#{block.block_type}", block: block %>
     </div>
   <% end %>
-<% end %>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.6/Sortable.min.js"></script>
 
 <script>
 let selectedBlock = null;
 
 function selectBlock(event, element) {
   if (event.target.closest('.control-btn')) return;
-  
+
   if (selectedBlock) {
     selectedBlock.classList.remove('selected');
   }
-  
+
   element.classList.add('selected');
   selectedBlock = element;
 }
 
-function moveBlockUp(event, index) {
+function deleteBlock(event) {
   event.stopPropagation();
-  if (index === 0) return;
-  
-  const wrapper = event.target.closest('.block-wrapper');
-  const prev = wrapper.previousElementSibling;
-  if (!prev) return;
-  
-  wrapper.parentNode.insertBefore(wrapper, prev);
-  
-  wrapper.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  
-  // Trigger resize after move
-  setTimeout(() => notifyParentOfHeight(), 150);
-  
-  fetch('/admin/blocks/reorder', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
-    },
-    body: JSON.stringify({ from: index, to: index - 1 })
-  });
-}
 
-function moveBlockDown(event, index) {
-  event.stopPropagation();
-  
-  const wrapper = event.target.closest('.block-wrapper');
-  const next = wrapper.nextElementSibling;
-  if (!next) return;
-  
-  wrapper.parentNode.insertBefore(next, wrapper);
-  
-  wrapper.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  
-  // Trigger resize after move
-  setTimeout(() => notifyParentOfHeight(), 150);
-  
-  fetch('/admin/blocks/reorder', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
-    },
-    body: JSON.stringify({ from: index, to: index + 1 })
-  });
-}
-
-function deleteBlock(event, index) {
-  event.stopPropagation();
-  
   if (!confirm('Delete this block?')) return;
-  
+
   const wrapper = event.target.closest('.block-wrapper');
+  const blockId = wrapper.dataset.blockId;
+
   wrapper.style.transition = 'opacity 0.3s';
   wrapper.style.opacity = '0';
-  
+
   setTimeout(() => {
     wrapper.remove();
     requestAnimationFrame(() => notifyParentOfHeight());
   }, 350);
-  
-  fetch('/admin/blocks/delete', {
+
+  fetch(`/admin/blocks/${blockId}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
       'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
-    },
-    body: JSON.stringify({ index: index })
+    }
   });
 }
 
@@ -191,9 +151,9 @@ document.addEventListener('click', (e) => {
 // Auto-resize iframe to fit content
 function notifyParentOfHeight() {
   const height = document.documentElement.scrollHeight;
-  window.parent.postMessage({ 
-    type: 'resize', 
-    height: height 
+  window.parent.postMessage({
+    type: 'resize',
+    height: height
   }, '*');
 }
 
@@ -208,10 +168,31 @@ const observer = new MutationObserver(() => {
   setTimeout(notifyParentOfHeight, 150);
 });
 
-observer.observe(document.body, { 
-  childList: true, 
+observer.observe(document.body, {
+  childList: true,
   subtree: true,
   attributes: true,
   attributeFilter: ['style']
+});
+
+Sortable.create(document.getElementById('blocks-container'), {
+  animation: 150,
+  handle: '.drag-handle',
+  ghostClass: 'sortable-ghost',
+  onEnd(evt) {
+    const blockId = evt.item.dataset.blockId;
+    const newPosition = evt.newIndex + 1;
+
+    fetch(`/admin/blocks/${blockId}/reorder`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
+      },
+      body: JSON.stringify({ position: newPosition })
+    });
+
+    setTimeout(() => notifyParentOfHeight(), 150);
+  }
 });
 </script>
