@@ -1,13 +1,9 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 one:
   shop: one
   block_type: MyString
-  config: 
   position: 1
 
 two:
   shop: two
   block_type: MyString
-  config: 
   position: 1

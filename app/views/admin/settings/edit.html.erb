@@ -197,7 +197,51 @@ document.addEventListener('click', (e) => {
                 </div>
                 <span class="text-xs text-gray-700 text-center leading-tight font-medium">Hero Section</span>
               <% end %>
-              
+
+              <%= button_tag type: 'submit', name: 'block_type', value: 'hero_split',
+                  class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
+                <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
+                  <div class="w-full h-full flex gap-1.5">
+                    <div class="w-6 h-full bg-gray-800 rounded-sm"></div>
+                    <div class="flex-1 flex flex-col gap-1 justify-center">
+                      <div class="h-2 bg-gray-800 rounded-sm"></div>
+                      <div class="h-1 bg-gray-600 rounded-sm w-4/5"></div>
+                      <div class="h-1 bg-gray-500 rounded-sm w-3/5"></div>
+                      <div class="h-0.5 bg-gray-400 w-2/5"></div>
+                      <div class="h-0.5 bg-gray-300 w-1/3"></div>
+                    </div>
+                  </div>
+                </div>
+                <span class="text-xs text-gray-700 text-center leading-tight font-medium">Hero — Split</span>
+              <% end %>
+
+              <%= button_tag type: 'submit', name: 'block_type', value: 'hero_centered',
+                  class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
+                <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
+                  <div class="w-full h-full flex flex-col gap-1 justify-center items-center">
+                    <div class="h-2 bg-gray-800 rounded-sm w-4/5"></div>
+                    <div class="h-1 bg-gray-600 rounded-sm w-3/5"></div>
+                    <div class="h-1 bg-gray-500 rounded-sm w-2/5"></div>
+                    <div class="h-0.5 bg-gray-300 w-1/5"></div>
+                    <div class="h-2 bg-gray-800 rounded-sm w-full mt-1"></div>
+                  </div>
+                </div>
+                <span class="text-xs text-gray-700 text-center leading-tight font-medium">Hero — Centered</span>
+              <% end %>
+
+              <%= button_tag type: 'submit', name: 'block_type', value: 'hero_fullbleed',
+                  class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
+                <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
+                  <div class="w-full h-full bg-gray-800 rounded-sm flex flex-col gap-1 justify-center items-center px-2">
+                    <div class="h-2 bg-white rounded-sm w-4/5 opacity-90"></div>
+                    <div class="h-1 bg-white rounded-sm w-3/5 opacity-60"></div>
+                    <div class="h-1 bg-white rounded-sm w-2/5 opacity-50"></div>
+                    <div class="h-2 bg-white rounded-sm w-1/2 opacity-80 mt-1"></div>
+                  </div>
+                </div>
+                <span class="text-xs text-gray-700 text-center leading-tight font-medium">Hero — Full Bleed</span>
+              <% end %>
+
               <%= button_tag type: 'submit', name: 'block_type', value: 'sub_hero',
                   class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
                 <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
@@ -470,7 +514,7 @@ document.addEventListener('click', (e) => {
     
     <!-- Back to Dashboard -->
     <div class="px-6 py-4 flex justify-center">
-      <%= link_to root_path, class: 'flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors' do %>
+      <%= link_to admin_dashboard_path, class: 'flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors', data: { turbo_frame: "_top" } do %>
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
         </svg>
@@ -510,6 +554,7 @@ document.addEventListener('click', (e) => {
   
   <!-- Device Selector Toolbar -->
   <div class="bg-white border-b border-gray-200 px-6 py-4">
+    <div class="flex items-center justify-between">
     <div class="flex items-center gap-2">
       <button data-device="desktop" class="device-btn active flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg transition-colors">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -535,8 +580,15 @@ document.addEventListener('click', (e) => {
         <span class="text-xs text-gray-500">390px</span>
       </button>
     </div>
+    <div class="flex items-center gap-2">
+      <a href="<%= preview_full_admin_settings_path %>" target="_blank" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+        Preview
+      </a>
+      <%= button_to "Publish", publish_admin_settings_path, method: :post, data: { turbo_confirm: "Publish all changes to the live site?" }, class: "px-4 py-2 text-sm font-medium text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 transition-colors" %>
+    </div>
+    </div>
   </div>
-  
+
   <!-- Canvas Workspace -->
   <div class="flex-1 overflow-auto p-4 bg-gray-50" style="min-height: calc(100vh - 80px);">
     <div class="mx-auto pb-20" id="preview-container" style="transition: all 0.3s;">
@@ -545,7 +597,7 @@ document.addEventListener('click', (e) => {
   src="<%= preview_admin_settings_path %>"
   style="
     width: 1440px;
-    min-height: 900px;
+    min-height: 400px;
     border: none;
     background: white;
     box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
@@ -568,7 +620,7 @@ document.addEventListener('click', (e) => {
   window.addEventListener('message', function(e) {
     if (e.data.type === 'resize' && e.data.height) {
       const iframe = document.getElementById('preview-frame');
-      const newHeight = Math.max(900, e.data.height + 40); // Minimum 900px
+      const newHeight = e.data.height + 40;
       iframe.style.height = newHeight + 'px';
     }
   });
@@ -641,8 +693,13 @@ document.addEventListener('click', (e) => {
   
   document.addEventListener('DOMContentLoaded', initDevicePreview);
   document.addEventListener('turbo:load', initDevicePreview);
-  
+
   if (document.readyState !== 'loading') {
     initDevicePreview();
   }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const iframe = document.getElementById('preview-frame');
+    if (iframe) iframe.contentWindow.location.reload();
+  });
 </script>

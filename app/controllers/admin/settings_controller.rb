@@ -1,20 +1,28 @@
-class Admin::SettingsController < ApplicationController
+class Admin::SettingsController < AdminController
   def edit
-    @shop = Shop.first || Shop.create!(name: "CanopySync Demo")
   end
 
   def update
-    @shop = Shop.first
     if @shop.update(shop_params)
-      redirect_to edit_admin_settings_path, notice: 'Settings updated'
+      redirect_to edit_admin_settings_path, notice: "Settings updated"
     else
       render :edit
     end
   end
 
   def preview
+    render layout: "preview"
+  end
+
+  def publish
+    @shop = Shop.first
+    @shop.publish!
+    redirect_to edit_admin_settings_path, notice: 'Site published!'
+  end
+
+  def preview_full
     @shop = Shop.first || Shop.create!(name: "CanopySync Demo")
-    render layout: 'preview'
+    render template: 'admin/settings/preview', layout: 'preview'
   end
 
   private

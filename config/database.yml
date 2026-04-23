@@ -1,26 +1,27 @@
 default: &default
-  adapter: sqlite3
+  adapter: postgresql
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
 
 development:
   <<: *default
-  database: storage/development.sqlite3
+  database: canopysync_development
+  username: peleda
 
 test:
   <<: *default
-  database: storage/test.sqlite3
+  database: canopysync_test
+  username: peleda
 
 production:
   primary:
-    <<: *default
-    database: storage/production.sqlite3
+    url: <%= ENV["DATABASE_URL"] %>
   cache:
-    <<: *default
-    database: storage/production_cache.sqlite3
+    url: <%= ENV.fetch("CACHE_DATABASE_URL", ENV["DATABASE_URL"]) %>
+    database_tasks: false
   queue:
-    <<: *default
-    database: storage/production_queue.sqlite3
+    url: <%= ENV.fetch("QUEUE_DATABASE_URL", ENV["DATABASE_URL"]) %>
+    database_tasks: false
   cable:
-    <<: *default
-    database: storage/production_cable.sqlite3
+    url: <%= ENV.fetch("CABLE_DATABASE_URL", ENV["DATABASE_URL"]) %>
+    database_tasks: false

@@ -1,7 +1,15 @@
 class Shop < ApplicationRecord
   has_many :blocks, dependent: :destroy
+  has_many :brands, dependent: :destroy
+  has_many :products, dependent: :destroy
+  has_many :collections, dependent: :destroy
+  has_many :orders, dependent: :destroy
+  has_many :redirects, dependent: :destroy
+  has_many :strains, dependent: :destroy
   include BlockTypes
   
+  serialize :blocks_config, coder: JSON
+  serialize :published_blocks_config, coder: JSON
   enum :template, { modern: 0, classic: 1, minimal: 2 }
   attribute :corner_style, :string, default: 'rounded'
 
@@ -40,10 +48,22 @@ class Shop < ApplicationRecord
     }
   }.freeze
   
-  def add_block(type, config = {})
-    Block.create!(shop: self, block_type: type, position: blocks.count + 1, content: config)
+  def blocks
+    blocks_config.is_a?(Array) ? blocks_config : []
   end
-
+  
+  def blocks=(value)
+    self.blocks_config = value
+  end
+  
+  def add_block(type, config = {})
+    current_blocks = blocks.dup # Get a copy of current blocks
+    merged_config = default_settings_for(type).merge(config)
+    current_blocks << { 'type' => type, 'config' => merged_config, 'id' => SecureRandom.hex(4) }
+    self.blocks_config = current_blocks # Save it back
+    save
+  end
+  
   # Generate accessible color variants from primary/secondary
   def theme_colors
     {
@@ -58,12 +78,85 @@ class Shop < ApplicationRecord
     }
   end
   
+  def publish!
+    update!(
+      published_blocks_config: blocks_config,
+      published_primary_color: primary_color,
+      published_secondary_color: secondary_color,
+      published_font_family: font_family,
+      published_logo_url: logo_url,
+      published_at: Time.current
+    )
+  end
+
+  def published?
+    published_at.present?
+  end
+
+  def published_blocks
+    published_blocks_config.is_a?(Array) ? published_blocks_config : blocks
+  end
+
+  def published_theme_colors
+    if published?
+      {
+        primary: published_primary_color,
+        primary_dark: darken_color(published_primary_color, 0.15),
+        primary_light: lighten_color(published_primary_color, 0.9),
+        secondary: published_secondary_color,
+        secondary_dark: darken_color(published_secondary_color, 0.15),
+        secondary_light: lighten_color(published_secondary_color, 0.9),
+        text_on_primary: text_color_for(published_primary_color),
+        text_on_secondary: text_color_for(published_secondary_color)
+      }
+    else
+      theme_colors
+    end
+  end
+
+  def published_font
+    published? ? (published_font_family || font_family) : font_family
+  end
+
+  def published_logo
+    published? ? (published_logo_url || logo_url) : logo_url
+  end
+
   def font_url
     custom_font_url.presence || FONT_LIBRARY.dig(font_family, :url)
   end
   
   private
-  
+
+  def default_settings_for(type)
+    hero_defaults = {
+      'eyebrow_text'       => 'Now open · 11am–10pm',
+      'headline'           => 'Flower, <em>carefully</em> sourced from small farms.',
+      'subtext'            => 'Browse our curated selection — ready for pickup or same-day delivery.',
+      'cta_primary_text'   => 'Shop the menu',
+      'cta_primary_url'    => '/menu',
+      'cta_secondary_text' => 'Find a store',
+      'cta_secondary_url'  => '/locations',
+      'trust_badges'       => [
+        { 'icon' => 'shield', 'label' => 'Lab-tested' },
+        { 'icon' => 'leaf',   'label' => 'Small-farm sourced' },
+        { 'icon' => 'card',   'label' => '21+ verified checkout' }
+      ],
+      'image_url' => ''
+    }
+
+    case type
+    when 'hero_split'
+      hero_defaults
+    when 'hero_centered'
+      hero_defaults
+    when 'hero_fullbleed'
+      hero_defaults.merge('overlay_opacity' => 0.65)
+    else
+      {}
+    end
+  end
+
   # Simple color manipulation - keeps it in Ruby, no JS needed
   def darken_color(hex, amount)
     hex = hex.delete('#')

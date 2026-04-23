@@ -168,8 +168,7 @@ function deleteBlock(event, index) {
   
   setTimeout(() => {
     wrapper.remove();
-    // Force immediate resize after deletion
-    notifyParentOfHeight();
+    requestAnimationFrame(() => notifyParentOfHeight());
   }, 350);
   
   fetch('/admin/blocks/delete', {

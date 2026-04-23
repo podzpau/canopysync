@@ -24,8 +24,8 @@ Rails.application.configure do
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.asset_host = "http://assets.example.com"
 
-  # Store uploaded files on the local file system (see config/storage.yml for options).
-  config.active_storage.service = :local
+  # Store uploaded files on S3/Tigris (see config/storage.yml).
+  config.active_storage.service = :amazon
 
   # Assume all access to the app is happening through a SSL-terminating reverse proxy.
   config.assume_ssl = true
@@ -83,11 +83,17 @@ Rails.application.configure do
   config.active_record.attributes_for_inspect = [ :id ]
 
   # Enable DNS rebinding protection and other `Host` header attacks.
-  # config.hosts = [
-  #   "example.com",     # Allow requests from example.com
-  #   /.*\.example\.com/ # Allow requests from subdomains like `www.example.com`
-  # ]
-  #
-  # Skip DNS rebinding protection for the default health check endpoint.
-  # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
+  config.hosts = [
+    /.*\.canopysync\.com/,  # CanopySync subdomains
+    "canopysync.com",        # Main domain
+    /.*\.fly\.dev/           # Fly.io staging
+  ]
+
+  # Allow health checks and known shop domains through host authorization.
+  config.host_authorization = {
+    exclude: ->(request) {
+      request.path == "/up" ||
+        Shop.exists?(domain: request.host)
+    }
+  }
 end

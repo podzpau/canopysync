@@ -6,6 +6,8 @@ require "rails/all"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+require_relative "../lib/permissions_policy_middleware"
+
 module Canopysync
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
@@ -15,6 +17,12 @@ module Canopysync
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w[assets tasks])
+
+    config.session_store :cookie_store, key: "_canopysync_session",
+      secure: Rails.env.production?, httponly: true, same_site: :lax
+
+    config.middleware.use Rack::Attack
+    config.middleware.use PermissionsPolicyMiddleware
 
     # Configuration for the application, engines, and railties goes here.
     #

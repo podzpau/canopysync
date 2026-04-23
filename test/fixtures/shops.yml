@@ -1,39 +1,15 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 one:
-  name: MyString
-  domain: MyString
-  logo_url: MyString
-  primary_color: MyString
-  secondary_color: MyString
-  hero_title: MyString
-  hero_subtitle: MyText
-  hero_image_url: MyString
-  about_text: MyText
-  phone: MyString
-  email: MyString
-  delivery_areas: MyText
-  hours: MyText
-  meadow_api_key: MyString
-  meadow_location_id: MyString
-  template: 1
-  blocks_config: MyText
+  name: Green Leaf Dispensary
+  domain: greenleaf.test
+  primary_color: "#10b981"
+  secondary_color: "#3b82f6"
+  hero_title: Premium Cannabis
+  template: 0
 
 two:
-  name: MyString
-  domain: MyString
-  logo_url: MyString
-  primary_color: MyString
-  secondary_color: MyString
-  hero_title: MyString
-  hero_subtitle: MyText
-  hero_image_url: MyString
-  about_text: MyText
-  phone: MyString
-  email: MyString
-  delivery_areas: MyText
-  hours: MyText
-  meadow_api_key: MyString
-  meadow_location_id: MyString
-  template: 1
-  blocks_config: MyText
+  name: Blue Mountain Dispensary
+  domain: bluemountain.test
+  primary_color: "#3b82f6"
+  secondary_color: "#10b981"
+  hero_title: Blue Mountain Cannabis
+  template: 0

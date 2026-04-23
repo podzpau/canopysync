@@ -4,8 +4,7 @@ class ApplicationController < ActionController::Base
   private
 
   def set_shop
-    # For now, just get the first shop
-    # Later you'll match by domain
-    @shop = Shop.first || Shop.create!(name: "Default Shop", domain: request.host)
+    @shop = Shop.find_by(domain: request.host)
+    @shop ||= Shop.first if Rails.env.development?
   end
 end
