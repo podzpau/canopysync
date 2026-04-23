@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <% if content_for?(:robots) %>
+      <%= yield :robots %>
+    <% else %>
+      <meta name="robots" content="<%= @noindex ? 'noindex, follow' : 'index, follow' %>">
+    <% end %>
+    <title><%= content_for?(:title) ? yield(:title) : Current.shop&.name %></title>
+    <%= yield :meta %>
+    <%= yield :canonical %>
+    <%= yield :schema %>
+    <% if Current.shop&.google_search_console_verification.present? %>
+      <meta name="google-site-verification" content="<%= Current.shop.google_search_console_verification %>">
+    <% end %>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+    <% if Current.shop&.font_url.present? %>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="<%= Current.shop.font_url %>" rel="stylesheet">
+    <% end %>
+    <% if Current.shop %>
+      <% tc = Current.shop.published_theme_colors %>
+      <style>
+        :root {
+          --color-primary:       <%= tc[:primary] %>;
+          --color-primary-dark:  <%= tc[:primary_dark] %>;
+          --color-primary-light: <%= tc[:primary_light] %>;
+          --color-secondary:     <%= tc[:secondary] %>;
+          --text-on-primary:     <%= tc[:text_on_primary] %>;
+          --font-primary: '<%= Current.shop.published_font %>', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+        *, *::before, *::after { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+          font-family: var(--font-primary);
+          background-color: #FAFAF7;
+          color: #1A1A17;
+          margin: 0; padding: 0;
+          -webkit-font-smoothing: antialiased;
+        }
+        /* Theme utility classes */
+        .bg-primary    { background-color: var(--color-primary) !important; }
+        .bg-primary-dark { background-color: var(--color-primary-dark) !important; }
+        .bg-primary-light { background-color: var(--color-primary-light) !important; }
+        .text-primary  { color: var(--color-primary) !important; }
+        .border-primary { border-color: var(--color-primary) !important; }
+        /* Buttons */
+        .btn-primary {
+          display: inline-flex; align-items: center; justify-content: center;
+          background-color: var(--color-primary);
+          color: var(--text-on-primary);
+          font-weight: 500; border-radius: 6px;
+          padding: 12px 24px; border: none; cursor: pointer;
+          transition: background-color 200ms ease-out, opacity 200ms ease-out;
+          text-decoration: none; font-size: 15px; line-height: 1;
+        }
+        .btn-primary:hover { background-color: var(--color-primary-dark); }
+        .btn-secondary {
+          display: inline-flex; align-items: center; justify-content: center;
+          background-color: transparent;
+          color: #1A1A17; border: 1px solid #1A1A17;
+          font-weight: 500; border-radius: 6px;
+          padding: 12px 24px; cursor: pointer;
+          transition: background-color 200ms ease-out, color 200ms ease-out;
+          text-decoration: none; font-size: 15px; line-height: 1;
+        }
+        .btn-secondary:hover { background-color: #1A1A17; color: #FAFAF7; }
+        .btn-ghost {
+          display: inline-flex; align-items: center;
+          background: none; border: none; color: #1A1A17;
+          font-weight: 500; cursor: pointer; padding: 0;
+          text-decoration: none; font-size: 15px;
+          transition: opacity 200ms ease-out;
+        }
+        .btn-ghost:hover { opacity: 0.6; }
+        /* Strain type colors */
+        .strain-sativa  { background-color: #D4A574; color: #1A1A17; }
+        .strain-indica  { background-color: #7B68A6; color: #fff; }
+        .strain-hybrid  { background-color: #C97B5E; color: #fff; }
+        .strain-sativa-bg  { background-color: rgba(212,165,116,0.12); }
+        .strain-indica-bg  { background-color: rgba(123,104,166,0.12); }
+        .strain-hybrid-bg  { background-color: rgba(201,123,94,0.12); }
+        /* Typography scale */
+        .text-display { font-size: 56px; line-height: 64px; font-weight: 500; letter-spacing: -0.02em; }
+        .text-h1 { font-size: 40px; line-height: 48px; font-weight: 500; letter-spacing: -0.015em; }
+        .text-h2 { font-size: 32px; line-height: 40px; font-weight: 500; letter-spacing: -0.01em; }
+        .text-h3 { font-size: 24px; line-height: 32px; font-weight: 500; }
+        .text-h4 { font-size: 18px; line-height: 28px; font-weight: 500; }
+        .text-body { font-size: 16px; line-height: 24px; font-weight: 400; }
+        .text-small { font-size: 14px; line-height: 20px; font-weight: 400; }
+        .text-micro { font-size: 12px; line-height: 16px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; }
+        /* Shadows */
+        .shadow-card { box-shadow: 0 1px 2px rgba(26,26,23,0.04), 0 2px 8px rgba(26,26,23,0.04); }
+        .shadow-elevated { box-shadow: 0 4px 16px rgba(26,26,23,0.06), 0 8px 32px rgba(26,26,23,0.04); }
+        /* Product card hover */
+        .product-card { transition: box-shadow 200ms ease-out, transform 200ms ease-out; }
+        .product-card:hover { box-shadow: 0 4px 16px rgba(26,26,23,0.06), 0 8px 32px rgba(26,26,23,0.04); }
+        .product-card:hover .product-card__img { transform: scale(1.03); }
+        .product-card__img { transition: transform 200ms ease-out; }
+        /* Nav scroll border */
+        .nav-scrolled { border-bottom: 1px solid #E8E8E3; }
+        /* Hover underline slide */
+        .nav-link-hover {
+          position: relative; text-decoration: none;
+          transition: color 200ms ease-out;
+        }
+        .nav-link-hover::after {
+          content: ''; position: absolute; bottom: -2px; left: 0;
+          width: 0; height: 1px; background-color: #1A1A17;
+          transition: width 200ms ease-out;
+        }
+        .nav-link-hover:hover::after { width: 100%; }
+        /* Input focus */
+        input:focus, textarea:focus, select:focus {
+          outline: none;
+          border-color: var(--color-primary) !important;
+        }
+        /* Skeleton loader */
+        .skeleton { background-color: #E8E8E3; border-radius: 4px; }
+        /* Line clamp */
+        .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .line-clamp-4 { display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+        /* Responsive breakpoints reference: 390px / 768px / 1440px */
+        @media (max-width: 767px) {
+          .text-display { font-size: 36px; line-height: 44px; }
+          .text-h1 { font-size: 28px; line-height: 36px; }
+          .text-h2 { font-size: 24px; line-height: 32px; }
+        }
+      </style>
+    <% end %>
+    <%= yield :head %>
+    <% if Current.shop&.google_analytics_id.present? %>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=<%= Current.shop.google_analytics_id %>"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '<%= Current.shop.google_analytics_id %>');
+      </script>
+    <% end %>
+  </head>
+  <body>
+    <div class="sr-only"><%= yield :breadcrumb %></div>
+    <%= render "storefront/shared/ribbon" if Current.shop %>
+    <%= render "storefront/shared/nav" if Current.shop %>
+    <main>
+      <%= yield %>
+    </main>
+    <%= render "storefront/shared/footer" if Current.shop %>
+    <%= render "storefront/shared/age_gate" if Current.shop&.require_age_verification %>
+    <%= render "storefront/shared/cart_drawer" %>
+    <div id="toast-container" data-controller="toast" class="fixed bottom-4 right-4 z-50 flex flex-col gap-2 pointer-events-none"></div>
+    <%= yield :page_modals %>
+  </body>
+</html>

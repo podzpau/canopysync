@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /admin
+
+Sitemap: https://<%= request.host %>/sitemap.xml
+<% if Current.shop&.custom_robots_txt.present? %>
+<%= Current.shop.custom_robots_txt %>
+<% end %>

@@ -1,0 +1,24 @@
+blue_dream:
+  shop: one
+  name: Blue Dream
+  slug: blue-dream
+  product_type: flower
+  strain_name: Blue Dream
+  strain_classification: hybrid
+  published: true
+
+blue_dream_pre_roll:
+  shop: one
+  name: Blue Dream Pre-Roll
+  slug: blue-dream-pre-roll
+  product_type: pre-roll
+  strain_name: Blue Dream
+  strain_classification: hybrid
+  published: true
+
+gummy_bears:
+  shop: one
+  name: CBD Gummy Bears
+  slug: cbd-gummy-bears
+  product_type: edible
+  published: true

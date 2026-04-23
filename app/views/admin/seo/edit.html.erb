@@ -1,0 +1,172 @@
+<div class="flex h-screen overflow-hidden">
+  <%= render "admin/shared/sidebar", active: :seo %>
+
+  <div class="flex-1 overflow-y-auto bg-gray-50">
+    <div class="max-w-3xl mx-auto px-8 py-8">
+
+      <!-- Header -->
+      <div class="flex items-center gap-3 mb-8">
+        <%= link_to admin_seo_index_path,
+              class: "text-gray-400 hover:text-gray-600 transition-colors",
+              data: { turbo_frame: "_top" } do %>
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+        <% end %>
+        <div>
+          <h1 class="text-2xl font-bold text-gray-900">SEO: <%= @record.name %></h1>
+          <p class="text-sm text-gray-500 mt-0.5 capitalize"><%= @record_type %></p>
+        </div>
+        <% score = @record.seo_score || 0 %>
+        <div class="ml-auto flex items-center justify-center w-14 h-14 rounded-full border-4
+          <%= score >= 70 ? 'border-emerald-400 text-emerald-700' : score >= 40 ? 'border-amber-400 text-amber-700' : 'border-red-400 text-red-600' %>">
+          <span class="text-lg font-bold"><%= score %></span>
+        </div>
+      </div>
+
+      <%= form_with scope: :record, url: @form_url, method: :patch,
+            data: { controller: "seo-preview",
+                    "seo-preview-auto-title-value": @auto_title,
+                    "seo-preview-auto-desc-value":  @auto_desc,
+                    "seo-preview-canonical-url-value": "https://#{Current.shop.domain}/#{@record_type}/#{@record.slug}/" } do |f| %>
+
+        <!-- SERP Preview -->
+        <div class="bg-white rounded-lg border border-gray-200 p-5 mb-6">
+          <div class="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-3">Search Preview</div>
+          <div class="text-blue-700 text-lg font-medium truncate"
+               data-seo-preview-target="previewTitle"><%= @record.seo_title.presence || @auto_title %></div>
+          <div class="text-green-700 text-sm mt-0.5"
+               data-seo-preview-target="previewUrl">https://<%= Current.shop.domain %>/<%= @record_type %>/<%= @record.slug %>/</div>
+          <div class="text-gray-600 text-sm mt-1 line-clamp-2"
+               data-seo-preview-target="previewDesc"><%= @record.seo_description.presence || @auto_desc %></div>
+        </div>
+
+        <!-- SEO Fields -->
+        <div class="bg-white rounded-lg border border-gray-200 p-6 mb-6 space-y-5">
+          <h2 class="text-sm font-semibold text-gray-900">SEO Fields</h2>
+
+          <!-- SEO Title -->
+          <div data-controller="char-counter"
+               data-char-counter-min-value="50"
+               data-char-counter-max-value="65"
+               data-char-counter-warn-value="60">
+            <div class="flex items-center justify-between mb-1.5">
+              <label class="text-sm font-medium text-gray-700">SEO Title</label>
+              <span class="text-xs text-gray-400">
+                <span data-char-counter-target="count">0</span> / 65
+              </span>
+            </div>
+            <%= f.text_field :seo_title,
+                  value: @record.seo_title,
+                  placeholder: @auto_title,
+                  class: "w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent",
+                  data: { "char-counter-target": "input", "seo-preview-target": "titleInput", action: "input->char-counter#update input->seo-preview#update" } %>
+            <p class="text-xs text-gray-400 mt-1">Target 50–60 chars. Leave blank to use auto-generated title.</p>
+          </div>
+
+          <!-- Meta Description -->
+          <div data-controller="char-counter"
+               data-char-counter-min-value="120"
+               data-char-counter-max-value="160"
+               data-char-counter-warn-value="155">
+            <div class="flex items-center justify-between mb-1.5">
+              <label class="text-sm font-medium text-gray-700">Meta Description</label>
+              <span class="text-xs text-gray-400">
+                <span data-char-counter-target="count">0</span> / 160
+              </span>
+            </div>
+            <%= f.text_area :seo_description,
+                  value: @record.seo_description,
+                  placeholder: @auto_desc,
+                  rows: 3,
+                  class: "w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent resize-none",
+                  data: { "char-counter-target": "input", "seo-preview-target": "descInput", action: "input->char-counter#update input->seo-preview#update" } %>
+            <p class="text-xs text-gray-400 mt-1">Target 120–155 chars. Leave blank to use auto-generated description.</p>
+          </div>
+
+          <!-- Focus Keyword -->
+          <div>
+            <label class="text-sm font-medium text-gray-700 block mb-1.5">Focus Keyword</label>
+            <%= f.text_field :seo_focus_keyword,
+                  value: @record.seo_focus_keyword,
+                  placeholder: "e.g. blue dream strain",
+                  class: "w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent",
+                  data: { "seo-preview-target": "keywordInput", action: "input->seo-preview#update" } %>
+            <!-- Keyword check indicators -->
+            <div class="mt-2 flex gap-6 text-sm">
+              <div class="flex items-center gap-1.5">
+                <span class="text-gray-400 text-xs">In title:</span>
+                <span data-seo-preview-target="kwInTitle" class="text-gray-400 text-sm">—</span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <span class="text-gray-400 text-xs">In description:</span>
+                <span data-seo-preview-target="kwInDesc" class="text-gray-400 text-sm">—</span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <span class="text-gray-400 text-xs">In URL:</span>
+                <span data-seo-preview-target="kwInUrl" class="text-gray-400 text-sm">—</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Canonical URL -->
+          <div>
+            <label class="text-sm font-medium text-gray-700 block mb-1.5">Canonical URL</label>
+            <%= f.text_field :seo_canonical_url,
+                  value: @record.seo_canonical_url,
+                  placeholder: "https://#{Current.shop.domain}/#{@record_type}/#{@record.slug}/",
+                  class: "w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent" %>
+            <p class="text-xs text-gray-400 mt-1">Only set if this page should point to a different canonical URL.</p>
+          </div>
+
+          <!-- Robots -->
+          <div>
+            <label class="text-sm font-medium text-gray-700 block mb-1.5">Robots Directive</label>
+            <%= f.select :seo_robots,
+                  [["index, follow (default)", ""], ["noindex, follow", "noindex, follow"], ["noindex, nofollow", "noindex, nofollow"]],
+                  { selected: @record.seo_robots.presence || "" },
+                  class: "w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent" %>
+          </div>
+
+        </div>
+
+        <% if @record_type == "brand" %>
+          <!-- Brand entity / knowledge graph links -->
+          <div class="bg-white rounded-lg border border-gray-200 p-6 mb-6 space-y-4">
+            <div>
+              <h2 class="text-sm font-semibold text-gray-900">Schema / Knowledge Graph Links</h2>
+              <p class="text-xs text-gray-400 mt-0.5">These feed into the JSON-LD structured data for this brand page.</p>
+            </div>
+            <% [[:website_url, "Website URL", "https://brand.com/"],
+                [:wikipedia_url, "Wikipedia URL", "https://en.wikipedia.org/wiki/BrandName"],
+                [:wikidata_url, "Wikidata URL", "https://www.wikidata.org/wiki/Q12345"],
+                [:instagram_url, "Instagram URL", "https://www.instagram.com/brand/"],
+                [:twitter_url, "Twitter/X URL", "https://twitter.com/brand"],
+                [:linkedin_url, "LinkedIn URL", "https://www.linkedin.com/company/brand/"]].each do |attr, label, ph| %>
+              <div>
+                <label class="text-sm font-medium text-gray-700 block mb-1"><%= label %></label>
+                <%= f.text_field attr, value: @record.send(attr), placeholder: ph,
+                      class: "w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent" %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+
+        <!-- Schema Preview -->
+        <div class="bg-white rounded-lg border border-gray-200 p-5 mb-6">
+          <div class="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-3">Structured Data Preview</div>
+          <pre class="text-xs text-gray-700 overflow-x-auto bg-gray-50 rounded-lg p-3"><%= JSON.pretty_generate(@schema_preview) %></pre>
+        </div>
+
+        <div class="flex items-center justify-between">
+          <%= link_to "Cancel", admin_seo_index_path,
+                class: "text-sm text-gray-500 hover:text-gray-700",
+                data: { turbo_frame: "_top" } %>
+          <%= f.submit "Save SEO Settings",
+                class: "px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-lg transition-colors cursor-pointer" %>
+        </div>
+
+      <% end %>
+    </div>
+  </div>
+</div>

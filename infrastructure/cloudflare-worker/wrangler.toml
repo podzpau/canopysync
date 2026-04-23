@@ -1,0 +1,7 @@
+name = "dispensary-router"
+main = "router.js"
+compatibility_date = "2024-01-01"
+
+[vars]
+CANOPYSYNC_ORIGIN = "https://canopysync-app.fly.dev"
+WORDPRESS_ORIGIN = "https://wordpress-origin.com"

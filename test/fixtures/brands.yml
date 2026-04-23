@@ -1,0 +1,12 @@
+cannabis_co:
+  shop: one
+  name: Cannabis Co
+  slug: cannabis-co
+  website_url: https://cannabisco.example.com
+  instagram_url: https://instagram.com/cannabisco
+  wikipedia_url: https://en.wikipedia.org/wiki/Cannabis_Co
+
+green_brand:
+  shop: two
+  name: Green Brand
+  slug: green-brand

@@ -1,0 +1,84 @@
+<div class="flex h-screen overflow-hidden">
+  <%= render "admin/shared/sidebar", active: :entities %>
+
+  <div class="flex-1 overflow-y-auto bg-gray-50">
+    <div class="max-w-5xl mx-auto px-8 py-8">
+
+      <div class="flex items-center justify-between mb-8">
+        <div>
+          <h1 class="text-2xl font-bold text-gray-900">Concept Entities</h1>
+          <p class="text-sm text-gray-500 mt-1">Wikipedia & Wikidata references used in JSON-LD structured data</p>
+        </div>
+        <%= link_to "Add Entity", new_admin_concept_entity_path,
+              class: "px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-lg transition-colors",
+              data: { turbo_frame: "_top" } %>
+      </div>
+
+      <% if notice %>
+        <div class="mb-6 px-4 py-3 bg-emerald-50 border border-emerald-200 rounded-lg text-sm text-emerald-700">
+          <%= notice %>
+        </div>
+      <% end %>
+
+      <div class="bg-white rounded-lg border border-gray-200 overflow-hidden">
+        <table class="w-full">
+          <thead>
+            <tr class="border-b border-gray-200 bg-gray-50">
+              <th class="text-left text-xs font-semibold text-gray-500 uppercase tracking-wide px-6 py-3">Key</th>
+              <th class="text-left text-xs font-semibold text-gray-500 uppercase tracking-wide px-4 py-3">Name</th>
+              <th class="text-left text-xs font-semibold text-gray-500 uppercase tracking-wide px-4 py-3">Wikipedia</th>
+              <th class="text-left text-xs font-semibold text-gray-500 uppercase tracking-wide px-4 py-3">Wikidata</th>
+              <th class="px-4 py-3"></th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
+            <% @entities.each do |entity| %>
+              <tr class="hover:bg-gray-50 transition-colors">
+                <td class="px-6 py-3.5 text-sm font-mono text-gray-700"><%= entity.key %></td>
+                <td class="px-4 py-3.5 text-sm text-gray-900 font-medium"><%= entity.name %></td>
+                <td class="px-4 py-3.5 text-sm">
+                  <% if entity.wikipedia_url.present? %>
+                    <a href="<%= entity.wikipedia_url %>" target="_blank" rel="noopener"
+                       class="text-indigo-600 hover:text-indigo-800 truncate max-w-xs block">
+                      <%= entity.wikipedia_url.sub("https://en.wikipedia.org/wiki/", "WP: ") %>
+                    </a>
+                  <% else %>
+                    <span class="text-gray-400">—</span>
+                  <% end %>
+                </td>
+                <td class="px-4 py-3.5 text-sm">
+                  <% if entity.wikidata_url.present? %>
+                    <a href="<%= entity.wikidata_url %>" target="_blank" rel="noopener"
+                       class="text-indigo-600 hover:text-indigo-800">
+                      <%= entity.wikidata_url.split("/").last %>
+                    </a>
+                  <% else %>
+                    <span class="text-gray-400">—</span>
+                  <% end %>
+                </td>
+                <td class="px-4 py-3.5 text-right">
+                  <div class="flex items-center justify-end gap-3">
+                    <%= link_to "Edit", edit_admin_concept_entity_path(entity),
+                          class: "text-sm text-indigo-600 hover:text-indigo-800 font-medium",
+                          data: { turbo_frame: "_top" } %>
+                    <%= button_to "Delete", admin_concept_entity_path(entity), method: :delete,
+                          class: "text-sm text-red-500 hover:text-red-700 font-medium",
+                          form: { data: { turbo_confirm: "Delete \"#{entity.name}\"?" } } %>
+                  </div>
+                </td>
+              </tr>
+            <% end %>
+            <% if @entities.empty? %>
+              <tr>
+                <td colspan="5" class="px-6 py-10 text-center text-sm text-gray-400">
+                  No entities yet. <a href="<%= new_admin_concept_entity_path %>" class="text-indigo-600 hover:underline">Add your first entity</a>.
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>

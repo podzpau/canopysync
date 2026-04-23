@@ -1,0 +1,145 @@
+<%
+  s                  = block["config"] || {}
+  eyebrow            = s["eyebrow_text"]
+  headline           = s["headline"]
+  subtext            = s["subtext"]
+  cta_primary_text   = s["cta_primary_text"]
+  cta_primary_url    = s["cta_primary_url"]
+  cta_secondary_text = s["cta_secondary_text"]
+  cta_secondary_url  = s["cta_secondary_url"]
+  trust_badges       = Array(s["trust_badges"])
+  image_url          = s["image_url"]
+  uid                = "hc-#{block["id"]}"
+%>
+
+<style>
+  [data-hero-centered="<%= uid %>"] .hc-eyebrow {
+    color: var(--color-primary);
+    font-size: clamp(0.7rem, 1.5vw, 0.875rem);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  [data-hero-centered="<%= uid %>"] .hc-headline {
+    font-size: clamp(2.25rem, 6vw, 4rem);
+    line-height: 1.08;
+    font-weight: 800;
+    color: var(--color-foreground, #111827);
+    max-width: 22ch;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  [data-hero-centered="<%= uid %>"] .hc-headline em {
+    color: var(--color-primary);
+    font-style: italic;
+  }
+  [data-hero-centered="<%= uid %>"] .hc-subtext {
+    font-size: clamp(1rem, 2vw, 1.125rem);
+    color: var(--color-muted, #6b7280);
+    line-height: 1.65;
+    max-width: 52ch;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  [data-hero-centered="<%= uid %>"] .hc-cta-primary {
+    display: inline-block;
+    background-color: #111827;
+    color: #ffffff;
+    border-radius: 9999px;
+    padding: 0.875rem 2rem;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: opacity 0.15s ease;
+  }
+  [data-hero-centered="<%= uid %>"] .hc-cta-primary:hover { opacity: 0.85; }
+  [data-hero-centered="<%= uid %>"] .hc-cta-secondary {
+    display: inline-block;
+    color: var(--color-foreground, #111827);
+    font-weight: 500;
+    font-size: 1rem;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: opacity 0.15s ease;
+  }
+  [data-hero-centered="<%= uid %>"] .hc-cta-secondary:hover { opacity: 0.65; }
+  [data-hero-centered="<%= uid %>"] .hc-image {
+    border-radius: var(--radius);
+    object-fit: cover;
+    width: 100%;
+    aspect-ratio: 16 / 7;
+  }
+  [data-hero-centered="<%= uid %>"] .hc-badge-icon {
+    color: var(--color-primary);
+    width: 1.125rem;
+    height: 1.125rem;
+    flex-shrink: 0;
+  }
+</style>
+
+<section data-hero-centered="<%= uid %>" class="py-20 px-6 md:px-12 lg:px-20 text-center" style="<%= 'min-height:300px; display:flex; align-items:center; justify-content:center;' if eyebrow.blank? && headline.blank? && subtext.blank? && cta_primary_text.blank? %>">
+  <% if eyebrow.blank? && headline.blank? && subtext.blank? && cta_primary_text.blank? %>
+    <div style="display:flex; align-items:center; justify-content:center; border:2px dashed #d1d5db; border-radius:8px; padding:3rem 4rem; color:#9ca3af;">
+      <div>
+        <div style="font-size:0.875rem; font-weight:600; margin-bottom:4px;">Hero — Centered</div>
+        <div style="font-size:0.75rem;">Add a headline and image to get started</div>
+      </div>
+    </div>
+  <% else %>
+  <div class="max-w-5xl mx-auto flex flex-col gap-6 items-center">
+
+    <% if eyebrow.present? %>
+      <p class="hc-eyebrow"><%= eyebrow %></p>
+    <% end %>
+
+    <% if headline.present? %>
+      <h1 class="hc-headline"><%= sanitize(headline, tags: %w[em strong]) %></h1>
+    <% end %>
+
+    <% if subtext.present? %>
+      <p class="hc-subtext"><%= subtext %></p>
+    <% end %>
+
+    <% if cta_primary_text.present? || cta_secondary_text.present? %>
+      <div class="flex flex-wrap gap-6 items-center justify-center">
+        <% if cta_primary_text.present? && cta_primary_url.present? %>
+          <%= link_to cta_primary_text, cta_primary_url, class: "hc-cta-primary" %>
+        <% end %>
+        <% if cta_secondary_text.present? && cta_secondary_url.present? %>
+          <%= link_to cta_secondary_text, cta_secondary_url, class: "hc-cta-secondary" %>
+        <% end %>
+      </div>
+    <% end %>
+
+    <% if trust_badges.any? %>
+      <ul class="flex flex-wrap gap-x-6 gap-y-2 justify-center mt-1">
+        <% trust_badges.each do |badge| %>
+          <li class="flex items-center gap-2 text-sm text-gray-500">
+            <% case badge["icon"] %>
+            <% when "shield" %>
+              <svg class="hc-badge-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 2 3 7v5c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V7l-9-5z"/>
+              </svg>
+            <% when "leaf" %>
+              <svg class="hc-badge-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 008 20C19 20 22 3 22 3c-1 2-8 5-8 10l-1.46-1.46A7.06 7.06 0 0117 8z"/>
+              </svg>
+            <% when "card" %>
+              <svg class="hc-badge-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M20 4H4c-1.11 0-2 .89-2 2v12c0 1.11.89 2 2 2h16c1.11 0 2-1.11 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/>
+              </svg>
+            <% end %>
+            <span><%= badge["label"] %></span>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+
+  </div>
+
+  <% if image_url.present? %>
+    <div class="max-w-7xl mx-auto mt-12">
+      <img src="<%= image_url %>" alt="" class="hc-image" loading="eager" decoding="async">
+    </div>
+  <% end %>
+  <% end %>
+</section>

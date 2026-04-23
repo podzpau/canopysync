@@ -1,0 +1,122 @@
+<div class="flex h-screen overflow-hidden">
+  <%= render "admin/shared/sidebar", active: :seo %>
+
+  <div class="flex-1 overflow-y-auto bg-gray-50">
+    <div class="max-w-6xl mx-auto px-8 py-8">
+
+      <!-- Header -->
+      <div class="flex items-center justify-between mb-8">
+        <div>
+          <h1 class="text-2xl font-bold text-gray-900">SEO Overview</h1>
+          <p class="text-sm text-gray-500 mt-1">Manage per-page SEO across all content types</p>
+        </div>
+      </div>
+
+      <!-- Stats row -->
+      <% total = @all_records.size %>
+      <% avg_score   = total > 0 ? (@all_records.sum { |r| r[:score] } / total.to_f).round : 0 %>
+      <% no_title    = @all_records.count { |r| r[:title].blank? } %>
+      <% no_keyword  = @all_records.count { |r| r[:keyword].blank? } %>
+
+      <div class="grid grid-cols-4 gap-6 mb-8">
+        <div class="bg-white rounded-lg border border-gray-200 p-5">
+          <div class="text-xs text-gray-500 uppercase tracking-wide mb-1">Total Pages</div>
+          <div class="text-3xl font-bold text-gray-900"><%= total %></div>
+        </div>
+        <div class="bg-white rounded-lg border border-gray-200 p-5">
+          <div class="text-xs text-gray-500 uppercase tracking-wide mb-1">Avg SEO Score</div>
+          <div class="text-3xl font-bold <%= avg_score >= 70 ? 'text-emerald-600' : avg_score >= 40 ? 'text-amber-600' : 'text-red-600' %>">
+            <%= avg_score %>
+          </div>
+        </div>
+        <div class="bg-white rounded-lg border border-gray-200 p-5">
+          <div class="text-xs text-gray-500 uppercase tracking-wide mb-1">Missing Titles</div>
+          <div class="text-3xl font-bold text-gray-900"><%= no_title %></div>
+        </div>
+        <div class="bg-white rounded-lg border border-gray-200 p-5">
+          <div class="text-xs text-gray-500 uppercase tracking-wide mb-1">Missing Keywords</div>
+          <div class="text-3xl font-bold text-gray-900"><%= no_keyword %></div>
+        </div>
+      </div>
+
+      <!-- Filter tabs -->
+      <div class="flex gap-1 mb-6 bg-white border border-gray-200 rounded-lg p-1 w-fit">
+        <%= link_to "All", admin_seo_index_path,
+              class: "px-4 py-1.5 rounded-md text-sm font-medium transition-colors #{@tab == 'all' ? 'bg-gray-900 text-white' : 'text-gray-600 hover:text-gray-900'}",
+              data: { turbo_frame: "_top" } %>
+        <%= link_to "Products", products_admin_seo_index_path,
+              class: "px-4 py-1.5 rounded-md text-sm font-medium transition-colors #{@tab == 'products' ? 'bg-gray-900 text-white' : 'text-gray-600 hover:text-gray-900'}",
+              data: { turbo_frame: "_top" } %>
+        <%= link_to "Brands", brands_admin_seo_index_path,
+              class: "px-4 py-1.5 rounded-md text-sm font-medium transition-colors #{@tab == 'brands' ? 'bg-gray-900 text-white' : 'text-gray-600 hover:text-gray-900'}",
+              data: { turbo_frame: "_top" } %>
+        <%= link_to "Collections", collections_admin_seo_index_path,
+              class: "px-4 py-1.5 rounded-md text-sm font-medium transition-colors #{@tab == 'collections' ? 'bg-gray-900 text-white' : 'text-gray-600 hover:text-gray-900'}",
+              data: { turbo_frame: "_top" } %>
+      </div>
+
+      <!-- Table -->
+      <div class="bg-white rounded-lg border border-gray-200 overflow-hidden">
+        <table class="w-full">
+          <thead>
+            <tr class="border-b border-gray-200 bg-gray-50">
+              <th class="text-left text-xs font-semibold text-gray-500 uppercase tracking-wide px-6 py-3">Page</th>
+              <th class="text-left text-xs font-semibold text-gray-500 uppercase tracking-wide px-4 py-3">Type</th>
+              <th class="text-left text-xs font-semibold text-gray-500 uppercase tracking-wide px-4 py-3">Score</th>
+              <th class="text-left text-xs font-semibold text-gray-500 uppercase tracking-wide px-4 py-3">SEO Title</th>
+              <th class="text-left text-xs font-semibold text-gray-500 uppercase tracking-wide px-4 py-3">Focus Keyword</th>
+              <th class="text-left text-xs font-semibold text-gray-500 uppercase tracking-wide px-4 py-3">Schema</th>
+              <th class="px-4 py-3"></th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
+            <% @all_records.each do |item| %>
+              <tr class="hover:bg-gray-50 transition-colors">
+                <td class="px-6 py-3.5 text-sm font-medium text-gray-900"><%= item[:name] %></td>
+                <td class="px-4 py-3.5">
+                  <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-700">
+                    <%= item[:type] %>
+                  </span>
+                </td>
+                <td class="px-4 py-3.5">
+                  <% score = item[:score] %>
+                  <span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold
+                    <%= score >= 70 ? 'bg-emerald-50 text-emerald-700' : score >= 40 ? 'bg-amber-50 text-amber-700' : 'bg-red-50 text-red-600' %>">
+                    <%= score %>
+                  </span>
+                </td>
+                <td class="px-4 py-3.5 text-sm text-gray-600 max-w-xs truncate">
+                  <%= item[:title].present? ? item[:title].truncate(50) : tag.span("—", class: "text-gray-400") %>
+                </td>
+                <td class="px-4 py-3.5 text-sm text-gray-600">
+                  <%= item[:keyword].present? ? item[:keyword] : tag.span("—", class: "text-gray-400") %>
+                </td>
+                <td class="px-4 py-3.5 text-base">
+                  <% ss = item[:schema_strength] %>
+                  <% if ss >= 3 %>
+                    <span title="Strong schema (≥3 entities)">✅</span>
+                  <% elsif ss >= 1 %>
+                    <span title="Weak schema (1-2 entities)">⚠️</span>
+                  <% else %>
+                    <span title="No schema entities">❌</span>
+                  <% end %>
+                </td>
+                <td class="px-4 py-3.5 text-right">
+                  <%= link_to "Edit", item[:edit_path],
+                        class: "text-sm text-indigo-600 hover:text-indigo-800 font-medium",
+                        data: { turbo_frame: "_top" } %>
+                </td>
+              </tr>
+            <% end %>
+            <% if @all_records.empty? %>
+              <tr>
+                <td colspan="7" class="px-6 py-10 text-center text-sm text-gray-400">No records found.</td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>

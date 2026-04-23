@@ -1,0 +1,16 @@
+flower:
+  shop: one
+  name: Flower
+  slug: flower
+  collection_type: category
+  position: 0
+  published: true
+
+sativa:
+  shop: one
+  name: Sativa
+  slug: sativa
+  parent: flower
+  collection_type: facet
+  position: 0
+  published: true

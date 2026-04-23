@@ -1,0 +1,170 @@
+<%
+  s                  = block["config"] || {}
+  eyebrow            = s["eyebrow_text"]
+  headline           = s["headline"]
+  subtext            = s["subtext"]
+  cta_primary_text   = s["cta_primary_text"]
+  cta_primary_url    = s["cta_primary_url"]
+  cta_secondary_text = s["cta_secondary_text"]
+  cta_secondary_url  = s["cta_secondary_url"]
+  trust_badges       = Array(s["trust_badges"])
+  image_url          = s["image_url"]
+  overlay_opacity    = (s["overlay_opacity"]&.to_f || 0.65).clamp(0.0, 1.0)
+  uid                = "hf-#{block["id"]}"
+%>
+
+<style>
+  [data-hero-fullbleed="<%= uid %>"] {
+    --hf-overlay-opacity: <%= overlay_opacity %>;
+    position: relative;
+    overflow: hidden;
+    min-height: clamp(480px, 70vh, 800px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  [data-hero-fullbleed="<%= uid %>"] .hf-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  [data-hero-fullbleed="<%= uid %>"] .hf-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, var(--hf-overlay-opacity));
+  }
+  [data-hero-fullbleed="<%= uid %>"] .hf-content {
+    position: relative;
+    z-index: 1;
+  }
+  [data-hero-fullbleed="<%= uid %>"] .hf-eyebrow {
+    color: var(--color-primary);
+    font-size: clamp(0.7rem, 1.5vw, 0.875rem);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  [data-hero-fullbleed="<%= uid %>"] .hf-headline {
+    font-size: clamp(2.5rem, 7vw, 5rem);
+    line-height: 1.06;
+    font-weight: 800;
+    color: #fff;
+    max-width: 20ch;
+    margin-left: auto;
+    margin-right: auto;
+    text-shadow: 0 2px 16px rgba(0,0,0,0.35);
+  }
+  [data-hero-fullbleed="<%= uid %>"] .hf-headline em {
+    color: var(--color-primary);
+    font-style: italic;
+  }
+  [data-hero-fullbleed="<%= uid %>"] .hf-subtext {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.65;
+    max-width: 50ch;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  [data-hero-fullbleed="<%= uid %>"] .hf-cta-primary {
+    display: inline-block;
+    background-color: #111827;
+    color: #ffffff;
+    border-radius: 9999px;
+    padding: 0.875rem 2rem;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: opacity 0.15s ease;
+  }
+  [data-hero-fullbleed="<%= uid %>"] .hf-cta-primary:hover { opacity: 0.85; }
+  [data-hero-fullbleed="<%= uid %>"] .hf-cta-secondary {
+    display: inline-block;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+    font-size: 1rem;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: opacity 0.15s ease;
+  }
+  [data-hero-fullbleed="<%= uid %>"] .hf-cta-secondary:hover { opacity: 0.65; }
+  [data-hero-fullbleed="<%= uid %>"] .hf-badges {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 1.25rem;
+    margin-top: 0.5rem;
+  }
+  [data-hero-fullbleed="<%= uid %>"] .hf-badge-icon {
+    color: var(--color-primary);
+    width: 1.125rem;
+    height: 1.125rem;
+    flex-shrink: 0;
+  }
+</style>
+
+<section data-hero-fullbleed="<%= uid %>">
+  <% if image_url.present? %>
+    <img src="<%= image_url %>" alt="" class="hf-bg" loading="eager" decoding="async">
+  <% end %>
+  <div class="hf-overlay"></div>
+
+  <div class="hf-content w-full py-24 px-6 md:px-12 lg:px-20 text-center">
+    <div class="max-w-4xl mx-auto flex flex-col gap-6 items-center">
+
+      <% if eyebrow.blank? && headline.blank? && subtext.blank? && cta_primary_text.blank? %>
+        <p style="color:rgba(255,255,255,0.5); font-size:0.875rem; border:2px dashed rgba(255,255,255,0.3); border-radius:8px; padding:2rem 3rem;">
+          Hero — Full Bleed · Add a headline and image to get started
+        </p>
+      <% end %>
+
+      <% if eyebrow.present? %>
+        <p class="hf-eyebrow"><%= eyebrow %></p>
+      <% end %>
+
+      <% if headline.present? %>
+        <h1 class="hf-headline"><%= sanitize(headline, tags: %w[em strong]) %></h1>
+      <% end %>
+
+      <% if subtext.present? %>
+        <p class="hf-subtext"><%= subtext %></p>
+      <% end %>
+
+      <% if cta_primary_text.present? || cta_secondary_text.present? %>
+        <div class="flex flex-wrap gap-6 items-center justify-center">
+          <% if cta_primary_text.present? && cta_primary_url.present? %>
+            <%= link_to cta_primary_text, cta_primary_url, class: "hf-cta-primary" %>
+          <% end %>
+          <% if cta_secondary_text.present? && cta_secondary_url.present? %>
+            <%= link_to cta_secondary_text, cta_secondary_url, class: "hf-cta-secondary" %>
+          <% end %>
+        </div>
+      <% end %>
+
+      <% if trust_badges.any? %>
+        <ul class="hf-badges flex flex-wrap gap-x-6 gap-y-2 justify-center w-full">
+          <% trust_badges.each do |badge| %>
+            <li class="flex items-center gap-2 text-sm text-white/75">
+              <% case badge["icon"] %>
+              <% when "shield" %>
+                <svg class="hf-badge-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M12 2 3 7v5c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V7l-9-5z"/>
+                </svg>
+              <% when "leaf" %>
+                <svg class="hf-badge-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 008 20C19 20 22 3 22 3c-1 2-8 5-8 10l-1.46-1.46A7.06 7.06 0 0117 8z"/>
+                </svg>
+              <% when "card" %>
+                <svg class="hf-badge-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M20 4H4c-1.11 0-2 .89-2 2v12c0 1.11.89 2 2 2h16c1.11 0 2-1.11 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/>
+                </svg>
+              <% end %>
+              <span><%= badge["label"] %></span>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+
+    </div>
+  </div>
+</section>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <% @products.each do |product| %>
+  <url>
+    <loc>https://<%= request.host %>/product/<%= product.slug %>/</loc>
+    <image:image>
+      <image:loc><%= product.image_url %></image:loc>
+      <image:title><%= CGI.escapeHTML(product.name) %></image:title>
+    </image:image>
+  </url>
+  <% end %>
+</urlset>

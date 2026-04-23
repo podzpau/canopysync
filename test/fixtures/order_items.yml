@@ -1,0 +1,17 @@
+one:
+  order: one
+  product_name: Blue Dream Flower
+  product_type: flower
+  brand_name: STIIIZY
+  quantity: 2
+  unit_price_cents: 1500
+  total_cents: 3000
+
+two:
+  order: two
+  product_name: OG Kush Pre-Roll
+  product_type: pre-roll
+  brand_name: Jeeter
+  quantity: 1
+  unit_price_cents: 5000
+  total_cents: 5000

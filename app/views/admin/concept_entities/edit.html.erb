@@ -1,0 +1,24 @@
+<div class="flex h-screen overflow-hidden">
+  <%= render "admin/shared/sidebar", active: :entities %>
+
+  <div class="flex-1 overflow-y-auto bg-gray-50">
+    <div class="max-w-2xl mx-auto px-8 py-8">
+
+      <div class="flex items-center gap-3 mb-8">
+        <%= link_to admin_concept_entities_path,
+              class: "text-gray-400 hover:text-gray-600 transition-colors",
+              data: { turbo_frame: "_top" } do %>
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+        <% end %>
+        <h1 class="text-2xl font-bold text-gray-900">Edit Entity: <%= @entity.name %></h1>
+      </div>
+
+      <div class="bg-white rounded-lg border border-gray-200 p-6">
+        <%= render "form", entity: @entity %>
+      </div>
+
+    </div>
+  </div>
+</div>

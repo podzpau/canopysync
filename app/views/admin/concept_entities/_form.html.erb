@@ -1,0 +1,50 @@
+<%= form_with model: [:admin, entity], local: true do |f| %>
+  <% if entity.errors.any? %>
+    <div class="mb-5 px-4 py-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700">
+      <ul class="list-disc list-inside space-y-0.5">
+        <% entity.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="space-y-4">
+    <div>
+      <label class="text-sm font-medium text-gray-700 block mb-1.5">Key <span class="text-gray-400 font-normal">(slug, unique)</span></label>
+      <%= f.text_field :key,
+            placeholder: "cannabis_flower",
+            class: "w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent" %>
+    </div>
+
+    <div>
+      <label class="text-sm font-medium text-gray-700 block mb-1.5">Display Name</label>
+      <%= f.text_field :name,
+            placeholder: "Cannabis Flower",
+            class: "w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent" %>
+    </div>
+
+    <div>
+      <label class="text-sm font-medium text-gray-700 block mb-1.5">Wikipedia URL</label>
+      <%= f.text_field :wikipedia_url,
+            placeholder: "https://en.wikipedia.org/wiki/Cannabis",
+            class: "w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent" %>
+      <p class="text-xs text-gray-400 mt-1">Must start with https://en.wikipedia.org/wiki/</p>
+    </div>
+
+    <div>
+      <label class="text-sm font-medium text-gray-700 block mb-1.5">Wikidata URL <span class="text-gray-400 font-normal">(optional)</span></label>
+      <%= f.text_field :wikidata_url,
+            placeholder: "https://www.wikidata.org/wiki/Q1513828",
+            class: "w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent" %>
+    </div>
+  </div>
+
+  <div class="flex items-center justify-between mt-6">
+    <%= link_to "Cancel", admin_concept_entities_path,
+          class: "text-sm text-gray-500 hover:text-gray-700",
+          data: { turbo_frame: "_top" } %>
+    <%= f.submit entity.new_record? ? "Create Entity" : "Save Changes",
+          class: "px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-lg transition-colors cursor-pointer" %>
+  </div>
+<% end %>

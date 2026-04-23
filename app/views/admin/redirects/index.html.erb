@@ -1,0 +1,79 @@
+<div class="flex h-screen overflow-hidden">
+  <%= render "admin/shared/sidebar", active: :redirects %>
+
+  <div class="flex-1 overflow-y-auto bg-gray-50">
+    <div class="max-w-5xl mx-auto px-8 py-8">
+
+      <div class="flex items-center justify-between mb-8">
+        <div>
+          <h1 class="text-2xl font-bold text-gray-900">Redirects</h1>
+          <p class="text-sm text-gray-500 mt-1">301 and 302 redirects for this shop</p>
+        </div>
+        <%= link_to "Add Redirect", new_admin_redirect_path,
+              class: "px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-lg transition-colors",
+              data: { turbo_frame: "_top" } %>
+      </div>
+
+      <% if notice %>
+        <div class="mb-6 px-4 py-3 bg-emerald-50 border border-emerald-200 rounded-lg text-sm text-emerald-700">
+          <%= notice %>
+        </div>
+      <% end %>
+
+      <div class="bg-white rounded-lg border border-gray-200 overflow-hidden">
+        <table class="w-full">
+          <thead>
+            <tr class="border-b border-gray-200 bg-gray-50">
+              <th class="text-left text-xs font-semibold text-gray-500 uppercase tracking-wide px-6 py-3">Source</th>
+              <th class="text-left text-xs font-semibold text-gray-500 uppercase tracking-wide px-4 py-3">Target</th>
+              <th class="text-left text-xs font-semibold text-gray-500 uppercase tracking-wide px-4 py-3">Type</th>
+              <th class="text-left text-xs font-semibold text-gray-500 uppercase tracking-wide px-4 py-3">Hits</th>
+              <th class="text-left text-xs font-semibold text-gray-500 uppercase tracking-wide px-4 py-3">Status</th>
+              <th class="px-4 py-3"></th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
+            <% @redirects.each do |redirect| %>
+              <tr class="hover:bg-gray-50 transition-colors">
+                <td class="px-6 py-3.5 text-sm font-mono text-gray-700"><%= redirect.source_path %></td>
+                <td class="px-4 py-3.5 text-sm font-mono text-gray-600 max-w-xs truncate"><%= redirect.target_path %></td>
+                <td class="px-4 py-3.5">
+                  <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold
+                    <%= redirect.redirect_type == 301 ? 'bg-indigo-50 text-indigo-700' : 'bg-amber-50 text-amber-700' %>">
+                    <%= redirect.redirect_type %>
+                  </span>
+                </td>
+                <td class="px-4 py-3.5 text-sm text-gray-600 tabular-nums"><%= number_with_delimiter(redirect.hits) %></td>
+                <td class="px-4 py-3.5">
+                  <% if redirect.active? %>
+                    <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-emerald-50 text-emerald-700">Active</span>
+                  <% else %>
+                    <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-500">Inactive</span>
+                  <% end %>
+                </td>
+                <td class="px-4 py-3.5 text-right">
+                  <div class="flex items-center justify-end gap-3">
+                    <%= link_to "Edit", edit_admin_redirect_path(redirect),
+                          class: "text-sm text-indigo-600 hover:text-indigo-800 font-medium",
+                          data: { turbo_frame: "_top" } %>
+                    <%= button_to "Delete", admin_redirect_path(redirect), method: :delete,
+                          class: "text-sm text-red-500 hover:text-red-700 font-medium",
+                          form: { data: { turbo_confirm: "Delete redirect from #{redirect.source_path}?" } } %>
+                  </div>
+                </td>
+              </tr>
+            <% end %>
+            <% if @redirects.empty? %>
+              <tr>
+                <td colspan="6" class="px-6 py-10 text-center text-sm text-gray-400">
+                  No redirects yet. <a href="<%= new_admin_redirect_path %>" class="text-indigo-600 hover:underline">Add your first redirect</a>.
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>

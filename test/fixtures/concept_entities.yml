@@ -1,0 +1,34 @@
+cannabis_flower:
+  key: cannabis_flower
+  name: Cannabis Flower
+  wikipedia_url: https://en.wikipedia.org/wiki/Cannabis_(drug)
+  wikidata_url: https://www.wikidata.org/wiki/Q79
+
+cannabis_sativa:
+  key: cannabis_sativa
+  name: Cannabis Sativa
+  wikipedia_url: https://en.wikipedia.org/wiki/Cannabis_sativa
+  wikidata_url: https://www.wikidata.org/wiki/Q161513
+
+cannabis_indica:
+  key: cannabis_indica
+  name: Cannabis Indica
+  wikipedia_url: https://en.wikipedia.org/wiki/Cannabis_indica
+  wikidata_url: https://www.wikidata.org/wiki/Q161516
+
+cannabis_edible:
+  key: cannabis_edible
+  name: Cannabis Edible
+  wikipedia_url: https://en.wikipedia.org/wiki/Cannabis_edible
+  wikidata_url: https://www.wikidata.org/wiki/Q910980
+
+pre_roll:
+  key: pre_roll
+  name: Pre-Roll
+  wikipedia_url: https://en.wikipedia.org/wiki/Joint_(cannabis)
+
+cannabis:
+  key: cannabis
+  name: Cannabis
+  wikipedia_url: https://en.wikipedia.org/wiki/Cannabis_(drug)
+  wikidata_url: https://www.wikidata.org/wiki/Q79

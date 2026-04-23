@@ -1,0 +1,147 @@
+<div class="flex h-screen overflow-hidden">
+  <%= render "admin/shared/sidebar", active: :seo_settings %>
+
+  <div class="flex-1 overflow-y-auto bg-gray-50">
+    <div class="max-w-3xl mx-auto px-8 py-8">
+
+      <div class="mb-8">
+        <h1 class="text-2xl font-bold text-gray-900">Global SEO Settings</h1>
+        <p class="text-sm text-gray-500 mt-1">Site-wide defaults applied across all pages</p>
+      </div>
+
+      <% if notice %>
+        <div class="mb-6 px-4 py-3 bg-emerald-50 border border-emerald-200 rounded-lg text-sm text-emerald-700">
+          <%= notice %>
+        </div>
+      <% end %>
+
+      <%= form_with model: @shop, url: admin_seo_settings_path, method: :patch do |f| %>
+
+        <!-- General SEO -->
+        <div class="bg-white rounded-lg border border-gray-200 p-6 mb-6 space-y-5">
+          <h2 class="text-sm font-semibold text-gray-900 border-b border-gray-100 pb-3">General SEO</h2>
+
+          <div>
+            <label class="text-sm font-medium text-gray-700 block mb-1.5">Title Suffix</label>
+            <%= f.text_field :default_seo_title_suffix,
+                  placeholder: " | Alpaca Club Dispensary",
+                  class: "w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent" %>
+            <p class="text-xs text-gray-400 mt-1">
+              Appended to all generated titles. Preview: "Blue Dream Weed Strain<%= @shop.default_seo_title_suffix.presence || " | Your Shop Name" %>"
+            </p>
+          </div>
+
+          <div data-controller="char-counter"
+               data-char-counter-min-value="120"
+               data-char-counter-max-value="160"
+               data-char-counter-warn-value="155">
+            <div class="flex items-center justify-between mb-1.5">
+              <label class="text-sm font-medium text-gray-700">Default Meta Description</label>
+              <span class="text-xs text-gray-400">
+                <span data-char-counter-target="count">0</span> / 160
+              </span>
+            </div>
+            <%= f.text_area :default_meta_description,
+                  rows: 3,
+                  placeholder: "Fallback description used on pages without a custom description",
+                  class: "w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent resize-none",
+                  data: { "char-counter-target": "input", action: "input->char-counter#update" } %>
+          </div>
+
+          <div>
+            <label class="text-sm font-medium text-gray-700 block mb-1.5">Homepage Title</label>
+            <%= f.text_field :seo_homepage_title,
+                  placeholder: "#{@shop.name} — Premium Cannabis Dispensary",
+                  class: "w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent" %>
+          </div>
+
+          <div data-controller="char-counter"
+               data-char-counter-min-value="120"
+               data-char-counter-max-value="160"
+               data-char-counter-warn-value="155">
+            <div class="flex items-center justify-between mb-1.5">
+              <label class="text-sm font-medium text-gray-700">Homepage Description</label>
+              <span class="text-xs text-gray-400">
+                <span data-char-counter-target="count">0</span> / 160
+              </span>
+            </div>
+            <%= f.text_area :seo_homepage_description,
+                  rows: 3,
+                  placeholder: "Shop cannabis products online from #{@shop.name}...",
+                  class: "w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent resize-none",
+                  data: { "char-counter-target": "input", action: "input->char-counter#update" } %>
+          </div>
+        </div>
+
+        <!-- Social Profiles -->
+        <div class="bg-white rounded-lg border border-gray-200 p-6 mb-6 space-y-4">
+          <div class="border-b border-gray-100 pb-3">
+            <h2 class="text-sm font-semibold text-gray-900">Social Profiles</h2>
+            <p class="text-xs text-gray-400 mt-0.5">Used in Organization schema sameAs — helps Google connect your brand entity</p>
+          </div>
+          <% [[:social_facebook_url, "Facebook URL", "https://www.facebook.com/yourpage"],
+              [:social_instagram_url, "Instagram URL", "https://www.instagram.com/yourhandle/"],
+              [:social_twitter_url, "Twitter / X URL", "https://twitter.com/yourhandle"],
+              [:social_linkedin_url, "LinkedIn URL", "https://www.linkedin.com/company/yourco/"],
+              [:social_youtube_url, "YouTube URL", "https://www.youtube.com/@yourchannel"]].each do |attr, label, ph| %>
+            <div>
+              <label class="text-sm font-medium text-gray-700 block mb-1"><%= label %></label>
+              <%= f.text_field attr, placeholder: ph,
+                    class: "w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent" %>
+            </div>
+          <% end %>
+        </div>
+
+        <!-- Verification & Analytics -->
+        <div class="bg-white rounded-lg border border-gray-200 p-6 mb-6 space-y-4">
+          <h2 class="text-sm font-semibold text-gray-900 border-b border-gray-100 pb-3">Verification & Analytics</h2>
+
+          <div>
+            <label class="text-sm font-medium text-gray-700 block mb-1.5">Google Analytics ID</label>
+            <%= f.text_field :google_analytics_id,
+                  placeholder: "G-XXXXXXXXXX",
+                  class: "w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent" %>
+            <p class="text-xs text-gray-400 mt-1">Enter your GA4 Measurement ID (starts with G-). Leave blank to disable GA.</p>
+          </div>
+
+          <div>
+            <label class="text-sm font-medium text-gray-700 block mb-1.5">Google Search Console Verification</label>
+            <%= f.text_field :google_search_console_verification,
+                  placeholder: "abc123xyz...",
+                  class: "w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent" %>
+            <p class="text-xs text-gray-400 mt-1">Enter the <code class="bg-gray-100 px-1 rounded">content</code> value from your GSC verification meta tag.</p>
+          </div>
+        </div>
+
+        <!-- Sitemaps & Crawling -->
+        <div class="bg-white rounded-lg border border-gray-200 p-6 mb-6 space-y-4">
+          <h2 class="text-sm font-semibold text-gray-900 border-b border-gray-100 pb-3">Sitemaps & Crawling</h2>
+
+          <div class="flex items-start gap-3">
+            <%= f.check_box :html_sitemap_enabled,
+                  class: "mt-0.5 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" %>
+            <div>
+              <label class="text-sm font-medium text-gray-700">Show HTML Sitemap</label>
+              <p class="text-xs text-gray-400">Enables the human-readable sitemap page at <code class="bg-gray-100 px-1 rounded">/sitemap/</code></p>
+            </div>
+          </div>
+
+          <div>
+            <label class="text-sm font-medium text-gray-700 block mb-1.5">Custom robots.txt Additions</label>
+            <%= f.text_area :custom_robots_txt,
+                  rows: 4,
+                  placeholder: "# Additional rules\nDisallow: /private/",
+                  class: "w-full border border-gray-200 rounded-lg px-3 py-2 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent resize-none" %>
+            <p class="text-xs text-gray-400 mt-1">These lines are appended to the default robots.txt. The default already disallows /admin/.</p>
+          </div>
+        </div>
+
+        <div class="flex justify-end">
+          <%= f.submit "Save Settings",
+                class: "px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-lg transition-colors cursor-pointer" %>
+        </div>
+
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,112 @@
+<% content_for :title, "Sitemap | #{Current.shop.name}" %>
+<% shop = Current.shop %>
+<% roots = @collections.select { |c| c.parent_id.nil? } %>
+<% children_by_parent = @collections.select { |c| c.parent_id.present? }.group_by(&:parent_id) %>
+
+<div class="max-w-[1440px] mx-auto px-5 md:px-10 py-16 pb-24">
+
+  <%# Header %>
+  <div class="mb-16 border-b border-[#E8E8E3] pb-12">
+    <nav aria-label="Breadcrumb" class="mb-8">
+      <ol class="flex items-center gap-2 list-none m-0 p-0 text-micro text-[#8A8A85]" role="list">
+        <li><a href="/" class="hover:text-[#1A1A17] transition-colors">Home</a></li>
+        <li aria-hidden="true" class="text-[#E8E8E3]">›</li>
+        <li><span aria-current="page" class="text-[#1A1A17]">Sitemap</span></li>
+      </ol>
+    </nav>
+    <h1 class="text-h1 text-[#1A1A17] mb-4">Sitemap</h1>
+    <p class="text-body text-[#8A8A85]">A complete directory of all pages on our site.</p>
+  </div>
+
+  <div class="space-y-16">
+
+    <%# Categories %>
+    <% if roots.any? %>
+      <section>
+        <h2 class="text-micro text-[#8A8A85] mb-6 pb-3 border-b border-[#E8E8E3]">Categories</h2>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-4">
+          <% roots.each do |root| %>
+            <div>
+              <%= link_to root.name, "/collection/#{root.slug}/",
+                class: "text-body font-medium text-[#1A1A17] hover:text-primary transition-colors hover:underline underline-offset-2" %>
+              <% kids = children_by_parent[root.id] %>
+              <% if kids.present? %>
+                <ul class="mt-2 ml-4 space-y-2 list-none p-0" role="list">
+                  <% kids.each do |child| %>
+                    <li>
+                      <%= link_to child.name, "/collection/#{root.slug}/#{child.slug}/",
+                        class: "text-small text-[#8A8A85] hover:text-primary transition-colors hover:underline underline-offset-2" %>
+                    </li>
+                  <% end %>
+                </ul>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </section>
+    <% end %>
+
+    <%# Brands %>
+    <% if @brands.any? %>
+      <section>
+        <h2 class="text-micro text-[#8A8A85] mb-6 pb-3 border-b border-[#E8E8E3]">Brands</h2>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-3">
+          <% @brands.each do |brand| %>
+            <%= link_to brand.name, "/brand/#{brand.slug}/",
+              class: "text-body text-[#1A1A17] hover:text-primary transition-colors hover:underline underline-offset-2" %>
+          <% end %>
+        </div>
+      </section>
+    <% end %>
+
+    <%# Strains %>
+    <% strains = shop.strains.where(noindex: false).order(:name) %>
+    <% if strains.any? %>
+      <section>
+        <div class="flex items-baseline justify-between mb-6 pb-3 border-b border-[#E8E8E3]">
+          <h2 class="text-micro text-[#8A8A85]">Strains</h2>
+          <a href="/strains/" class="text-micro text-primary hover:underline underline-offset-2">All Strains →</a>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-3">
+          <% strains.first(30).each do |strain| %>
+            <div class="flex items-center gap-2">
+              <%= link_to strain.name, "/strains/#{strain.slug}/",
+                class: "text-body text-[#1A1A17] hover:text-primary transition-colors hover:underline underline-offset-2" %>
+              <% case strain.classification %>
+              <% when "sativa" %>
+                <span class="strain-sativa text-[10px] font-medium uppercase tracking-widest px-1.5 py-0 rounded-full leading-5">S</span>
+              <% when "indica" %>
+                <span class="strain-indica text-[10px] font-medium uppercase tracking-widest px-1.5 py-0 rounded-full leading-5">I</span>
+              <% when "hybrid" %>
+                <span class="strain-hybrid text-[10px] font-medium uppercase tracking-widest px-1.5 py-0 rounded-full leading-5">H</span>
+              <% end %>
+            </div>
+          <% end %>
+          <% if strains.count > 30 %>
+            <div class="col-span-full mt-2">
+              <a href="/strains/" class="text-small text-primary hover:underline underline-offset-2">
+                View all <%= strains.count %> strains →
+              </a>
+            </div>
+          <% end %>
+        </div>
+      </section>
+    <% end %>
+
+    <%# Pages %>
+    <section>
+      <h2 class="text-micro text-[#8A8A85] mb-6 pb-3 border-b border-[#E8E8E3]">Pages</h2>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-3">
+        <a href="/" class="text-body text-[#1A1A17] hover:text-primary transition-colors hover:underline underline-offset-2">Home</a>
+        <a href="/about/" class="text-body text-[#1A1A17] hover:text-primary transition-colors hover:underline underline-offset-2">About Us</a>
+        <a href="/contact/" class="text-body text-[#1A1A17] hover:text-primary transition-colors hover:underline underline-offset-2">Contact</a>
+        <a href="/faq/" class="text-body text-[#1A1A17] hover:text-primary transition-colors hover:underline underline-offset-2">FAQ</a>
+        <a href="/brands/" class="text-body text-[#1A1A17] hover:text-primary transition-colors hover:underline underline-offset-2">Brands</a>
+        <a href="/strains/" class="text-body text-[#1A1A17] hover:text-primary transition-colors hover:underline underline-offset-2">Strains</a>
+        <a href="/privacy/" class="text-body text-[#1A1A17] hover:text-primary transition-colors hover:underline underline-offset-2">Privacy Policy</a>
+        <a href="/terms/" class="text-body text-[#1A1A17] hover:text-primary transition-colors hover:underline underline-offset-2">Terms of Service</a>
+      </div>
+    </section>
+
+  </div>
+</div>

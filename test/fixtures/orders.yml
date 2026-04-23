@@ -1,0 +1,35 @@
+one:
+  shop: one
+  status: completed
+  ordered_at: <%= 2.hours.ago %>
+  subtotal_cents: 3000
+  tax_cents: 277
+  total_cents: 3277
+  item_count: 2
+
+two:
+  shop: one
+  status: completed
+  ordered_at: <%= 1.hour.ago %>
+  subtotal_cents: 5000
+  tax_cents: 462
+  total_cents: 5462
+  item_count: 1
+
+old:
+  shop: one
+  status: completed
+  ordered_at: <%= 2.months.ago %>
+  subtotal_cents: 2000
+  tax_cents: 185
+  total_cents: 2185
+  item_count: 1
+
+pending_order:
+  shop: one
+  status: pending
+  ordered_at: <%= 30.minutes.ago %>
+  subtotal_cents: 1500
+  tax_cents: 138
+  total_cents: 1638
+  item_count: 1

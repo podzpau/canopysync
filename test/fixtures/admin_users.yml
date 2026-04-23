@@ -1,0 +1,9 @@
+one:
+  email: admin@greenleaf.test
+  password_digest: <%= BCrypt::Password.create("password", cost: BCrypt::Engine::MIN_COST) %>
+  shop: one
+
+two:
+  email: admin@bluemountain.test
+  password_digest: <%= BCrypt::Password.create("password", cost: BCrypt::Engine::MIN_COST) %>
+  shop: two
