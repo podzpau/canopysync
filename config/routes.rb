@@ -14,10 +14,9 @@ Rails.application.routes.draw do
         post :publish
       end
     end
-    resources :blocks, only: [ :create, :destroy ] do
-      collection do
-        post :reorder
-        delete :delete
+    resources :blocks, only: [:create, :destroy, :update] do
+      member do
+        patch :reorder
       end
     end
 

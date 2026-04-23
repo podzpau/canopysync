@@ -1,41 +1,32 @@
 class Admin::BlocksController < AdminController
 
   def create
-    block_type = params[:block_type]
-    @shop.add_block(block_type)
+    Block.create!(shop: @shop, block_type: params[:block_type], position: @shop.blocks.count + 1, content: {})
     redirect_to edit_admin_settings_path
   end
 
   def destroy
-    blocks = @shop.blocks.dup
-    blocks.reject! { |b| b['id'] == params[:id] }
-    @shop.update(blocks_config: blocks)
+    Block.find(params[:id]).destroy
     redirect_to edit_admin_settings_path
   end
 
   def reorder
-    blocks = @shop.blocks.dup
-    from = params[:from].to_i
-    to = params[:to].to_i
-    
-    return head :bad_request if from < 0 || to < 0 || from >= blocks.length
-    
-    blocks.insert(to, blocks.delete_at(from))
-    @shop.update(blocks_config: blocks)
-    
+    Block.find(params[:id]).insert_at(params[:position].to_i)
     render json: { success: true }
   end
 
-  def delete
-    blocks = @shop.blocks.dup
-    index = params[:index].to_i
-    
-    return head :bad_request if index < 0 || index >= blocks.length
-    
-    blocks.delete_at(index)
-    @shop.update(blocks_config: blocks)
-    
-    render json: { success: true }
+  def update
+    Block.find(params[:id]).update(content: block_params[:content])
+    head :ok
   end
 
+  private
+
+  def set_shop
+    @shop = Shop.first
+  end
+
+  def block_params
+    params.require(:block).permit(content: {})
+  end
 end

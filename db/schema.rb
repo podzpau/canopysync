@@ -11,9 +11,6 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[8.0].define(version: 2026_04_23_115249) do
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "pg_catalog.plpgsql"
-
   create_table "admin_users", force: :cascade do |t|
     t.string "email", null: false
     t.string "password_digest", null: false
@@ -23,6 +20,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_04_23_115249) do
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["shop_id"], name: "index_admin_users_on_shop_id"
   end
+
 
   create_table "blocks", force: :cascade do |t|
     t.integer "shop_id", null: false
