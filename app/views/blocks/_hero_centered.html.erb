@@ -1,5 +1,5 @@
 <%
-  s                  = block["config"] || {}
+  s                  = block.content || {}
   eyebrow            = s["eyebrow_text"]
   headline           = s["headline"]
   subtext            = s["subtext"]
@@ -9,7 +9,7 @@
   cta_secondary_url  = s["cta_secondary_url"]
   trust_badges       = Array(s["trust_badges"])
   image_url          = s["image_url"]
-  uid                = "hc-#{block["id"]}"
+  uid                = "hc-#{block.id.to_s}"
 %>
 
 <style>
