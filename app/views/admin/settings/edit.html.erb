@@ -154,236 +154,468 @@ document.addEventListener('click', (e) => {
         
         <div class="px-4 pb-4 pt-2">
           <%= form_with url: admin_blocks_path, method: :post, id: 'add-block-form' do |f| %>
-            <div class="grid grid-cols-2 gap-4">
-              
-              <%= button_tag type: 'submit', name: 'block_type', value: 'navigation',
-                  class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
-                <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
-                  <div class="w-full h-full flex flex-col gap-1.5">
-                    <div class="h-2 bg-gray-800 rounded-sm"></div>
-                    <div class="flex gap-1">
-                      <div class="h-1 flex-1 bg-gray-600 rounded-sm"></div>
-                      <div class="h-1 flex-1 bg-gray-600 rounded-sm"></div>
-                      <div class="h-1 flex-1 bg-gray-600 rounded-sm"></div>
-                    </div>
-                  </div>
-                </div>
-                <span class="text-xs text-gray-700 text-center leading-tight font-medium">Navigation</span>
-              <% end %>
 
-              <%= button_tag type: 'submit', name: 'block_type', value: 'ribbon',
-                  class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
-                <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
-                  <div class="w-full h-full flex items-center justify-center">
-                    <div class="w-full h-3 bg-indigo-600 rounded-sm"></div>
-                  </div>
-                </div>
-                <span class="text-xs text-gray-700 text-center leading-tight font-medium">Ribbon</span>
-              <% end %>
-              
-              <%= button_tag type: 'submit', name: 'block_type', value: 'hero',
-                  class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
-                <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
-                  <div class="w-full h-full flex gap-1.5">
-                    <div class="w-6 h-full bg-gray-800 rounded-sm"></div>
-                    <div class="flex-1 flex flex-col gap-1 justify-center">
+            <!-- LAYOUT -->
+            <div class="mb-4">
+              <div class="flex items-center gap-2 mb-3">
+                <span class="text-xs font-medium text-gray-400 tracking-wider uppercase">Layout</span>
+                <div class="flex-1 border-t border-gray-200"></div>
+              </div>
+              <div class="grid grid-cols-2 gap-4">
+
+                <%= button_tag type: 'submit', name: 'block_type', value: 'navigation',
+                    class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
+                  <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
+                    <div class="w-full h-full flex flex-col gap-1.5">
                       <div class="h-2 bg-gray-800 rounded-sm"></div>
-                      <div class="h-1 bg-gray-600 rounded-sm"></div>
-                      <div class="h-1 bg-gray-500 rounded-sm"></div>
-                      <div class="h-0.5 bg-gray-400"></div>
-                      <div class="h-0.5 bg-gray-300"></div>
+                      <div class="flex gap-1">
+                        <div class="h-1 flex-1 bg-gray-600 rounded-sm"></div>
+                        <div class="h-1 flex-1 bg-gray-600 rounded-sm"></div>
+                        <div class="h-1 flex-1 bg-gray-600 rounded-sm"></div>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <span class="text-xs text-gray-700 text-center leading-tight font-medium">Hero Section</span>
-              <% end %>
+                  <span class="text-xs text-gray-700 text-center leading-tight font-medium">Navigation</span>
+                <% end %>
 
-              <%= button_tag type: 'submit', name: 'block_type', value: 'hero_split',
-                  class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
-                <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
-                  <div class="w-full h-full flex gap-1.5">
-                    <div class="w-6 h-full bg-gray-800 rounded-sm"></div>
-                    <div class="flex-1 flex flex-col gap-1 justify-center">
-                      <div class="h-2 bg-gray-800 rounded-sm"></div>
-                      <div class="h-1 bg-gray-600 rounded-sm w-4/5"></div>
-                      <div class="h-1 bg-gray-500 rounded-sm w-3/5"></div>
-                      <div class="h-0.5 bg-gray-400 w-2/5"></div>
-                      <div class="h-0.5 bg-gray-300 w-1/3"></div>
+                <%= button_tag type: 'submit', name: 'block_type', value: 'ribbon',
+                    class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
+                  <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
+                    <div class="w-full h-full flex items-center justify-center">
+                      <div class="w-full h-3 bg-indigo-600 rounded-sm"></div>
                     </div>
                   </div>
-                </div>
-                <span class="text-xs text-gray-700 text-center leading-tight font-medium">Hero — Split</span>
-              <% end %>
+                  <span class="text-xs text-gray-700 text-center leading-tight font-medium">Ribbon</span>
+                <% end %>
 
-              <%= button_tag type: 'submit', name: 'block_type', value: 'hero_centered',
-                  class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
-                <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
-                  <div class="w-full h-full flex flex-col gap-1 justify-center items-center">
-                    <div class="h-2 bg-gray-800 rounded-sm w-4/5"></div>
-                    <div class="h-1 bg-gray-600 rounded-sm w-3/5"></div>
-                    <div class="h-1 bg-gray-500 rounded-sm w-2/5"></div>
-                    <div class="h-0.5 bg-gray-300 w-1/5"></div>
-                    <div class="h-2 bg-gray-800 rounded-sm w-full mt-1"></div>
-                  </div>
-                </div>
-                <span class="text-xs text-gray-700 text-center leading-tight font-medium">Hero — Centered</span>
-              <% end %>
-
-              <%= button_tag type: 'submit', name: 'block_type', value: 'hero_fullbleed',
-                  class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
-                <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
-                  <div class="w-full h-full bg-gray-800 rounded-sm flex flex-col gap-1 justify-center items-center px-2">
-                    <div class="h-2 bg-white rounded-sm w-4/5 opacity-90"></div>
-                    <div class="h-1 bg-white rounded-sm w-3/5 opacity-60"></div>
-                    <div class="h-1 bg-white rounded-sm w-2/5 opacity-50"></div>
-                    <div class="h-2 bg-white rounded-sm w-1/2 opacity-80 mt-1"></div>
-                  </div>
-                </div>
-                <span class="text-xs text-gray-700 text-center leading-tight font-medium">Hero — Full Bleed</span>
-              <% end %>
-
-              <%= button_tag type: 'submit', name: 'block_type', value: 'sub_hero',
-                  class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
-                <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
-                  <div class="w-full h-full flex gap-1">
-                    <div class="flex-1 bg-gray-600 rounded-sm"></div>
-                    <div class="flex-1 bg-gray-600 rounded-sm"></div>
-                    <div class="flex-1 bg-gray-400 rounded-sm"></div>
-                  </div>
-                </div>
-                <span class="text-xs text-gray-700 text-center leading-tight font-medium">Sub Hero</span>
-              <% end %>
-
-              <%= button_tag type: 'submit', name: 'block_type', value: 'product_grid',
-                  class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
-                <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
-                  <div class="w-full h-full bg-gray-800 rounded-sm flex flex-col p-2.5 gap-1">
-                    <div class="w-6 h-6 bg-gray-300 rounded-sm"></div>
-                    <div class="h-1 bg-gray-300 rounded-sm"></div>
-                    <div class="h-0.5 bg-gray-400"></div>
-                    <div class="h-0.5 bg-gray-400"></div>
-                    <div class="flex-1"></div>
-                    <div class="h-1.5 bg-gray-300 rounded-sm"></div>
-                  </div>
-                </div>
-                <span class="text-xs text-gray-700 text-center leading-tight font-medium">Product Card</span>
-              <% end %>
-
-              <%= button_tag type: 'submit', name: 'block_type', value: 'footer',
-                  class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
-                <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
-                  <div class="w-full h-full flex flex-col gap-1 justify-end">
-                    <div class="grid grid-cols-3 gap-0.5 mb-1">
-                      <div class="h-1 bg-gray-600 rounded-sm"></div>
-                      <div class="h-1 bg-gray-600 rounded-sm"></div>
-                      <div class="h-1 bg-gray-600 rounded-sm"></div>
-                    </div>
-                    <div class="h-0.5 bg-gray-400 rounded-sm"></div>
-                  </div>
-                </div>
-                <span class="text-xs text-gray-700 text-center leading-tight font-medium">Footer</span>
-              <% end %>
-
-              <%= button_tag type: 'submit', name: 'block_type', value: 'footer2',
-                  class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
-                <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
-                  <div class="w-full h-full flex flex-col gap-1">
-                    <div class="flex items-center gap-1 mb-1">
-                      <div class="w-2 h-2 bg-gray-800 rounded-sm"></div>
-                      <div class="h-1 flex-1 bg-gray-800 rounded-sm"></div>
-                    </div>
-                    <div class="grid grid-cols-3 gap-0.5">
-                      <div class="h-1 bg-gray-600 rounded-sm"></div>
-                      <div class="h-1 bg-gray-600 rounded-sm"></div>
-                      <div class="h-1 bg-gray-600 rounded-sm"></div>
-                    </div>
-                    <div class="flex-1"></div>
-                    <div class="h-0.5 bg-gray-400 rounded-sm"></div>
-                    <div class="h-0.5 bg-gray-300 rounded-sm"></div>
-                  </div>
-                </div>
-                <span class="text-xs text-gray-700 text-center leading-tight font-medium">Footer v2</span>
-              <% end %>
-              
-              <%= button_tag type: 'submit', name: 'block_type', value: 'brands',
-                  class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
-                <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
-                  <div class="w-full h-full flex items-center justify-center">
-                    <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                    </svg>
-                  </div>
-                </div>
-                <span class="text-xs text-gray-700 text-center leading-tight font-medium">Brands</span>
-              <% end %>
-
-              <%= button_tag type: 'submit', name: 'block_type', value: 'promo_section',
-                  class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
-                <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
-                  <div class="w-full h-full bg-gradient-to-br from-purple-500 to-pink-500 rounded-sm flex items-center justify-center">
-                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
-                    </svg>
-                  </div>
-                </div>
-                <span class="text-xs text-gray-700 text-center leading-tight font-medium">Promo Section</span>
-              <% end %>
-
-              <%= button_tag type: 'submit', name: 'block_type', value: 'faq',
-                  class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
-                <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
-                  <div class="w-full h-full flex flex-col gap-1.5 justify-center">
-                    <div class="h-2 bg-gray-800 rounded-sm"></div>
-                    <div class="h-1.5 bg-gray-600 rounded-sm"></div>
-                    <div class="h-1.5 bg-gray-600 rounded-sm"></div>
-                  </div>
-                </div>
-                <span class="text-xs text-gray-700 text-center leading-tight font-medium">FAQ</span>
-              <% end %>
-
-              <%= button_tag type: 'submit', name: 'block_type', value: 'faq_v2',
-                  class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
-                <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
-                  <div class="w-full h-full flex gap-1">
-                    <div class="w-8 h-full bg-indigo-400 rounded-sm"></div>
-                    <div class="flex-1 flex flex-col gap-1 justify-center">
-                      <div class="h-2 bg-gray-800 rounded-sm"></div>
-                      <div class="h-1 bg-gray-600 rounded-sm"></div>
-                      <div class="h-1 bg-gray-600 rounded-sm"></div>
+                <%= button_tag type: 'submit', name: 'block_type', value: 'footer',
+                    class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
+                  <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
+                    <div class="w-full h-full flex flex-col gap-1 justify-end">
+                      <div class="grid grid-cols-3 gap-0.5 mb-1">
+                        <div class="h-1 bg-gray-600 rounded-sm"></div>
+                        <div class="h-1 bg-gray-600 rounded-sm"></div>
+                        <div class="h-1 bg-gray-600 rounded-sm"></div>
+                      </div>
+                      <div class="h-0.5 bg-gray-400 rounded-sm"></div>
                     </div>
                   </div>
-                </div>
-                <span class="text-xs text-gray-700 text-center leading-tight font-medium">FAQ + Image</span>
-              <% end %>
+                  <span class="text-xs text-gray-700 text-center leading-tight font-medium">Footer</span>
+                <% end %>
 
-              <%= button_tag type: 'submit', name: 'block_type', value: 'email_optin1',
-                  class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
-                <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
-                  <div class="w-full h-full flex gap-1">
-                    <div class="flex-1 flex flex-col gap-1 justify-center">
-                      <div class="h-2 bg-gray-800 rounded-sm"></div>
-                      <div class="h-1 bg-gray-600 rounded-sm"></div>
-                      <div class="h-1.5 bg-gray-800 rounded-sm"></div>
+                <%= button_tag type: 'submit', name: 'block_type', value: 'footer2',
+                    class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
+                  <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
+                    <div class="w-full h-full flex flex-col gap-1">
+                      <div class="flex items-center gap-1 mb-1">
+                        <div class="w-2 h-2 bg-gray-800 rounded-sm"></div>
+                        <div class="h-1 flex-1 bg-gray-800 rounded-sm"></div>
+                      </div>
+                      <div class="grid grid-cols-3 gap-0.5">
+                        <div class="h-1 bg-gray-600 rounded-sm"></div>
+                        <div class="h-1 bg-gray-600 rounded-sm"></div>
+                        <div class="h-1 bg-gray-600 rounded-sm"></div>
+                      </div>
+                      <div class="flex-1"></div>
+                      <div class="h-0.5 bg-gray-400 rounded-sm"></div>
+                      <div class="h-0.5 bg-gray-300 rounded-sm"></div>
                     </div>
-                    <div class="w-8 h-full bg-gray-400 rounded-sm"></div>
                   </div>
-                </div>
-                <span class="text-xs text-gray-700 text-center leading-tight font-medium">Email + Image</span>
-              <% end %>
+                  <span class="text-xs text-gray-700 text-center leading-tight font-medium">Footer v2</span>
+                <% end %>
 
-              <%= button_tag type: 'submit', name: 'block_type', value: 'email_optin2',
-                  class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
-                <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
-                  <div class="w-full h-full flex flex-col gap-1 justify-center items-center">
-                    <div class="h-2 w-3/4 bg-gray-800 rounded-sm"></div>
-                    <div class="h-1 w-2/3 bg-gray-600 rounded-sm"></div>
-                    <div class="h-1.5 w-full bg-gray-800 rounded-sm mt-1"></div>
+                <%= button_tag type: 'submit', name: 'block_type', value: 'age_gate',
+                    class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
+                  <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
+                    <div class="w-full h-full flex flex-col gap-1 items-center justify-center">
+                      <div class="w-8 h-8 border-2 border-gray-600 rounded-full flex items-center justify-center">
+                        <span style="font-size:9px;font-weight:bold;color:#4B5563;line-height:1">18+</span>
+                      </div>
+                      <div class="h-1 bg-gray-400 rounded-sm w-3/4 mt-1"></div>
+                    </div>
                   </div>
-                </div>
-                <span class="text-xs text-gray-700 text-center leading-tight font-medium">Email Centered</span>
-              <% end %>
+                  <span class="text-xs text-gray-700 text-center leading-tight font-medium">Age Gate</span>
+                <% end %>
 
+              </div>
             </div>
+
+            <!-- HERO -->
+            <div class="mb-4">
+              <div class="flex items-center gap-2 mb-3">
+                <span class="text-xs font-medium text-gray-400 tracking-wider uppercase">Hero</span>
+                <div class="flex-1 border-t border-gray-200"></div>
+              </div>
+              <div class="grid grid-cols-2 gap-4">
+
+                <%= button_tag type: 'submit', name: 'block_type', value: 'hero',
+                    class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
+                  <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
+                    <div class="w-full h-full flex gap-1.5">
+                      <div class="w-6 h-full bg-gray-800 rounded-sm"></div>
+                      <div class="flex-1 flex flex-col gap-1 justify-center">
+                        <div class="h-2 bg-gray-800 rounded-sm"></div>
+                        <div class="h-1 bg-gray-600 rounded-sm"></div>
+                        <div class="h-1 bg-gray-500 rounded-sm"></div>
+                        <div class="h-0.5 bg-gray-400"></div>
+                        <div class="h-0.5 bg-gray-300"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <span class="text-xs text-gray-700 text-center leading-tight font-medium">Hero Section</span>
+                <% end %>
+
+                <%= button_tag type: 'submit', name: 'block_type', value: 'hero_split',
+                    class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
+                  <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
+                    <div class="w-full h-full flex gap-1.5">
+                      <div class="w-6 h-full bg-gray-800 rounded-sm"></div>
+                      <div class="flex-1 flex flex-col gap-1 justify-center">
+                        <div class="h-2 bg-gray-800 rounded-sm"></div>
+                        <div class="h-1 bg-gray-600 rounded-sm w-4/5"></div>
+                        <div class="h-1 bg-gray-500 rounded-sm w-3/5"></div>
+                        <div class="h-0.5 bg-gray-400 w-2/5"></div>
+                        <div class="h-0.5 bg-gray-300 w-1/3"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <span class="text-xs text-gray-700 text-center leading-tight font-medium">Hero — Split</span>
+                <% end %>
+
+                <%= button_tag type: 'submit', name: 'block_type', value: 'hero_centered',
+                    class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
+                  <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
+                    <div class="w-full h-full flex flex-col gap-1 justify-center items-center">
+                      <div class="h-2 bg-gray-800 rounded-sm w-4/5"></div>
+                      <div class="h-1 bg-gray-600 rounded-sm w-3/5"></div>
+                      <div class="h-1 bg-gray-500 rounded-sm w-2/5"></div>
+                      <div class="h-0.5 bg-gray-300 w-1/5"></div>
+                      <div class="h-2 bg-gray-800 rounded-sm w-full mt-1"></div>
+                    </div>
+                  </div>
+                  <span class="text-xs text-gray-700 text-center leading-tight font-medium">Hero — Centered</span>
+                <% end %>
+
+                <%= button_tag type: 'submit', name: 'block_type', value: 'hero_fullbleed',
+                    class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
+                  <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
+                    <div class="w-full h-full bg-gray-800 rounded-sm flex flex-col gap-1 justify-center items-center px-2">
+                      <div class="h-2 bg-white rounded-sm w-4/5 opacity-90"></div>
+                      <div class="h-1 bg-white rounded-sm w-3/5 opacity-60"></div>
+                      <div class="h-1 bg-white rounded-sm w-2/5 opacity-50"></div>
+                      <div class="h-2 bg-white rounded-sm w-1/2 opacity-80 mt-1"></div>
+                    </div>
+                  </div>
+                  <span class="text-xs text-gray-700 text-center leading-tight font-medium">Hero — Full Bleed</span>
+                <% end %>
+
+                <%= button_tag type: 'submit', name: 'block_type', value: 'sub_hero',
+                    class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
+                  <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
+                    <div class="w-full h-full flex gap-1">
+                      <div class="flex-1 bg-gray-600 rounded-sm"></div>
+                      <div class="flex-1 bg-gray-600 rounded-sm"></div>
+                      <div class="flex-1 bg-gray-400 rounded-sm"></div>
+                    </div>
+                  </div>
+                  <span class="text-xs text-gray-700 text-center leading-tight font-medium">Sub Hero</span>
+                <% end %>
+
+              </div>
+            </div>
+
+            <!-- SHOP -->
+            <div class="mb-4">
+              <div class="flex items-center gap-2 mb-3">
+                <span class="text-xs font-medium text-gray-400 tracking-wider uppercase">Shop</span>
+                <div class="flex-1 border-t border-gray-200"></div>
+              </div>
+              <div class="grid grid-cols-2 gap-4">
+
+                <%= button_tag type: 'submit', name: 'block_type', value: 'category_grid',
+                    class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
+                  <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
+                    <div class="w-full h-full grid grid-cols-2 gap-1">
+                      <div class="bg-gray-300 rounded-sm"></div>
+                      <div class="bg-gray-300 rounded-sm"></div>
+                      <div class="bg-gray-300 rounded-sm"></div>
+                      <div class="bg-gray-300 rounded-sm"></div>
+                    </div>
+                  </div>
+                  <span class="text-xs text-gray-700 text-center leading-tight font-medium">Category Grid</span>
+                <% end %>
+
+                <%= button_tag type: 'submit', name: 'block_type', value: 'product_grid',
+                    class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
+                  <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
+                    <div class="w-full h-full bg-gray-800 rounded-sm flex flex-col p-2.5 gap-1">
+                      <div class="w-6 h-6 bg-gray-300 rounded-sm"></div>
+                      <div class="h-1 bg-gray-300 rounded-sm"></div>
+                      <div class="h-0.5 bg-gray-400"></div>
+                      <div class="h-0.5 bg-gray-400"></div>
+                      <div class="flex-1"></div>
+                      <div class="h-1.5 bg-gray-300 rounded-sm"></div>
+                    </div>
+                  </div>
+                  <span class="text-xs text-gray-700 text-center leading-tight font-medium">Product Card</span>
+                <% end %>
+
+                <%= button_tag type: 'submit', name: 'block_type', value: 'product_card',
+                    class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
+                  <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
+                    <div class="w-full h-full flex flex-col gap-1">
+                      <div class="flex-1 bg-gray-200 rounded-sm"></div>
+                      <div class="h-1 bg-gray-600 rounded-sm"></div>
+                      <div class="h-1 bg-gray-400 rounded-sm w-2/3"></div>
+                      <div class="h-1.5 bg-gray-800 rounded-sm w-1/2"></div>
+                    </div>
+                  </div>
+                  <span class="text-xs text-gray-700 text-center leading-tight font-medium">Product Detail</span>
+                <% end %>
+
+                <%= button_tag type: 'submit', name: 'block_type', value: 'featured_products',
+                    class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
+                  <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
+                    <div class="w-full h-full flex flex-col gap-1">
+                      <div class="h-2 bg-gray-800 rounded-sm"></div>
+                      <div class="flex gap-1 flex-1">
+                        <div class="flex-1 bg-gray-300 rounded-sm"></div>
+                        <div class="flex-1 bg-gray-300 rounded-sm"></div>
+                        <div class="flex-1 bg-gray-300 rounded-sm"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <span class="text-xs text-gray-700 text-center leading-tight font-medium">Featured Products</span>
+                <% end %>
+
+                <%= button_tag type: 'submit', name: 'block_type', value: 'new_products',
+                    class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
+                  <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
+                    <div class="w-full h-full flex flex-col gap-1">
+                      <div class="flex items-center gap-1">
+                        <div class="h-1.5 bg-green-500 rounded-sm w-5"></div>
+                        <div class="h-1 flex-1 bg-gray-800 rounded-sm"></div>
+                      </div>
+                      <div class="flex gap-1 flex-1 mt-1">
+                        <div class="flex-1 bg-gray-300 rounded-sm"></div>
+                        <div class="flex-1 bg-gray-300 rounded-sm"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <span class="text-xs text-gray-700 text-center leading-tight font-medium">New Products</span>
+                <% end %>
+
+                <%= button_tag type: 'submit', name: 'block_type', value: 'sales',
+                    class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
+                  <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
+                    <div class="w-full h-full flex items-center justify-center">
+                      <div class="w-9 h-9 bg-red-400 rounded-full flex items-center justify-center">
+                        <span style="font-size:11px;font-weight:bold;color:white;line-height:1">%</span>
+                      </div>
+                    </div>
+                  </div>
+                  <span class="text-xs text-gray-700 text-center leading-tight font-medium">Sales</span>
+                <% end %>
+
+                <%= button_tag type: 'submit', name: 'block_type', value: 'brands',
+                    class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
+                  <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
+                    <div class="w-full h-full flex items-center justify-center">
+                      <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                      </svg>
+                    </div>
+                  </div>
+                  <span class="text-xs text-gray-700 text-center leading-tight font-medium">Brands</span>
+                <% end %>
+
+                <%= button_tag type: 'submit', name: 'block_type', value: 'brand_spotlight',
+                    class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
+                  <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
+                    <div class="w-full h-full flex flex-col gap-1">
+                      <div class="flex-1 bg-gray-200 rounded-sm flex items-center justify-center">
+                        <div class="w-8 h-3 bg-gray-600 rounded-sm"></div>
+                      </div>
+                      <div class="h-1 bg-gray-400 rounded-sm"></div>
+                      <div class="h-1 bg-gray-300 rounded-sm w-3/4"></div>
+                    </div>
+                  </div>
+                  <span class="text-xs text-gray-700 text-center leading-tight font-medium">Brand Spotlight</span>
+                <% end %>
+
+                <%= button_tag type: 'submit', name: 'block_type', value: 'strain_types',
+                    class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
+                  <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
+                    <div class="w-full h-full flex flex-col gap-1">
+                      <div class="h-1 bg-gray-600 rounded-sm w-2/3"></div>
+                      <div class="flex gap-1 flex-1">
+                        <div class="flex-1 bg-green-400 rounded-sm"></div>
+                        <div class="flex-1 bg-purple-400 rounded-sm"></div>
+                        <div class="flex-1 bg-yellow-400 rounded-sm"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <span class="text-xs text-gray-700 text-center leading-tight font-medium">Strain Types</span>
+                <% end %>
+
+              </div>
+            </div>
+
+            <!-- MARKETING -->
+            <div class="mb-4">
+              <div class="flex items-center gap-2 mb-3">
+                <span class="text-xs font-medium text-gray-400 tracking-wider uppercase">Marketing</span>
+                <div class="flex-1 border-t border-gray-200"></div>
+              </div>
+              <div class="grid grid-cols-2 gap-4">
+
+                <%= button_tag type: 'submit', name: 'block_type', value: 'promo_section',
+                    class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
+                  <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
+                    <div class="w-full h-full bg-gradient-to-br from-purple-500 to-pink-500 rounded-sm flex items-center justify-center">
+                      <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
+                      </svg>
+                    </div>
+                  </div>
+                  <span class="text-xs text-gray-700 text-center leading-tight font-medium">Promo Section</span>
+                <% end %>
+
+                <%= button_tag type: 'submit', name: 'block_type', value: 'promotional',
+                    class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
+                  <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
+                    <div class="w-full h-full bg-gradient-to-br from-orange-400 to-red-500 rounded-sm flex flex-col gap-1 items-center justify-center px-2">
+                      <div class="h-1.5 bg-white rounded-sm w-3/4 opacity-90"></div>
+                      <div class="h-1 bg-white rounded-sm w-1/2 opacity-70"></div>
+                      <div class="h-1.5 bg-white rounded-sm w-2/3 opacity-80 mt-1"></div>
+                    </div>
+                  </div>
+                  <span class="text-xs text-gray-700 text-center leading-tight font-medium">Promotional</span>
+                <% end %>
+
+                <%= button_tag type: 'submit', name: 'block_type', value: 'cta',
+                    class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
+                  <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
+                    <div class="w-full h-full flex flex-col gap-1 justify-center items-center">
+                      <div class="h-1 bg-gray-600 rounded-sm w-3/4"></div>
+                      <div class="h-1 bg-gray-600 rounded-sm w-2/3"></div>
+                      <div class="h-3 bg-gray-800 rounded-sm w-full mt-1"></div>
+                    </div>
+                  </div>
+                  <span class="text-xs text-gray-700 text-center leading-tight font-medium">CTA</span>
+                <% end %>
+
+                <%= button_tag type: 'submit', name: 'block_type', value: 'email_optin1',
+                    class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
+                  <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
+                    <div class="w-full h-full flex gap-1">
+                      <div class="flex-1 flex flex-col gap-1 justify-center">
+                        <div class="h-2 bg-gray-800 rounded-sm"></div>
+                        <div class="h-1 bg-gray-600 rounded-sm"></div>
+                        <div class="h-1.5 bg-gray-800 rounded-sm"></div>
+                      </div>
+                      <div class="w-8 h-full bg-gray-400 rounded-sm"></div>
+                    </div>
+                  </div>
+                  <span class="text-xs text-gray-700 text-center leading-tight font-medium">Email + Image</span>
+                <% end %>
+
+                <%= button_tag type: 'submit', name: 'block_type', value: 'email_optin2',
+                    class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
+                  <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
+                    <div class="w-full h-full flex flex-col gap-1 justify-center items-center">
+                      <div class="h-2 w-3/4 bg-gray-800 rounded-sm"></div>
+                      <div class="h-1 w-2/3 bg-gray-600 rounded-sm"></div>
+                      <div class="h-1.5 w-full bg-gray-800 rounded-sm mt-1"></div>
+                    </div>
+                  </div>
+                  <span class="text-xs text-gray-700 text-center leading-tight font-medium">Email Centered</span>
+                <% end %>
+
+              </div>
+            </div>
+
+            <!-- CONTENT -->
+            <div class="mb-4">
+              <div class="flex items-center gap-2 mb-3">
+                <span class="text-xs font-medium text-gray-400 tracking-wider uppercase">Content</span>
+                <div class="flex-1 border-t border-gray-200"></div>
+              </div>
+              <div class="grid grid-cols-2 gap-4">
+
+                <%= button_tag type: 'submit', name: 'block_type', value: 'text_block',
+                    class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
+                  <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
+                    <div class="w-full h-full flex flex-col gap-1 justify-center">
+                      <div class="h-1.5 bg-gray-800 rounded-sm w-3/4"></div>
+                      <div class="h-1 bg-gray-500 rounded-sm"></div>
+                      <div class="h-1 bg-gray-500 rounded-sm w-4/5"></div>
+                      <div class="h-1 bg-gray-500 rounded-sm w-3/5"></div>
+                    </div>
+                  </div>
+                  <span class="text-xs text-gray-700 text-center leading-tight font-medium">Text Block</span>
+                <% end %>
+
+                <%= button_tag type: 'submit', name: 'block_type', value: 'faq',
+                    class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
+                  <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
+                    <div class="w-full h-full flex flex-col gap-1.5 justify-center">
+                      <div class="h-2 bg-gray-800 rounded-sm"></div>
+                      <div class="h-1.5 bg-gray-600 rounded-sm"></div>
+                      <div class="h-1.5 bg-gray-600 rounded-sm"></div>
+                    </div>
+                  </div>
+                  <span class="text-xs text-gray-700 text-center leading-tight font-medium">FAQ</span>
+                <% end %>
+
+                <%= button_tag type: 'submit', name: 'block_type', value: 'faq_v2',
+                    class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
+                  <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
+                    <div class="w-full h-full flex gap-1">
+                      <div class="w-8 h-full bg-indigo-400 rounded-sm"></div>
+                      <div class="flex-1 flex flex-col gap-1 justify-center">
+                        <div class="h-2 bg-gray-800 rounded-sm"></div>
+                        <div class="h-1 bg-gray-600 rounded-sm"></div>
+                        <div class="h-1 bg-gray-600 rounded-sm"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <span class="text-xs text-gray-700 text-center leading-tight font-medium">FAQ + Image</span>
+                <% end %>
+
+                <%= button_tag type: 'submit', name: 'block_type', value: 'about_section',
+                    class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
+                  <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
+                    <div class="w-full h-full flex gap-1">
+                      <div class="flex-1 flex flex-col gap-1 justify-center">
+                        <div class="h-1.5 bg-gray-800 rounded-sm"></div>
+                        <div class="h-1 bg-gray-500 rounded-sm"></div>
+                        <div class="h-1 bg-gray-500 rounded-sm w-3/4"></div>
+                        <div class="h-2 bg-gray-700 rounded-sm w-1/2 mt-1"></div>
+                      </div>
+                      <div class="w-7 bg-gray-300 rounded-sm"></div>
+                    </div>
+                  </div>
+                  <span class="text-xs text-gray-700 text-center leading-tight font-medium">About Section</span>
+                <% end %>
+
+                <%= button_tag type: 'submit', name: 'block_type', value: 'contact_section',
+                    class: 'flex flex-col items-center gap-3 hover:opacity-70 transition-opacity' do %>
+                  <div class="w-20 h-20 bg-white rounded-lg border-2 border-gray-300 flex items-center justify-center p-3 shadow-sm">
+                    <div class="w-full h-full flex flex-col gap-1 justify-center">
+                      <div class="h-1.5 bg-gray-800 rounded-sm w-2/3"></div>
+                      <div class="h-1.5 border border-gray-400 rounded-sm bg-gray-100"></div>
+                      <div class="h-1.5 border border-gray-400 rounded-sm bg-gray-100"></div>
+                      <div class="h-3 border border-gray-400 rounded-sm bg-gray-100"></div>
+                      <div class="h-2 bg-gray-700 rounded-sm w-1/2 mt-0.5"></div>
+                    </div>
+                  </div>
+                  <span class="text-xs text-gray-700 text-center leading-tight font-medium">Contact Section</span>
+                <% end %>
+
+              </div>
+            </div>
+
           <% end %>
         </div>
       </details>
