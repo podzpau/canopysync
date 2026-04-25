@@ -4,6 +4,7 @@
   transition: all 0.2s;
   cursor: pointer;
   border: 3px solid transparent;
+  padding-left: 28px;
 }
 
 .block-wrapper:hover {
@@ -17,6 +18,27 @@
 
 .block-wrapper.sortable-ghost {
   opacity: 0.4;
+}
+
+.drag-area {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  opacity: 0.4;
+}
+
+.drag-area:hover { opacity: 1; }
+
+.drag-area:active { cursor: grabbing; }
+
+[data-locked="true"] .drag-area {
+  cursor: default;
 }
 
 .block-controls {
@@ -62,14 +84,6 @@
   stroke: white;
 }
 
-.control-btn.drag-handle {
-  cursor: grab;
-}
-
-.control-btn.drag-handle:active {
-  cursor: grabbing;
-}
-
 .control-btn svg {
   width: 18px;
   height: 18px;
@@ -79,15 +93,29 @@
 
 <div id="blocks-container">
   <% @shop.blocks.order(:position).each do |block| %>
-    <div class="block-wrapper" data-block-id="<%= block.id %>" onclick="selectBlock(event, this)">
+    <% locked = ['navigation', 'footer', 'footer2'].include?(block.block_type) %>
+    <div class="block-wrapper" data-block-id="<%= block.id %>"
+         <%= 'data-locked="true"' if locked %>
+         onclick="selectBlock(event, this)">
+
+      <div class="drag-area drag-handle">
+        <% if locked %>
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width:16px;height:16px;pointer-events:none;cursor:default">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+          </svg>
+        <% else %>
+          <svg fill="currentColor" viewBox="0 0 24 24" style="width:16px;height:16px;pointer-events:none">
+            <circle cx="9" cy="7" r="1.5"/>
+            <circle cx="15" cy="7" r="1.5"/>
+            <circle cx="9" cy="12" r="1.5"/>
+            <circle cx="15" cy="12" r="1.5"/>
+            <circle cx="9" cy="17" r="1.5"/>
+            <circle cx="15" cy="17" r="1.5"/>
+          </svg>
+        <% end %>
+      </div>
 
       <div class="block-controls">
-        <button type="button" class="control-btn drag-handle" title="Drag to reorder">
-          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16"/>
-          </svg>
-        </button>
-
         <button type="button" class="control-btn delete-btn" onclick="deleteBlock(event)" title="Delete">
           <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
@@ -106,7 +134,7 @@
 let selectedBlock = null;
 
 function selectBlock(event, element) {
-  if (event.target.closest('.control-btn')) return;
+  if (event.target.closest('.control-btn') || event.target.closest('.drag-area')) return;
 
   if (selectedBlock) {
     selectedBlock.classList.remove('selected');
@@ -178,6 +206,8 @@ observer.observe(document.body, {
 Sortable.create(document.getElementById('blocks-container'), {
   animation: 150,
   handle: '.drag-handle',
+  filter: '[data-locked="true"]',
+  preventOnFilter: true,
   ghostClass: 'sortable-ghost',
   onEnd(evt) {
     const blockId = evt.item.dataset.blockId;
