@@ -36,3 +36,4 @@
 /app/assets/builds/*
 !/app/assets/builds/.keep
 caveman/
+repomix-output.txt\nrepomix-output.xml
