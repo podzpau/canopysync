@@ -116,7 +116,7 @@
         </button>
       </div>
 
-      <%= render "blocks/#{block.block_type}", block: block %>
+      <%= render "blocks/#{block.block_type}", block: block rescue nil %>
     </div>
   <% end %>
 </div>
